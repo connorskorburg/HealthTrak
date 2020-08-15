@@ -5,3 +5,26 @@ from models import *
 # render home page
 def home():
     return render_template('index.html')
+# render dashboard
+def dashboard():
+    if not 'user_id' in session.keys():
+        return redirect('/')
+    else:
+        return render_template('dashboard.html')
+# register user 
+def register():
+    valid_user = User.validate_user(request.form)
+    if not valid_user:
+        return redirect('/')
+    else:
+        user = User.create_user(request.form)
+        session['user_id'] = user.id
+        return redirect('/dashboard')
+# login user
+def login():
+    user = User.validate_login(request.form)
+    return redirect('/dashboard')
+# logout user
+def logout():
+    session.clear()
+    return redirect('/')

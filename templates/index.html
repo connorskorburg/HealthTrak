@@ -9,6 +9,36 @@
 <body>
     <div id="wrapper">
         <h1>Health Tracker</h1>
+        <form action="/register" method="post">
+            <h3>Register</h3>
+            <input type="text" name="first_name" placeholder="First Name">
+            <input type="text" name="last_name" placeholder="Last Name">
+            <input type="text" name="email" placeholder="Email">
+            <input type="number" name="age" placeholder="Age">
+            <input type="password" name="password" placeholder="Password">
+            <input type="password" name="confirm_password" placeholder="Confirm Password">
+            <button type="submit">Register</button>
+        </form>
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            {% for message in messages %}
+                <p class="error">{{ message }}</p>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+    <form action="/login" method="post">
+        <h3>Login</h3>
+        <input type="email" name="email" placeholder="Email">
+        <input type="password" name="password" placeholder="Password">
+        <button type="submit">Login</button>
+        {% with login_error = get_flashed_messages(category_filter = ["login_error"])%}
+            {% if login_error %}
+                {% for log_error in login_error %}
+                    <p class="error">{{ log_error }}</p>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+    </form>
     </div>
 </body>
 </html>

@@ -10,6 +10,10 @@ body {
 }
 #wrapper{
     width: 100%;
-    background-color: #f78a8a;
+    // background-color: #f78a8a;
     text-align: center;
+}
+.error{ color: red; font-weight: bold;}
+form {
+    width: 350px;
 }
