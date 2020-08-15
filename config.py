@@ -11,4 +11,6 @@ app.secret_key = 'health_app_practice'
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///health_app_practice.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False 
 
-db = SQLAlchemy(app0)
+db = SQLAlchemy(app)
+
+migrate = Migrate(app, db)
