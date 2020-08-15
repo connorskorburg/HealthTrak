@@ -26,19 +26,19 @@ class User(db.Model):
         is_valid = True 
         if len(user_data['first_name']) < 1:
             is_valid = False 
-            flash("Please Enter a Valid First Name")
+            flash("Please Enter a Valid First Name", "reg_error")
         if len(user_data['last_name']) < 1:
             is_valid = False 
-            flash("Please Enter a Valid Last Name")
+            flash("Please Enter a Valid Last Name", "reg_error")
         if not EMAIL_REGEX.match(user_data['email']):
             is_valid = False
-            flash("Please Enter a Valid Email")
+            flash("Please Enter a Valid Email", "reg_error")
         if len(user_data['password']) < 8:
             is_valid = False 
-            flash("Please Enter a Valid Password")
+            flash("Please Enter a Valid Password", "reg_error")
         if user_data['password'] != user_data['confirm_password']:
             is_valid = False 
-            flash("Please Enter Matching Passwords")
+            flash("Please Enter Matching Passwords", "reg_error")
         return is_valid
     @classmethod
     def create_user(cls, user_data):
@@ -49,13 +49,20 @@ class User(db.Model):
         return user
     @classmethod
     def validate_login(cls, user_data):
-        user = cls.query.filter_by(email=user_data['email']).first()
-        if bcrypt.check_password_hash(user.password, user_data['password']):
-            session['user_id'] = user.id
-            return user
+        if not EMAIL_REGEX.match(user_data['email']):
+            user = False
+            flash("Please Enter a Valid Email", 'login_error')
+        if len(user_data['password']) < 8:
+            user = False 
+            flash("Please Enter a Valid Password", 'login_error')
         else:
-            flash("You could not be logged in", "login_error")
-            return False
+            user = cls.query.filter_by(email=user_data['email']).first()
+            if bcrypt.check_password_hash(user.password, user_data['password']):
+                session['user_id'] = user.id
+                return user
+            else:
+                flash("Password Did Not Match", "login_error")
+                return user
 
 class Sleep(db.Model):
     id = db.Column(db.Integer, primary_key=True)

@@ -19,10 +19,10 @@
             <input type="password" name="confirm_password" placeholder="Confirm Password">
             <button type="submit">Register</button>
         </form>
-        {% with messages = get_flashed_messages() %}
-        {% if messages %}
-            {% for message in messages %}
-                <p class="error">{{ message }}</p>
+        {% with reg_error = get_flashed_messages(category_filter = ["reg_error"]) %}
+        {% if reg_error %}
+            {% for reg_err in reg_error %}
+                <p class="error">{{ reg_err }}</p>
             {% endfor %}
         {% endif %}
     {% endwith %}
