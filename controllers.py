@@ -10,7 +10,8 @@ def dashboard():
     if not 'user_id' in session.keys():
         return redirect('/')
     else:
-        return render_template('dashboard.html')
+        user = User.query.get(session['user_id'])
+        return render_template('dashboard.html', user=user)
 # register user 
 def register():
     valid_user = User.validate_user(request.form)
@@ -23,6 +24,7 @@ def register():
 # login user
 def login():
     user = User.validate_login(request.form)
+    session['user_id'] = user.id
     return redirect('/dashboard')
 # logout user
 def logout():

@@ -5,6 +5,14 @@ import re
 
 EMAIL_REGEX = re.compile(r'^[a-zA-Z0-9.+_-]+@[a-zA-Z0-9._-]+\.[a-zA-Z]+$')
 
+def calcCalories(height, weight, sex, age):
+    if sex == 1:
+        cals = float(66 + (6.3 * weight) + (12.9 * height) - (6.8 * age))
+    if sex == 2:
+        pass
+    else:
+        return False
+
 meal_has_food_item = db.Table('meal_has_food_item',
                      db.Column('meal_id', db.Integer, db.ForeignKey('meal.id', ondelete='cascade'), primary_key=True),
                      db.Column('food_id', db.Integer, db.ForeignKey('food.id', ondelete='cascade'), primary_key=True))
@@ -15,6 +23,11 @@ class User(db.Model):
     last_name = db.Column(db.String(45))
     email = db.Column(db.String(100))
     age = db.Column(db.Integer)
+    sex = db.Column(db.Integer)
+    activity = db.Column(db.Float)
+    height = db.Column(db.Float, nullable=True)
+    weight = db.Column(db.Float, nullable=True)
+    daily_calories = db.Column(db.Float, nullable=True)
     password = db.Column(db.String(100))
     created_at = db.Column(db.DateTime, server_default=func.now())
     updated_at = db.Column(db.DateTime, server_default=func.now(), onupdate=func.now())
@@ -33,6 +46,12 @@ class User(db.Model):
         if not EMAIL_REGEX.match(user_data['email']):
             is_valid = False
             flash("Please Enter a Valid Email", "reg_error")
+        if request.form['feet'] == '' or request.form['inches'] == '':
+            is_valid = False
+            flash("Please Enter a Valid Height", "reg_error")
+        if len(user_data['weight']) < 1:
+            is_valid = False 
+            flash("Please Enter a Valid Weight", "reg_error")
         if len(user_data['password']) < 8:
             is_valid = False 
             flash("Please Enter a Valid Password", "reg_error")
@@ -42,8 +61,9 @@ class User(db.Model):
         return is_valid
     @classmethod
     def create_user(cls, user_data):
+        user_height = float((12 * int(request.form['feet'])) + int(request.form['inches']))
         hashed_password = bcrypt.generate_password_hash(user_data['password'])
-        user = cls(first_name=user_data['first_name'], last_name=user_data['last_name'], email=user_data['email'], age=user_data['age'], password=hashed_password)
+        user = cls(first_name=user_data['first_name'], last_name=user_data['last_name'], email=user_data['email'], age=user_data['age'], height=user_height, weight=float(user_data['weight']), password=hashed_password)
         db.session.add(user)
         db.session.commit()
         return user
@@ -58,7 +78,6 @@ class User(db.Model):
         else:
             user = cls.query.filter_by(email=user_data['email']).first()
             if bcrypt.check_password_hash(user.password, user_data['password']):
-                session['user_id'] = user.id
                 return user
             else:
                 flash("Password Did Not Match", "login_error")

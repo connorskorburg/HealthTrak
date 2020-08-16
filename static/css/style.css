@@ -22,6 +22,15 @@ body {
 }
 
 form {
+  margin-left: 10px;
+  display: inline-block;
+  vertical-align: top;
   width: 350px;
+}
+
+form input, form select, form button {
+  display: block;
+  margin: 10px auto;
+  width: 100%;
 }
 /*# sourceMappingURL=style.css.map */
