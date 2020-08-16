@@ -5,11 +5,15 @@ import re
 
 EMAIL_REGEX = re.compile(r'^[a-zA-Z0-9.+_-]+@[a-zA-Z0-9._-]+\.[a-zA-Z]+$')
 
-def calcCalories(height, weight, sex, age):
+def calcCalories(height, weight, sex, age, activity):
     if sex == 1:
-        cals = float(66 + (6.3 * weight) + (12.9 * height) - (6.8 * age))
+        bmr = float((4.536 * weight) + (15.88 * height) - (5 * float(age)) + 5)
+        daily_cals = bmr * activity
+        return daily_cals
     if sex == 2:
-        pass
+        bmr = float((4.536 * weight) + (15.88 * height) - (5 * float(age)) - 161)
+        daily_cals = bmr * activity
+        return daily_cals
     else:
         return False
 
@@ -52,6 +56,12 @@ class User(db.Model):
         if len(user_data['weight']) < 1:
             is_valid = False 
             flash("Please Enter a Valid Weight", "reg_error")
+        if int(user_data['sex']) != 1 and int(user_data['sex']) != 2:
+            is_valid = False
+            flash("Please Select Your Sex", "reg_error")
+        if float(user_data['activity']) != 1.2 and float(user_data['activity']) != 1.375 and float(user_data['activity']) != 1.55 and float(user_data['activity']) != 1.725 and float(user_data['activity']) != 1.9:
+            is_valid = False 
+            flash("Please Select Activity Level", "reg_error")
         if len(user_data['password']) < 8:
             is_valid = False 
             flash("Please Enter a Valid Password", "reg_error")
@@ -61,9 +71,15 @@ class User(db.Model):
         return is_valid
     @classmethod
     def create_user(cls, user_data):
+        # get user height 
         user_height = float((12 * int(request.form['feet'])) + int(request.form['inches']))
+        #get daily calories 
+        daily_cals = calcCalories(user_height, float(user_data['weight']), int(user_data['sex']), int(user_data['age']), float(user_data['activity']))
+        # hash password w bcrypt
         hashed_password = bcrypt.generate_password_hash(user_data['password'])
-        user = cls(first_name=user_data['first_name'], last_name=user_data['last_name'], email=user_data['email'], age=user_data['age'], height=user_height, weight=float(user_data['weight']), password=hashed_password)
+        # create user 
+        user = cls(first_name=user_data['first_name'], last_name=user_data['last_name'], email=user_data['email'], age=user_data['age'], sex=user_data['sex'], activity=user_data['activity'], height=user_height, weight=float(user_data['weight']), daily_calories=daily_cals, password=hashed_password)
+        # save user to db
         db.session.add(user)
         db.session.commit()
         return user
