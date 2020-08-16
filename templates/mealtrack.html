@@ -9,12 +9,20 @@
 <body>
     <h1>Welcome, {{ user.first_name }}</h1>
     <div class="container">
+        {% with food_error = get_flashed_messages(category_filter = ["food_error"]) %}
+            {% if food_error %}
+                {% for food_err in food_error %}
+                    <p class="error">{{ food_err }}</p>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
         <div class="meal">
             <h3>Breakfast: 0</h3>
             <p data-alt-src='breakForm'>Add Food Item</p>
             <form id="breakForm" action="/fooditem/new" method="post">
                 <input type="hidden" name="meal_name" value="breakfast">
                 <input type="text" name="food_name" placeholder="Food Name">
+                <input type="number" name="calories" placeholder="Calories">
                 <span>Carbs</span>
                 <input type="number" name="carbs">
                 <span>Fat</span>
@@ -29,6 +37,7 @@
             <form id="lunchForm" action="/fooditem/new" method="post">
                 <input type="hidden" name="meal_name" value="lunch">
                 <input type="text" name="food_name" placeholder="Food Name">
+                <input type="number" name="calories" placeholder="Calories">
                 <span>Carbs</span>
                 <input type="number" name="carbs">
                 <span>Fat</span>
@@ -43,6 +52,7 @@
             <form id="dinnerForm" action="/fooditem/new" method="post">
                 <input type="hidden" name="meal_name" value="dinner">
                 <input type="text" name="food_name" placeholder="Food Name">
+                <input type="number" name="calories" placeholder="Calories">
                 <span>Carbs</span>
                 <input type="number" name="carbs">
                 <span>Fat</span>
@@ -57,6 +67,7 @@
             <form id="snackForm" action="/fooditem/new" method="post">
                 <input type="hidden" name="meal_name" value="snack">
                 <input type="text" name="food_name" placeholder="Food Name">
+                <input type="number" name="calories" placeholder="Calories">
                 <span>Carbs</span>
                 <input type="number" name="carbs">
                 <span>Fat</span>

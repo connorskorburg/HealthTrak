@@ -2,6 +2,10 @@ from sqlalchemy.sql import func
 from config import db, bcrypt
 from flask import flash, request, session
 import re
+from datetime import datetime, timezone
+
+utc = datetime.now(timezone.utc)
+local_tz = utc.astimezone()
 
 EMAIL_REGEX = re.compile(r'^[a-zA-Z0-9.+_-]+@[a-zA-Z0-9._-]+\.[a-zA-Z]+$')
 
@@ -129,6 +133,7 @@ class Meal(db.Model):
 
 class Food(db.Model):
     id = db.Column(db.Integer, primary_key=True)
+    calories = db.Column(db.Float)
     name = db.Column(db.String(100))
     carbs = db.Column(db.Float, nullable=True)
     fat = db.Column(db.Float, nullable=True)
@@ -136,3 +141,16 @@ class Food(db.Model):
     created_at = db.Column(db.DateTime, server_default=func.now())
     updated_at = db.Column(db.DateTime, server_default=func.now(), onupdate=func.now())
     meal_categories = db.relationship('Food', secondary=meal_has_food_item, passive_deletes=True)
+    @classmethod
+    def validate_food(cls, user_data):
+        is_valid = True
+        if len(user_data['food_name']) < 1:
+            is_valid = False
+            flash("Please Enter A Food Name", "food_error")
+        if user_data['calories'] == '':
+            is_valid = False 
+            flash("Please Enter Calories for Food Item", "food_error")
+        return is_valid
+    @classmethod
+    def create_food(cls, user_data):
+        pass

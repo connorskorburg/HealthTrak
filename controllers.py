@@ -1,6 +1,7 @@
 from flask import render_template, redirect, request, flash, session
 from config import db 
 from models import *
+from datetime import datetime, timezone
 
 # render home page
 def home():
@@ -37,3 +38,27 @@ def mealtrack():
     else:
         user = User.query.get(session['user_id'])
         return render_template('mealtrack.html', user=user)
+# add food item to meal
+def newFood():
+    meal = Meal.query.get(1)
+    print(meal.created_at)
+    utc = datetime.now(timezone.utc)
+    print(utc)
+    print(utc.astimezone())
+    created = meal.created_at
+    print(utc.strftime("%d"))
+    print(created.strftime("%d"))
+
+    last_meal = Meal.query.filter_by(user_id = session['user_id']).all()
+    print(last_meal) 
+    print(len(last_meal))
+    valid_food = Food.validate_food(request.form)
+    if not valid_food:
+        return redirect('/mealtrack')
+    else:
+        if request.form['meal_name'] == '':
+            return redirect('/')
+        else:
+            # if utc.strftime("%d") == 
+            return redirect('/mealtrack')
+            

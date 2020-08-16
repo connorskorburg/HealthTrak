@@ -37,6 +37,9 @@
             <td>{{ user.daily_calories }}</td>
         </tr>
     </table>
+    {% for meal in user.meals%}
+        <p>{{ meal.name }}</p>
+    {% endfor %}
     <a href="/fitness">Add Exercise</a>
     <a href="/mealtrack">Add Meal</a>
     <a href="/sleep">Add Sleep</a>
