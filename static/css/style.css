@@ -16,6 +16,10 @@ body {
   text-align: center;
 }
 
+h1 {
+  text-align: center;
+}
+
 .error {
   color: red;
   font-weight: bold;
@@ -32,5 +36,35 @@ form input, form select, form button {
   display: block;
   margin: 10px auto;
   width: 100%;
+}
+
+table {
+  margin: 0 auto;
+}
+
+tr, th, td {
+  padding: 15px;
+  border: 1px solid #ccc;
+  text-align: center;
+}
+
+.container {
+  width: 25%;
+  margin: 25px auto;
+}
+
+.meal {
+  width: 100%;
+  display: inline-block;
+  vertical-align: top;
+}
+
+.meal p:hover {
+  color: #777;
+  cursor: pointer;
+}
+
+.container form {
+  display: none;
 }
 /*# sourceMappingURL=style.css.map */

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Food</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='/css/style.css') }}">
+</head>
+<body>
+    <h1>Welcome, {{ user.first_name }}</h1>
+    <div class="container">
+        <div class="meal">
+            <h3>Breakfast: 0</h3>
+            <p data-alt-src='breakForm'>Add Food Item</p>
+            <form id="breakForm" action="/fooditem/new" method="post">
+                <input type="hidden" name="meal_name" value="breakfast">
+                <input type="text" name="food_name" placeholder="Food Name">
+                <span>Carbs</span>
+                <input type="number" name="carbs">
+                <span>Fat</span>
+                <input type="number" name="fat">
+                <span>Protein</span>
+                <input type="number" name="protein">
+                <button type="submit">Add Food</button>
+            </form>
+        </div><div class="meal">
+            <h3>Lunch: 0</h3>
+            <p data-alt-src='lunchForm'>Add Food Item</p>
+            <form id="lunchForm" action="/fooditem/new" method="post">
+                <input type="hidden" name="meal_name" value="lunch">
+                <input type="text" name="food_name" placeholder="Food Name">
+                <span>Carbs</span>
+                <input type="number" name="carbs">
+                <span>Fat</span>
+                <input type="number" name="fat">
+                <span>Protein</span>
+                <input type="number" name="protein">
+                <button type="submit">Add Food</button>
+            </form>
+        </div><div class="meal">
+            <h3>Dinner: 0</h3>
+            <p data-alt-src='dinnerForm'>Add Food Item</p>
+            <form id="dinnerForm" action="/fooditem/new" method="post">
+                <input type="hidden" name="meal_name" value="dinner">
+                <input type="text" name="food_name" placeholder="Food Name">
+                <span>Carbs</span>
+                <input type="number" name="carbs">
+                <span>Fat</span>
+                <input type="number" name="fat">
+                <span>Protein</span>
+                <input type="number" name="protein">
+                <button type="submit">Add Food</button>
+            </form>
+        </div><div class="meal">
+            <h3>Snack: 0</h3>
+            <p data-alt-src='snackForm'>Add Food Item</p>
+            <form id="snackForm" action="/fooditem/new" method="post">
+                <input type="hidden" name="meal_name" value="snack">
+                <input type="text" name="food_name" placeholder="Food Name">
+                <span>Carbs</span>
+                <input type="number" name="carbs">
+                <span>Fat</span>
+                <input type="number" name="fat">
+                <span>Protein</span>
+                <input type="number" name="protein">
+                <button type="submit">Add Food</button>
+            </form>
+        </div>
+    </div>
+    <script src="{{ url_for('static', filename='/js/app.js') }}"></script>
+</body>
+</html>

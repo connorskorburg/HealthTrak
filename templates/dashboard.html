@@ -4,14 +4,41 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='/css/style.css') }}">
 </head>
 <body>
-    <h1>Welcome, User</h1>
+    <h1>Welcome, {{ user.first_name }}</h1>
     <a href="/logout">Logout</a>
     <table>
         <thead>
-            <th></th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Email</th>
+            <th>Age</th>
+            <th>Sex</th>
+            <th>Height(Inches)</th>
+            <th>Weight(lbs)</th>
+            <th>Activity Level</th>
+            <th>Daily Calories</th>
         </thead>
+        <tr>
+            <td>{{ user.first_name }}</td>
+            <td>{{ user.last_name }}</td>
+            <td>{{ user.email }}</td>
+            <td>{{ user.age }}</td>
+            {% if user.sex == 1 %}
+            <td>Male</td>
+            {% elif user.sex == 2 %}
+            <td>Female</td>
+            {% endif %}
+            <td>{{ user.height }}</td>
+            <td>{{ user.weight }}</td>
+            <td>{{ user.activity }}</td>
+            <td>{{ user.daily_calories }}</td>
+        </tr>
     </table>
+    <a href="/fitness">Add Exercise</a>
+    <a href="/mealtrack">Add Meal</a>
+    <a href="/sleep">Add Sleep</a>
 </body>
 </html>

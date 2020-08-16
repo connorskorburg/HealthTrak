@@ -30,3 +30,10 @@ def login():
 def logout():
     session.clear()
     return redirect('/')
+# fitness page 
+def mealtrack():
+    if not 'user_id' in session.keys():
+        return redirect('/')
+    else:
+        user = User.query.get(session['user_id'])
+        return render_template('mealtrack.html', user=user)
