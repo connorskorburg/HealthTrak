@@ -5,7 +5,7 @@ import re
 from datetime import datetime, timezone
 
 utc = datetime.now(timezone.utc)
-local_tz = utc.astimezone()
+local_time = utc.astimezone()
 
 EMAIL_REGEX = re.compile(r'^[a-zA-Z0-9.+_-]+@[a-zA-Z0-9._-]+\.[a-zA-Z]+$')
 
@@ -130,6 +130,17 @@ class Meal(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey('user.id', ondelete='cascade'), nullable=False)
     user = db.relationship('User', foreign_keys=[user_id])
     food_in_meal = db.relationship('Food', secondary=meal_has_food_item, passive_deletes=True)
+    @classmethod
+    def meal_exists(cls, user_data):
+        all_meals = Meal.query.filter_by(user_id=session['user_id']).filter_by(name=user_data['meal_name'])
+        meal = ''
+        for m in all_meals:
+            if m.created_at.astimezone().strftime("%z") == local_time.strftime("%z"):
+                meal = m
+        if meal != '':
+            return meal
+        elif meal == '':
+            return False                
 
 class Food(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -153,7 +164,10 @@ class Food(db.Model):
         return is_valid
     @classmethod
     def create_food(cls, user_data):
-        pass
+        food = Food(calories=user_data['calories'], name=user_data['food_name'], carbs=user_data['carbs'], fat=user_data['fat'], protein=user_data['protein'])
+        db.session.add(food)
+        db.session.commit()
+        return food
 
 db.create_all()
 db.session.commit()

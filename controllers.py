@@ -40,33 +40,19 @@ def mealtrack():
         return render_template('mealtrack.html', user=user)
 # add food item to meal
 def newFood():
-    user = User.query.get(session['user_id'])
-    # print(meal.created_at)
-    print("CREATED AT:", user.created_at)
-    utc = datetime.now(timezone.utc)
-    print("UTC:", utc)
-    print("LOCAL TZ:", utc.astimezone())
-    local = utc.astimezone()
-    print("LOCAL TZ DAY OF MONTH:", local.strftime("%d"))
-    print("LOCAL TZ TIME:", local.strftime("%H:%M"))
-    created = user.created_at
-    print("UTC DAY OF MONTH:", utc.strftime("%d"))
-    print("CREATED AT DAY OF MONTH:", created.strftime("%d"))
-    print("CREATED AT TIME:", created.strftime("%H:%M"))
-
-    print("CREATED AT LOCAL TZ:", created.astimezone())
-    print(created.astimezone().strftime("%Z"))
-    print("CREATED AT LOCAL TZ DIF:", created.astimezone().strftime("%z"))
-    # last_meal = Meal.query.filter_by(user_id = session['user_id']).all()
-    # print(last_meal) 
-    # print(len(last_meal))
     valid_food = Food.validate_food(request.form)
-    if not valid_food:
+    if not valid_food or request.form['meal_name'] == '':
         return redirect('/mealtrack')
     else:
-        if request.form['meal_name'] == '':
-            return redirect('/')
-        else:
-            # if utc.strftime("%d") == 
-            return redirect('/mealtrack')
+        existing_meal = Meal.meal_exists(request.form)
+        if existing_meal == False:
+            new_meal = Meal(name=request.form['meal_name'], user_id=session['user_id'])
+            db.session.add(new_meal)
+            db.session.commit()
+        elif existing_meal != False:
+            food = Food.create_food(request.form)
+            existing_meal.food_in_meal.append(food)
+            db.session.commit()
+
+        return redirect('/mealtrack')
             
