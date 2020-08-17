@@ -154,3 +154,6 @@ class Food(db.Model):
     @classmethod
     def create_food(cls, user_data):
         pass
+
+db.create_all()
+db.session.commit()
