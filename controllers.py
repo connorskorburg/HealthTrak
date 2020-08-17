@@ -40,18 +40,23 @@ def mealtrack():
         return render_template('mealtrack.html', user=user)
 # add food item to meal
 def newFood():
-    meal = Meal.query.get(1)
-    print(meal.created_at)
+    user = User.query.get(1)
+    # print(meal.created_at)
+    print(user.created_at)
     utc = datetime.now(timezone.utc)
     print(utc)
     print(utc.astimezone())
-    created = meal.created_at
+    local = utc.astimezone()
+    print(local.strftime("%d"))
+    print(local.strftime("%H:%M"))
+    created = user.created_at
     print(utc.strftime("%d"))
     print(created.strftime("%d"))
+    print(created.strftime("%H:%M"))
 
-    last_meal = Meal.query.filter_by(user_id = session['user_id']).all()
-    print(last_meal) 
-    print(len(last_meal))
+    # last_meal = Meal.query.filter_by(user_id = session['user_id']).all()
+    # print(last_meal) 
+    # print(len(last_meal))
     valid_food = Food.validate_food(request.form)
     if not valid_food:
         return redirect('/mealtrack')
