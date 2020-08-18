@@ -47,6 +47,7 @@
             <ul>
                 {% for food in meal.food_in_meal %}
                 <h4>{{ food.name }}</h4>
+                <a href="/fooditem/edit/{{ food.id }}">Edit</a>
                 <ul>
                     <li>Carbs: {{ food.carbs }}g</li>
                     <li>Fat: {{ food.fat }}g</li>

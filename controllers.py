@@ -57,4 +57,28 @@ def newFood():
             existing_meal.food_in_meal.append(food)
             db.session.commit()
         return redirect('/mealtrack')
-            
+# render edit food page
+def editFood(food_id):
+    if not 'user_id' in session.keys():
+        return redirect('/')
+    else:
+        user = User.query.get(session['user_id'])
+        food = Food.query.get(food_id)
+        return render_template('editfood.html', user=user, food=food)
+# method to update food 
+def updateFood():
+    food = Food.query.get(request.form['food_id'])
+    if not 'user_id' in session.keys():
+        return redirect('/')
+    else:
+        valid_food = Food.validate_food(request.form)
+        if valid_food:
+            food.name = request.form['food_name']
+            food.carbs = request.form['carbs']
+            food.fat = request.form['fat']
+            food.protein = request.form['protein']
+            food.calories = request.form['calories']
+            db.session.commit()
+            return redirect('/dashboard')
+        else:
+            return redirect(f'/fooditem/edit/{food.id}')

@@ -95,4 +95,14 @@ tr, th, td {
   list-style-type: none;
   margin-bottom: 5px;
 }
+
+#edit-food {
+  width: 100%;
+  display: -ms-grid;
+  display: grid;
+}
+
+#edit-food form {
+  margin: 25px auto;
+}
 /*# sourceMappingURL=style.css.map */
