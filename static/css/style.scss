@@ -28,7 +28,7 @@ form {
         width: 100%;
     }
 }
-table{
+table, #meals-display{
     margin: 0 auto;
 }
 tr, th, td {
@@ -52,5 +52,25 @@ tr, th, td {
 .container {
     form{
         display: none;
+    }
+}
+
+#meals-display {
+    display: flex;
+    width: 100%;
+}
+.meal-display{
+    flex: 1;
+    border: 1px solid #ccc;
+    padding: 10px;
+    h2{
+        text-align: center;
+    }
+    h4{
+        margin-top: 10px;
+    }
+    li{
+        list-style-type: none;
+        margin-bottom: 5px;
     }
 }

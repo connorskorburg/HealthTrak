@@ -37,11 +37,26 @@
             <td>{{ user.daily_calories }}</td>
         </tr>
     </table>
-    {% for meal in user.meals%}
-        <p>{{ meal.name }}</p>
-    {% endfor %}
     <a href="/fitness">Add Exercise</a>
     <a href="/mealtrack">Add Meal</a>
     <a href="/sleep">Add Sleep</a>
+    <div id="meals-display">
+        {% for meal in user.meals%}
+        <div class="meal-display">
+            <h2>{{ meal.name }}</h2>
+            <ul>
+                {% for food in meal.food_in_meal %}
+                <h4>{{ food.name }}</h4>
+                <ul>
+                    <li>Carbs: {{ food.carbs }}g</li>
+                    <li>Fat: {{ food.fat }}g</li>
+                    <li>Protein: {{ food.protein }}g</li>
+                    <li>Calories: {{ food.calories }}</li>
+                </ul>
+                {% endfor %}
+            </ul>
+        </div>
+        {% endfor %}
+    </div>
 </body>
 </html>

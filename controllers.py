@@ -45,14 +45,16 @@ def newFood():
         return redirect('/mealtrack')
     else:
         existing_meal = Meal.meal_exists(request.form)
+        food = Food.create_food(request.form)
         if existing_meal == False:
             new_meal = Meal(name=request.form['meal_name'], user_id=session['user_id'])
             db.session.add(new_meal)
             db.session.commit()
+            new_meal.food_in_meal.append(food)
+            db.session.commit()
         elif existing_meal != False:
-            food = Food.create_food(request.form)
+            # food = Food.create_food(request.form)
             existing_meal.food_in_meal.append(food)
             db.session.commit()
-
         return redirect('/mealtrack')
             
