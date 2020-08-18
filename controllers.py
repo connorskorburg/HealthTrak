@@ -16,6 +16,7 @@ def dashboard():
 # register user 
 def register():
     valid_user = User.validate_user(request.form)
+    print(valid_user)
     if not valid_user:
         return redirect('/')
     else:
