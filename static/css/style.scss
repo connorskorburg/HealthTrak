@@ -55,11 +55,11 @@ tr, th, td {
     }
 }
 
-#meals-display {
+#meals-display, #workouts-display {
     display: flex;
     width: 100%;
 }
-.meal-display{
+.meal-display, .workout-display{
     flex: 1;
     border: 1px solid #ccc;
     padding: 10px;

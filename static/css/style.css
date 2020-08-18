@@ -68,14 +68,14 @@ tr, th, td {
   display: none;
 }
 
-#meals-display {
+#meals-display, #workouts-display {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
   width: 100%;
 }
 
-.meal-display {
+.meal-display, .workout-display {
   -webkit-box-flex: 1;
       -ms-flex: 1;
           flex: 1;
@@ -83,15 +83,15 @@ tr, th, td {
   padding: 10px;
 }
 
-.meal-display h2 {
+.meal-display h2, .workout-display h2 {
   text-align: center;
 }
 
-.meal-display h4 {
+.meal-display h4, .workout-display h4 {
   margin-top: 10px;
 }
 
-.meal-display li {
+.meal-display li, .workout-display li {
   list-style-type: none;
   margin-bottom: 5px;
 }

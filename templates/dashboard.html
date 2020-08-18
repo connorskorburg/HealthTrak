@@ -59,5 +59,23 @@
         </div>
         {% endfor %}
     </div>
+    <div id="workouts-display">
+        {% for workout in user.workout_history %}
+        <div class="workout-display">
+            <h2>{{ workout.name }}</h2>
+            <ul>
+                {% for ex in workout.exercise_in_workout %}
+                <h4>{{ ex.name }}</h4>
+                <a href="/exercise/edit/{{ ex.id }}">Edit</a>
+                <ul>
+                    <li>Description: {{ ex.description }}</li>
+                    <li>Duration: {{ ex.duration }} Minutes</li>
+                    <li>Calories Burned: {{ ex.calories_burned }}</li>
+                </ul>
+                {% endfor %}
+            </ul>
+        </div>
+        {% endfor%}
+    </div>
 </body>
 </html>
