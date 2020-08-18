@@ -81,3 +81,18 @@ tr, th, td {
         margin: 25px auto;
     }
 }
+textarea{
+    width: 100%;
+    resize: none;
+}
+.workouts{
+    .workout{
+        p:hover{
+            color: #777;
+            cursor: pointer;
+        }
+        form{
+            display: none;
+        }
+    }
+}

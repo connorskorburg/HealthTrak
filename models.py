@@ -21,6 +21,11 @@ def calcCalories(height, weight, sex, age, activity):
     else:
         return False
 
+def calcMinutes(hour, minutes):
+    h = float(hour)
+    m = float(minutes)
+    return float((h * 60) + m)
+
 meal_has_food_item = db.Table('meal_has_food_item',
                      db.Column('meal_id', db.Integer, db.ForeignKey('meal.id', ondelete='cascade'), primary_key=True),
                      db.Column('food_id', db.Integer, db.ForeignKey('food.id', ondelete='cascade'), primary_key=True))
@@ -135,6 +140,32 @@ class Exercise(db.Model):
     created_at = db.Column(db.DateTime, server_default=func.now())
     updated_at = db.Column(db.DateTime, server_default=func.now(), onupdate=func.now())
     workout_categories = db.relationship('Exercise', secondary=workout_has_exercise, passive_deletes=True)
+    @classmethod
+    def valid_exercise(cls, user_data):
+        is_valid = True
+        if user_data['workout_id'] == '':
+            is_valid = False
+        if len(user_data['exercise_name']) < 2 or user_data['exercise_name'] == '':
+            is_valid = False
+            flash("Please Enter an Exercise Name", "ex_error")
+        if user_data['hour'] == '':
+            is_valid = False
+            flash("Please Enter Amount of Hours", "ex_error")
+        if user_data['minutes'] == '':
+            is_valid = False
+            flash("Please Enter Amount of Minutes", "ex_error")
+        if user_data['calories_burned'] == '':
+            is_valid = False
+            flash("Please Enter Est. Calories Burned", "ex_error")
+        return is_valid
+    @classmethod
+    def create_exercise(cls, user_data):
+        duration = calcMinutes(user_data['hour'], user_data['minutes'])
+        exercise = Exercise(name=user_data['exercise_name'], description=user_data['desc'], duration=duration, calories_burned=user_data['calories_burned'])
+        db.session.add(exercise)
+        db.session.commit()
+        return exercise
+
 class Meal(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(45))

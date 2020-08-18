@@ -83,3 +83,42 @@ def updateFood():
             return redirect('/dashboard')
         else:
             return redirect(f'/fooditem/edit/{food.id}')
+# render template for adding workout/exercise
+def fitness():
+    if not 'user_id' in session.keys():
+        return redirect('/')
+    else:
+        user = User.query.get(session['user_id'])
+        workouts = Workout.query.filter_by(user_id=session['user_id'])
+        daily_workouts = []
+        for w in workouts:
+            if w.created_at.astimezone().strftime("%z") == local_time.strftime('%z'):
+                daily_workouts.append(w)
+        return render_template('workout.html', user=user, workouts=daily_workouts)
+# post method to add new workout
+def newWorkout():
+    if not 'user_id' in session.keys():
+        return redirect('/')
+    else:
+        if request.form['workout_name'] == '':
+            flash("Please Enter a Workout Name", "workout_error")
+            return redirect('/fitness')
+        else:
+            workout = Workout(name=request.form['workout_name'], user_id=session['user_id'])
+            db.session.add(workout)
+            db.session.commit()
+            return redirect('/fitness')
+# create exercise and add it to workout
+def newExercise():
+    if not 'user_id' in session.keys():
+        return redirect('/')
+    else:
+        valid_ex = Exercise.valid_exercise(request.form)
+        if valid_ex:
+            exercise = Exercise.create_exercise(request.form)
+            workout = Workout.query.get(request.form['workout_id'])
+            workout.exercise_in_workout.append(exercise)
+            db.session.commit()
+            return redirect('/fitness')
+        else:
+            return redirect('/fitness')

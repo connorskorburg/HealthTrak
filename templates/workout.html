@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fitness</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='/css/style.css') }}">
+</head>
+<body>
+    <h1>Welcome, {{ user.first_name }}</h1>
+    <a href="/dashboard">Dashboard</a>
+    <form action="/workout/new" method="post">
+        <h3>Create New Workout</h3>
+        {% with workout_error = get_flashed_messages(category_filter = ["workout_error"]) %}
+            {% if workout_error %}
+                {% for work_err in workout_error %}
+                    <p class="error">{{ work_err }}</p>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+        <input type="text" name="workout_name" placeholder="Name">
+        <button type="submit">Create Workout</button>
+    </form>
+    <div class="workouts">
+        {% with ex_error = get_flashed_messages(category_filter = ["ex_error"]) %}
+            {% if ex_error %}
+                {% for ex_err in ex_error %}
+                    <p class="error">{{ ex_err }}</p>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+        {% for w in workouts %}
+            <div class="workout">
+                <h3>{{ w.name }}</h3>
+                <ul>
+                    {% for ex in w.exercise_in_workout %}
+                        <li>{{ ex.name }}</li>
+                    {% endfor%}
+                </ul>
+                <p data-alt-src='{{ w.name }}'>Add Exercise</p>
+                <form id='{{ w.name }}' action="/exercise/new" method="post">
+                    <input type="hidden" name="workout_id" value="{{ w.id }}">
+                    <input type="text" name="exercise_name" placeholder="Exercise Name">
+                    <textarea name="desc" placeholder="Description(Optional)"></textarea>
+                    <span>Duration</span>
+                    <input type="number" name="hour" placeholder="Hour">
+                    <input type="number" name="minutes" placeholder="Minutes">
+                    <input type="number" name="calories_burned" placeholder="Estimated Calories Burned">
+                    <button type="submit">Add Exercise</button>
+                </form>
+            </div>
+        {% endfor %}
+    </div>
+    <script src="{{ url_for('static', filename='/js/app.js') }}"></script>
+</body>
+</html>

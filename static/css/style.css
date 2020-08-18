@@ -105,4 +105,18 @@ tr, th, td {
 #edit-food form {
   margin: 25px auto;
 }
+
+textarea {
+  width: 100%;
+  resize: none;
+}
+
+.workouts .workout p:hover {
+  color: #777;
+  cursor: pointer;
+}
+
+.workouts .workout form {
+  display: none;
+}
 /*# sourceMappingURL=style.css.map */
