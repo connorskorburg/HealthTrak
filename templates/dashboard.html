@@ -42,39 +42,47 @@
     <a href="/sleep">Add Sleep</a>
     <div id="meals-display">
         {% for meal in user.meals%}
-        <div class="meal-display">
-            <h2>{{ meal.name }}</h2>
-            <ul>
-                {% for food in meal.food_in_meal %}
-                <h4>{{ food.name }}</h4>
-                <a href="/fooditem/edit/{{ food.id }}">Edit</a>
+            {% if meal.created_at.astimezone().strftime('%Y-%m-%d') == local_time.strftime('%Y-%m-%d') %}
+            <div class="meal-display">
+                <h2>{{ meal.name }}</h2>
                 <ul>
-                    <li>Carbs: {{ food.carbs }}g</li>
-                    <li>Fat: {{ food.fat }}g</li>
-                    <li>Protein: {{ food.protein }}g</li>
-                    <li>Calories: {{ food.calories }}</li>
+                    {% for food in meal.food_in_meal %}
+                    {% if food.created_at.astimezone().strftime('%Y-%m-%d') == local_time.strftime('%Y-%m-%d') %}
+                    <h4>{{ food.name }}</h4>
+                    <a href="/fooditem/edit/{{ food.id }}">Edit</a>
+                    <ul>
+                        <li>Carbs: {{ food.carbs }}g</li>
+                        <li>Fat: {{ food.fat }}g</li>
+                        <li>Protein: {{ food.protein }}g</li>
+                        <li>Calories: {{ food.calories }}</li>
+                    </ul>
+                    {% endif %}
+                    {% endfor %}
                 </ul>
-                {% endfor %}
-            </ul>
-        </div>
+            </div>
+            {% endif %}
         {% endfor %}
     </div>
     <div id="workouts-display">
         {% for workout in user.workout_history %}
-        <div class="workout-display">
-            <h2>{{ workout.name }}</h2>
-            <ul>
+            {% if workout.created_at.astimezone().strftime('%Y-%m-%d') == local_time.strftime('%Y-%m-%d') %}
+            <div class="workout-display">
+                <h2>{{ workout.name }}</h2>
                 {% for ex in workout.exercise_in_workout %}
-                <h4>{{ ex.name }}</h4>
-                <a href="/exercise/edit/{{ ex.id }}">Edit</a>
-                <ul>
-                    <li>Description: {{ ex.description }}</li>
-                    <li>Duration: {{ ex.duration }} Minutes</li>
-                    <li>Calories Burned: {{ ex.calories_burned }}</li>
+                    {% if ex.created_at.astimezone().strftime('%Y-%m-%d') == local_time.strftime('%Y-%m-%d'):%}
+                    <ul>
+                        <h4>{{ ex.name }}</h4>
+                        <a href="/exercise/edit/{{ ex.id }}">Edit</a>
+                        <ul>
+                            <li>Description: {{ ex.description }}</li>
+                            <li>Duration: {{ ex.duration }} Minutes</li>
+                            <li>Calories Burned: {{ ex.calories_burned }}</li>
+                        </ul>
+                        {% endif %}
+                    {% endfor %}
                 </ul>
-                {% endfor %}
-            </ul>
-        </div>
+            </div>
+            {% endif %}
         {% endfor%}
     </div>
 </body>

@@ -12,7 +12,7 @@ def dashboard():
         return redirect('/')
     else:
         user = User.query.get(session['user_id'])
-        return render_template('dashboard.html', user=user)
+        return render_template('dashboard.html', user=user, local_time=local_time)
 # register user 
 def register():
     valid_user = User.validate_user(request.form)
@@ -92,7 +92,7 @@ def fitness():
         workouts = Workout.query.filter_by(user_id=session['user_id'])
         daily_workouts = []
         for w in workouts:
-            if w.created_at.astimezone().strftime("%z") == local_time.strftime('%z'):
+            if w.created_at.astimezone().strftime('%Y-%m-%d') == local_time.strftime('%Y-%m-%d'):
                 daily_workouts.append(w)
         return render_template('workout.html', user=user, workouts=daily_workouts)
 # post method to add new workout

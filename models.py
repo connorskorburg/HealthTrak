@@ -164,7 +164,7 @@ class Exercise(db.Model):
         exercise = Exercise(name=user_data['exercise_name'], description=user_data['desc'], duration=duration, calories_burned=user_data['calories_burned'])
         db.session.add(exercise)
         db.session.commit()
-        return exercise
+        return exercise 
 
 class Meal(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -178,10 +178,12 @@ class Meal(db.Model):
     @classmethod
     def meal_exists(cls, user_data):
         all_meals = Meal.query.filter_by(user_id=session['user_id']).filter_by(name=user_data['meal_name'])
+        print(all_meals)
         meal = ''
         for m in all_meals:
-            if m.created_at.astimezone().strftime("%z") == local_time.strftime("%z"):
+            if m.created_at.astimezone().strftime('%Y-%m-%d') == local_time.strftime('%Y-%m-%d'):
                 meal = m
+                print(meal)
         if meal != '':
             return meal
         elif meal == '':
