@@ -44,7 +44,7 @@
         {% for meal in user.meals%}
             {% if meal.created_at.astimezone().strftime('%Y-%m-%d') == local_time.strftime('%Y-%m-%d') %}
             <div class="meal-display">
-                <h2>{{ meal.name }}</h2>
+                <h3>{{ meal.name }}: {{ meal.total_calories }}</h3>
                 <ul>
                     {% for food in meal.food_in_meal %}
                     {% if food.created_at.astimezone().strftime('%Y-%m-%d') == local_time.strftime('%Y-%m-%d') %}
@@ -74,7 +74,6 @@
                         <h4>{{ ex.name }}</h4>
                         <a href="/exercise/edit/{{ ex.id }}">Edit</a>
                         <ul>
-                            <li>Description: {{ ex.description }}</li>
                             <li>Duration: {{ ex.duration }} Minutes</li>
                             <li>Calories Burned: {{ ex.calories_burned }}</li>
                         </ul>

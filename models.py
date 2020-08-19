@@ -45,6 +45,7 @@ class User(db.Model):
     height = db.Column(db.Float, nullable=True)
     weight = db.Column(db.Float, nullable=True)
     daily_calories = db.Column(db.Float, nullable=True)
+    # calories_consumed = db.Column(db.Float, default=0)
     password = db.Column(db.String(100))
     created_at = db.Column(db.DateTime, server_default=func.now())
     updated_at = db.Column(db.DateTime, server_default=func.now(), onupdate=func.now())
@@ -161,7 +162,7 @@ class Exercise(db.Model):
     @classmethod
     def create_exercise(cls, user_data):
         duration = calcMinutes(user_data['hour'], user_data['minutes'])
-        exercise = Exercise(name=user_data['exercise_name'], description=user_data['desc'], duration=duration, calories_burned=user_data['calories_burned'])
+        exercise = Exercise(name=user_data['exercise_name'], duration=duration, calories_burned=user_data['calories_burned'])
         db.session.add(exercise)
         db.session.commit()
         return exercise 

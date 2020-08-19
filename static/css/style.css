@@ -83,7 +83,7 @@ tr, th, td {
   padding: 10px;
 }
 
-.meal-display h2, .workout-display h2 {
+.meal-display h3, .workout-display h3 {
   text-align: center;
 }
 

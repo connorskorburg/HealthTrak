@@ -52,10 +52,12 @@ def newFood():
             db.session.add(new_meal)
             db.session.commit()
             new_meal.food_in_meal.append(food)
+            new_meal.total_calories = float(new_meal.total_calories) + float(food.calories)
             db.session.commit()
         elif existing_meal != False:
             # food = Food.create_food(request.form)
             existing_meal.food_in_meal.append(food)
+            existing_meal.total_calories = float(existing_meal.total_calories) + float(food.calories)
             db.session.commit()
         return redirect('/mealtrack')
 # render edit food page
