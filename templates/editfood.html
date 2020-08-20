@@ -21,14 +21,21 @@
             {% endwith %}
             <input type="hidden" name="food_id" value="{{ food.id }}">
             <input type="text" name="food_name" value="{{ food.name }}">
+            <span>Calories</span>
+            <input type="number" name="calories" value="{{ food.calories }}">
             <span>Carbs</span>
             <input type="number" name="carbs" value="{{ food.carbs }}">
             <span>Fat</span>
             <input type="number" name="fat" value="{{ food.fat }}">
             <span>Protein</span>
             <input type="number" name="protein" value="{{ food.protein }}">
-            <span>Calories</span>
-            <input type="number" name="calories" value="{{ food.calories }}">
+            <span>Quantity</span>
+            <input type="number" name="quantity" value="{{ food.quantity }}">
+            <span>Can we add this to our Public Database?</span>
+            <select name="public">
+                <option value="1">Public</option>
+                <option value="0">Private</option>
+            </select>
             <button type="submit">Update Food</button>
         </form>
     </div>

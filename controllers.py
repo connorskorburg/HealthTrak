@@ -87,7 +87,7 @@ def newFood():
             existing_meal.total_calories = total_cals
             db.session.commit()
             # add meal calories to daily log
-            log_exists.calories_consumed = float(log_exists.calories_consumed) + total_cals
+            log_exists.calories_consumed = float(log_exists.calories_consumed) + float(food.calories)
             db.session.commit() 
         return redirect('/mealtrack')
 # render edit food page
@@ -101,16 +101,30 @@ def editFood(food_id):
 # method to update food 
 def updateFood():
     food = Food.query.get(request.form['food_id'])
+    meal = Meal.query.get(food.meal_id)
     if not 'user_id' in session.keys():
         return redirect('/')
     else:
         valid_food = Food.validate_food(request.form)
-        if valid_food:
+        log_exists = DailyLog.log_exists()
+        if log_exists == False:
+            return redirect('/dashboard')
+        if valid_food and log_exists:
+            if float(request.form['calories']) != float(food.calories):
+                # update daily log calories
+                log_exists.calories_consumed = float(log_exists.calories_consumed) - float(food.calories) + float(request.form['calories'])
+                db.session.commit()
+                # update meal calories
+                meal.total_calories = float(meal.total_calories) - float(food.calories) + float(request.form['calories'])
+                db.session.commit()
+            # update food item
             food.name = request.form['food_name']
             food.carbs = request.form['carbs']
             food.fat = request.form['fat']
             food.protein = request.form['protein']
             food.calories = request.form['calories']
+            food.quantity = request.form['quantity']
+            food.public = request.form['public']
             db.session.commit()
             return redirect('/dashboard')
         else:
