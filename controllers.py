@@ -129,6 +129,29 @@ def updateFood():
             return redirect('/dashboard')
         else:
             return redirect(f'/fooditem/edit/{food.id}')
+# delete food item
+def deleteFood(food_id):
+    if not 'user_id' in session.keys():
+        return redirect('/')
+    else:
+        log_exists = DailyLog.log_exists()
+        if log_exists:
+            food = Food.query.get(int(food_id))
+            # remove calories from meal
+            meal = Meal.query.get(food.meal_id)
+            meal.total_calories = float(meal.total_calories) - float(food.calories)
+            db.session.commit()
+            # remove calories from daily calories
+            log_exists.calories_consumed = float(log_exists.calories_consumed) - float(food.calories)
+            db.session.commit()
+            # delete food item
+            db.session.delete(food)
+            db.session.commit()
+            return redirect('/dashboard')
+        else:
+            return redirect('/dashboard')
+
+
 # render template for adding workout/exercise
 def fitness():
     if not 'user_id' in session.keys():

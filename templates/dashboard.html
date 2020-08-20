@@ -55,6 +55,7 @@
                     {% if food.created_at.astimezone().strftime('%Y-%m-%d') == local_time.strftime('%Y-%m-%d') %}
                     <h4>{{ food.name }}</h4>
                     <a href="/fooditem/edit/{{ food.id }}">Edit</a>
+                    <a href="/fooditem/delete/{{ food.id }}">Delete</a>
                     <ul>
                         <li>Carbs: {{ food.carbs }}g</li>
                         <li>Fat: {{ food.fat }}g</li>
