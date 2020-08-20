@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Exercise</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='/css/style.css') }}">
+</head>
+<body>
+    <h1>Welcome, {{ user.first_name }}</h1>
+    <div id="edit-exercise">
+        <a href="/dashboard">Dashboard</a>
+        <form action="/updateExercise" method="post">
+            <h2>Update Exercise</h2>
+            {% with ex_error = get_flashed_messages(category_filter = ["ex_error"]) %}
+                {% if ex_error %}
+                    {% for ex_err in ex_error %}
+                        <p class="error">{{ ex_err }}</p>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+            <input type="hidden" name="exercise_id" value="{{ exercise.id }}">
+            <input type="hidden" name="workout_id" value="{{ exercise.workout_id }}">
+            <span>Name:</span>
+            <input type="text" name="exercise_name" value="{{ exercise.name }}">
+            <span>Duration(Minutes):</span>
+            <input type="number" name="duration" value="{{ exercise.duration }}">
+            <span>Estimated Calories Burned:</span>
+            <input type="number" name="calories_burned" value="{{ exercise.calories_burned }}">
+            <button type="submit">Update Exercise</button>
+        </form>
+    </div>
+</body>
+</html>

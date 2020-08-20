@@ -96,13 +96,13 @@ tr, th, td {
   margin-bottom: 5px;
 }
 
-#edit-food {
+#edit-food, #edit-exercise {
   width: 100%;
   display: -ms-grid;
   display: grid;
 }
 
-#edit-food form {
+#edit-food form, #edit-exercise form {
   margin: 25px auto;
 }
 

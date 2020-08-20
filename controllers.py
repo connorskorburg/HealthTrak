@@ -224,3 +224,34 @@ def newExercise():
         else:
             return redirect('/fitness')
 
+# render edit exercise page
+def editExercise(exercise_id):
+    if not 'user_id' in session.keys():
+        return redirect('/')
+    else:
+        user = User.query.get(session['user_id'])
+        exercise = Exercise.query.get(int(exercise_id))
+        return render_template('editExercise.html', user=user, exercise=exercise)
+# post method to update exercise
+def updateExercise():
+    if not 'user_id' in session.keys():
+        return redirect('/')
+    exercise = Exercise.query.get(int(request.form['exercise_id']))
+    workout = Workout.query.get(exercise.workout_id)
+    log_exists = DailyLog.log_exists()
+    if log_exists == False:
+        return redirect('/dashboard')
+    else:
+        valid_ex = Exercise.valid_exercise(request.form)
+        if valid_ex and log_exists:
+            if float(exercise.calories_burned) != float(request.form['calories_burned']):
+                print("ONE")
+            if float(exercise.duration) != float(request.form['duration']):
+                print("TWO")
+            return redirect(f'/exercise/edit/{exercise.id}')
+
+        
+        
+        
+        
+        
