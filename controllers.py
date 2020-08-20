@@ -154,17 +154,50 @@ def newWorkout():
             db.session.add(workout)
             db.session.commit()
             return redirect('/fitness')
+# delete workout
+def deleteWorkout(workout_id):
+    if not 'user_id' in session.keys():
+        return redirect('/')
+    else:
+        log_exists = DailyLog.log_exists()
+        if log_exists:
+            workout = Workout.query.get(int(workout_id))
+            # remove daily calories burned from workout
+            log_exists.calories_burned = float(log_exists.calories_burned) - float(workout.calories_burned)
+            db.session.commit()
+            # remove daily duration from workout
+            log_exists.minutes_worked_out = float(log_exists.minutes_worked_out) - float(workout.duration)
+            db.session.commit()
+            # delete workout
+            db.session.delete(workout)
+            db.session.commit()
+            return redirect('/fitness')
+        else:
+            return redirect('/dashboard')
+
+
 # create exercise and add it to workout
 def newExercise():
     if not 'user_id' in session.keys():
         return redirect('/')
     else:
         valid_ex = Exercise.valid_exercise(request.form)
-        if valid_ex:
+        log_exists = DailyLog.log_exists()
+        if valid_ex and log_exists:
+            duration = calcMinutes(request.form['hour'], request.form['minutes'])
             exercise = Exercise.create_exercise(request.form)
             workout = Workout.query.get(request.form['workout_id'])
-            workout.exercise_in_workout.append(exercise)
+            # update workout duration
+            workout.duration = float(workout.duration) + float(duration)
+            workout.exercises.append(exercise)
+            db.session.commit()
+            # add duration to daily log
+            log_exists.minutes_worked_out = float(log_exists.minutes_worked_out) + float(duration)
+            db.session.commit()
+            # add calories burned
+            log_exists.calories_burned = float(log_exists.calories_burned) + float(request.form['calories_burned'])
             db.session.commit()
             return redirect('/fitness')
         else:
             return redirect('/fitness')
+

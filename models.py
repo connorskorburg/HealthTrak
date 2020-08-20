@@ -179,7 +179,7 @@ class Exercise(db.Model):
     @classmethod
     def create_exercise(cls, user_data):
         duration = calcMinutes(user_data['hour'], user_data['minutes'])
-        exercise = Exercise(name=user_data['exercise_name'], duration=duration, calories_burned=user_data['calories_burned'])
+        exercise = Exercise(name=user_data['exercise_name'], duration=duration, calories_burned=user_data['calories_burned'], workout_id=user_data['workout_id'])
         db.session.add(exercise)
         db.session.commit()
         return exercise 

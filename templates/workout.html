@@ -32,8 +32,9 @@
         {% for w in workouts %}
             <div class="workout">
                 <h3>{{ w.name }}</h3>
+                <a href="/workout/delete/{{ w.id }}">Delete Workout</a>
                 <ul>
-                    {% for ex in w.exercise_in_workout %}
+                    {% for ex in w.exercises %}
                         <li>{{ ex.name }}</li>
                     {% endfor%}
                 </ul>
