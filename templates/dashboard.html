@@ -40,13 +40,16 @@
     <a href="/fitness">Add Exercise</a>
     <a href="/mealtrack">Add Meal</a>
     <a href="/sleep">Add Sleep</a>
+    {% if log_exists != False %}
+        <h2>Total Calories Consumed: {{ log_exists.calories_consumed }}</h2>
+    {% endif %}
     <div id="meals-display">
         {% for meal in user.meals%}
             {% if meal.created_at.astimezone().strftime('%Y-%m-%d') == local_time.strftime('%Y-%m-%d') %}
             <div class="meal-display">
                 <h3>{{ meal.name }}: {{ meal.total_calories }}</h3>
                 <ul>
-                    {% for food in meal.food_in_meal %}
+                    {% for food in meal.food_items %}
                     {% if food.created_at.astimezone().strftime('%Y-%m-%d') == local_time.strftime('%Y-%m-%d') %}
                     <h4>{{ food.name }}</h4>
                     <a href="/fooditem/edit/{{ food.id }}">Edit</a>

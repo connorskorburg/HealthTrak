@@ -5,3 +5,6 @@
 -extract quantity and calories from food item to create new 1 to many model
 -add sleep validation, creation, edit and relationship
 -create methods to find calories consumed, duration of workouts/exercises, and minutes to hours
+
+8/20
+-

@@ -26,14 +26,6 @@ def calcMinutes(hour, minutes):
     m = float(minutes)
     return float((h * 60) + m)
 
-meal_has_food_item = db.Table('meal_has_food_item',
-                     db.Column('meal_id', db.Integer, db.ForeignKey('meal.id', ondelete='cascade'), primary_key=True),
-                     db.Column('food_id', db.Integer, db.ForeignKey('food.id', ondelete='cascade'), primary_key=True))
-
-workout_has_exercise = db.Table('workout_has_exercise',
-                       db.Column('workout_id', db.Integer, db.ForeignKey('workout.id', ondelete='cascade'), primary_key=True),
-                       db.Column('exercise_id', db.Integer, db.ForeignKey('exercise.id', ondelete='cascade'), primary_key=True))
-
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     first_name = db.Column(db.String(45))
@@ -45,13 +37,13 @@ class User(db.Model):
     height = db.Column(db.Float, nullable=True)
     weight = db.Column(db.Float, nullable=True)
     daily_calories = db.Column(db.Float, nullable=True)
-    # calories_consumed = db.Column(db.Float, default=0)
     password = db.Column(db.String(100))
     created_at = db.Column(db.DateTime, server_default=func.now())
     updated_at = db.Column(db.DateTime, server_default=func.now(), onupdate=func.now())
     sleep_history = db.relationship('Sleep', back_populates='user', cascade='all, delete, delete-orphan')
     workout_history = db.relationship('Workout', back_populates='user', cascade='all, delete, delete-orphan')
     meals = db.relationship('Meal', back_populates='user', cascade='all, delete, delete-orphan')
+    log_history = db.relationship('DailyLog', back_populates='user', cascade='all, delete, delete-orphan')
     @classmethod 
     def validate_user(cls, user_data):
         is_valid = True 
@@ -113,6 +105,29 @@ class User(db.Model):
                 flash("Password Did Not Match", "login_error")
                 return user
 
+class DailyLog(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    calories_consumed = db.Column(db.Float, default=0)
+    calories_burned = db.Column(db.Float, default=0)
+    minutes_worked_out = db.Column(db.Float, default=0)
+    created_at = db.Column(db.DateTime, server_default=func.now())
+    updated_at = db.Column(db.DateTime, server_default=func.now(), onupdate=func.now())
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id', ondelete='cascade'), nullable=False)
+    user = db.relationship('User', foreign_keys=[user_id])
+    @classmethod
+    def log_exists(cls):
+        all_logs = DailyLog.query.filter_by(user_id=session['user_id']).all()
+        print(all_logs)
+        log = ''
+        for l in all_logs:
+            if l.created_at.astimezone().strftime('%Y-%m-%d') == local_time.strftime('%Y-%m-%d'):
+                log = l
+                print(log)
+        if log != '':
+            return log
+        elif log == '':
+            return False  
+
 class Sleep(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     start_time = db.Column(db.DateTime)
@@ -130,7 +145,7 @@ class Workout(db.Model):
     updated_at = db.Column(db.DateTime, server_default=func.now(), onupdate=func.now())
     user_id = db.Column(db.Integer, db.ForeignKey('user.id', ondelete='cascade'), nullable=False)
     user = db.relationship('User', foreign_keys=[user_id])
-    exercise_in_workout = db.relationship('Exercise', secondary=workout_has_exercise, passive_deletes=True)
+    exercises = db.relationship('Exercise', back_populates='workout', cascade='all, delete, delete-orphan')
 
 class Exercise(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -140,7 +155,9 @@ class Exercise(db.Model):
     calories_burned = db.Column(db.Integer)
     created_at = db.Column(db.DateTime, server_default=func.now())
     updated_at = db.Column(db.DateTime, server_default=func.now(), onupdate=func.now())
-    workout_categories = db.relationship('Exercise', secondary=workout_has_exercise, passive_deletes=True)
+    workout_id = db.Column(db.Integer, db.ForeignKey('workout.id', ondelete='cascade'), nullable=False)
+    workout = db.relationship('Workout', foreign_keys=[workout_id])
+    # class methods
     @classmethod
     def valid_exercise(cls, user_data):
         is_valid = True
@@ -175,7 +192,7 @@ class Meal(db.Model):
     updated_at = db.Column(db.DateTime, server_default=func.now(), onupdate=func.now())
     user_id = db.Column(db.Integer, db.ForeignKey('user.id', ondelete='cascade'), nullable=False)
     user = db.relationship('User', foreign_keys=[user_id])
-    food_in_meal = db.relationship('Food', secondary=meal_has_food_item, passive_deletes=True)
+    food_items = db.relationship('Food', back_populates='meal', cascade='all, delete, delete-orphan')
     @classmethod
     def meal_exists(cls, user_data):
         all_meals = Meal.query.filter_by(user_id=session['user_id']).filter_by(name=user_data['meal_name'])
@@ -194,13 +211,16 @@ class Food(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     calories = db.Column(db.Float)
     name = db.Column(db.String(100))
-    carbs = db.Column(db.Float, nullable=True)
-    fat = db.Column(db.Float, nullable=True)
-    protein = db.Column(db.Float, nullable=True)
-    quantity = db.Column(db.Integer, default=1)
+    carbs = db.Column(db.Float, nullable=False)
+    fat = db.Column(db.Float, nullable=False)
+    protein = db.Column(db.Float, nullable=False)
+    quantity = db.Column(db.Float, nullable=False)
+    public = db.Column(db.Integer, nullable=False)
     created_at = db.Column(db.DateTime, server_default=func.now())
     updated_at = db.Column(db.DateTime, server_default=func.now(), onupdate=func.now())
-    meal_categories = db.relationship('Meal', secondary=meal_has_food_item, passive_deletes=True)
+    meal_id = db.Column(db.Integer, db.ForeignKey('meal.id', ondelete='cascade'), nullable=False)
+    meal = db.relationship('Meal', foreign_keys=[meal_id])
+    # class methods
     @classmethod
     def validate_food(cls, user_data):
         is_valid = True
@@ -210,13 +230,29 @@ class Food(db.Model):
         if user_data['calories'] == '':
             is_valid = False 
             flash("Please Enter Calories for Food Item", "food_error")
+        if user_data['carbs'] == '' or float(user_data['carbs']) <=0:
+            is_valid = False
+            flash("Please Enter Carbs for Food Item", "food_error")
+        if user_data['fat'] == '' or float(user_data['fat']) <=0:
+            is_valid = False
+            flash("Please Enter Fat for Food Item", "food_error")
+        if user_data['protein'] == '' or float(user_data['protein']) <=0:
+            is_valid = False
+            flash("Please Enter Protein for Food Item", "food_error")
+        if user_data['quantity'] == '' or float(user_data['quantity']) <=0:
+            is_valid = False
+            flash("Please Enter Quantity of Food Items", "food_error")
+        if user_data['public'] == '':
+            is_valid = False
+            flash("Please Select a Public or Private option", "food_error")
         return is_valid
     @classmethod
     def create_food(cls, user_data):
-        food = Food(calories=user_data['calories'], name=user_data['food_name'], carbs=user_data['carbs'], fat=user_data['fat'], protein=user_data['protein'])
+        food = Food(calories=user_data['calories'], name=user_data['food_name'], carbs=user_data['carbs'], fat=user_data['fat'], protein=user_data['protein'], quantity=user_data['quantity'])
         db.session.add(food)
         db.session.commit()
         return food
+
 
 db.create_all()
 db.session.commit()
