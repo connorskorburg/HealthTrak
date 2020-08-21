@@ -23,12 +23,17 @@
             <input type="hidden" name="workout_id" value="{{ exercise.workout_id }}">
             <span>Name:</span>
             <input type="text" name="exercise_name" value="{{ exercise.name }}">
-            <span>Duration(Minutes):</span>
-            <input type="number" name="duration" value="{{ exercise.duration }}">
+            <span>Duration:</span>
+            <input id="duration" type="hidden" name="duration" value="{{ exercise.duration }}">
+            <span>Hour</span>
+            <input id="hour" type="number" name="hour">
+            <span>Minutes</span>
+            <input id="minutes" type="number" name="minutes">
             <span>Estimated Calories Burned:</span>
             <input type="number" name="calories_burned" value="{{ exercise.calories_burned }}">
             <button type="submit">Update Exercise</button>
         </form>
     </div>
+    <script src="{{ url_for('static', filename='/js/editEx.js') }}"></script>
 </body>
 </html>
