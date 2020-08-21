@@ -141,6 +141,7 @@ class Workout(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(100))
     duration = db.Column(db.Float, default=0)
+    calories_burned = db.Column(db.Float, default=0)
     created_at = db.Column(db.DateTime, server_default=func.now())
     updated_at = db.Column(db.DateTime, server_default=func.now(), onupdate=func.now())
     user_id = db.Column(db.Integer, db.ForeignKey('user.id', ondelete='cascade'), nullable=False)
@@ -150,7 +151,6 @@ class Workout(db.Model):
 class Exercise(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(100))
-    description = db.Column(db.Text)
     duration = db.Column(db.Float)
     calories_burned = db.Column(db.Integer)
     created_at = db.Column(db.DateTime, server_default=func.now())
@@ -183,6 +183,19 @@ class Exercise(db.Model):
         db.session.add(exercise)
         db.session.commit()
         return exercise 
+    @classmethod
+    def valid_ex_update(cls, user_data):
+        is_valid = True
+        if user_data['calories_burned'] == '':
+            is_valid = False
+            flash("Please Enter Est. Calories Burned", "ex2_error")
+        if len(user_data['exercise_name']) < 2 or user_data['exercise_name'] == '':
+            is_valid = False
+            flash("Please Enter an Exercise Name", "ex2_error")
+        if user_data['duration'] == '' or float(user_data['duration']) < 1:
+            is_valid = False
+            flash("Please Enter Duration", "ex2_error")
+        return is_valid 
 
 class Meal(db.Model):
     id = db.Column(db.Integer, primary_key=True)

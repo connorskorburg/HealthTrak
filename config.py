@@ -10,8 +10,8 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root:root@localhost/hea
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False 
 
 db = SQLAlchemy(app)
-# db.create_all()
-# db.session.commit()
+db.create_all()
+db.session.commit()
 
 bcrypt = Bcrypt(app)
 

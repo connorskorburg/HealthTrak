@@ -12,23 +12,18 @@
         <a href="/dashboard">Dashboard</a>
         <form action="/updateExercise" method="post">
             <h2>Update Exercise</h2>
-            {% with ex_error = get_flashed_messages(category_filter = ["ex_error"]) %}
-                {% if ex_error %}
-                    {% for ex_err in ex_error %}
+            {% with ex2_error = get_flashed_messages(category_filter = ["ex2_error"]) %}
+                {% if ex2_error %}
+                    {% for ex_err in ex2_error %}
                         <p class="error">{{ ex_err }}</p>
                     {% endfor %}
                 {% endif %}
             {% endwith %}
             <input type="hidden" name="exercise_id" value="{{ exercise.id }}">
-            <input type="hidden" name="workout_id" value="{{ exercise.workout_id }}">
             <span>Name:</span>
             <input type="text" name="exercise_name" value="{{ exercise.name }}">
-            <span>Duration:</span>
-            <input id="duration" type="hidden" name="duration" value="{{ exercise.duration }}">
-            <span>Hour</span>
-            <input id="hour" type="number" name="hour">
-            <span>Minutes</span>
-            <input id="minutes" type="number" name="minutes">
+            <span>Duration(minutes):</span>
+            <input id="duration" type="number" name="duration" value="{{ exercise.duration }}">
             <span>Estimated Calories Burned:</span>
             <input type="number" name="calories_burned" value="{{ exercise.calories_burned }}">
             <button type="submit">Update Exercise</button>

@@ -73,12 +73,13 @@
         {% for workout in user.workout_history %}
             {% if workout.created_at.astimezone().strftime('%Y-%m-%d') == local_time.strftime('%Y-%m-%d') %}
             <div class="workout-display">
-                <h2>{{ workout.name }}</h2>
+                <h2>{{ workout.name }} | {{ workout.calories_burned }} Cals Burned | {{ workout.duration }} minutes</h2>
                 {% for ex in workout.exercises %}
                     {% if ex.created_at.astimezone().strftime('%Y-%m-%d') == local_time.strftime('%Y-%m-%d'):%}
                     <ul>
                         <h4>{{ ex.name }}</h4>
                         <a href="/exercise/edit/{{ ex.id }}">Edit</a>
+                        <a href="/exercise/delete/{{ ex.id }}">Delete</a>
                         <ul>
                             <li>Duration: {{ ex.duration }} Minutes</li>
                             <li>Calories Burned: {{ ex.calories_burned }}</li>

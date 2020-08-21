@@ -214,6 +214,9 @@ def newExercise():
             workout.duration = float(workout.duration) + float(duration)
             workout.exercises.append(exercise)
             db.session.commit()
+            # add workout calories burned
+            workout.calories_burned = float(workout.calories_burned) + float(request.form['calories_burned'])
+            db.session.commit()
             # add duration to daily log
             log_exists.minutes_worked_out = float(log_exists.minutes_worked_out) + float(duration)
             db.session.commit()
@@ -242,16 +245,56 @@ def updateExercise():
     if log_exists == False:
         return redirect('/dashboard')
     else:
-        valid_ex = Exercise.valid_exercise(request.form)
+        valid_ex = Exercise.valid_ex_update(request.form)
         if valid_ex and log_exists:
             if float(exercise.calories_burned) != float(request.form['calories_burned']):
                 print("ONE")
+                # update daily cals burned
+                log_exists.calories_burned = float(log_exists.calories_burned) - float(exercise.calories_burned) + float(request.form['calories_burned'])
+                db.session.commit()
+                # update worlout cals burned
+                workout.calories_burned = float(workout.calories_burned) - float(exercise.calories_burned) + float(request.form['calories_burned'])
+                db.session.commit()
             if float(exercise.duration) != float(request.form['duration']):
                 print("TWO")
+                # update total minutes working out
+                log_exists.minutes_worked_out = float(log_exists.minutes_worked_out) - float(exercise.duration) + float(request.form['duration'])
+                db.session.commit()
+                # update duration for workout
+                workout.duration = float(workout.duration) - float(exercise.duration) + float(request.form['duration'])
+                db.session.commit()
+            # update exercise
+            exercise.name = request.form['exercise_name']
+            exercise.duration = float(request.form['duration'])
+            exercise.calories_burned = float(request.form['calories_burned'])
+            db.session.commit()
+            return redirect('/dashboard')
+        else:
             return redirect(f'/exercise/edit/{exercise.id}')
-
-        
-        
-        
-        
-        
+# delete exercise
+def deleteExercise(exercise_id):
+    if not 'user_id' in session.keys():
+        return redirect('/')
+    else:
+        exercise = Exercise.query.get(int(exercise_id))
+        workout = Workout.query.get(exercise.workout_id)
+        log_exists = DailyLog.log_exists()
+        if exercise and log_exists and workout:
+            # update daily log cals burned
+            log_exists.calories_burned = float(log_exists.calories_burned) - float(exercise.calories_burned)
+            db.session.commit()
+            # update daily log minutes worked out
+            log_exists.minutes_worked_out = float(log_exists.minutes_worked_out) - float(exercise.duration)
+            db.session.commit()
+            # update workout cals burned
+            workout.calories_burned = float(workout.calories_burned) - float(exercise.calories_burned)
+            db.session.commit()
+            # update workout duration
+            workout.duration = float(workout.duration) - float(exercise.duration)
+            db.session.commit()
+            # delete exercise
+            db.session.delete(exercise)
+            db.session.commit()
+            return redirect('/dashboard')
+        else:
+            return redirect('/')
