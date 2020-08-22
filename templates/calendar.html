@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calendar</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog==" crossorigin="anonymous" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='/css/style.css') }}">
+</head>
+<body>
+    <div class="container-2">
+        <div id="logs">{{ logs|tojson }}</div>
+        <table>
+            <caption>
+                <span id="month"></span>
+                <span id="year"></span>
+                <br>
+                <a href="/dashboard">Dashboard</a>
+            </caption>
+            <thead>
+                <tr>
+                    <th>Sun</th>
+                    <th>Mon</th>
+                    <th>Tues</th>
+                    <th>Wed</th>
+                    <th>Thurs</th>
+                    <th>Fri</th>
+                    <th>Sat</th>
+                </tr>
+            </thead>
+            <tbody id="cal-content"></tbody>
+        </table>
+        <div class="btn-container">
+            <button onclick=previous()>Previous</button>
+            <button onclick=next()>Next</button>
+        </div>
+    </div>
+    <div id="log-pop-outer">
+        <div id="log-pop">
+            <div id="log-pop-top">
+                <h3 id="log-date"></h3>
+                <button onclick="hideLog()"> 
+                    <i class="fas fa-times fa-2x"></i>
+                </button>
+            </div>
+            <div class="log-item">
+                <p>Calories Burned:</p>
+                <span id="calories_burned"></span>
+            </div>
+            <div class="log-item">
+                <p>Calories Consumed:</p>
+                <span id="calories_consumed"></span>
+            </div>
+            <div class="log-item">
+                <p>Minutes Worked Out:</p>
+                <span id="minutes_worked_out"></span>
+            </div>
+        </div>
+    </div>
+    <script src="{{ url_for('static', filename='/js/calendar.js') }}"></script>
+</body>
+</html>

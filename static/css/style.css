@@ -9,6 +9,7 @@
 
 body {
   width: 100%;
+  min-height: 100vh;
 }
 
 #wrapper {
@@ -118,5 +119,139 @@ textarea {
 
 .workouts .workout form {
   display: none;
+}
+
+.container-2 {
+  width: 100%;
+  display: -ms-grid;
+  display: grid;
+}
+
+.container-2 h3 {
+  text-align: center;
+  padding: 15px;
+}
+
+table {
+  width: 100%;
+}
+
+.btn-container {
+  width: 100%;
+  text-align: center;
+}
+
+.btn-container button {
+  margin-top: 15px;
+  padding: 8px 25px;
+  border-radius: 15px;
+  color: #fff;
+  background-color: blue;
+  border: none;
+  font-size: 1rem;
+  font-weight: bold;
+  border: 2px solid blue;
+  -webkit-box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.2);
+          box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.2);
+}
+
+.btn-container button:hover {
+  background-color: #fff;
+  color: blue;
+  cursor: pointer;
+  -webkit-transition: all 400ms ease-in-out;
+  transition: all 400ms ease-in-out;
+}
+
+.btn-container button:first-child {
+  margin-right: 10px;
+}
+
+td {
+  text-align: center;
+  border-radius: 5px;
+}
+
+#month, #year {
+  font-size: 2rem;
+  display: inline-block;
+  padding: 15px 0;
+}
+
+.bg-info {
+  background-color: blue;
+  color: #fff;
+}
+
+#logs {
+  display: none;
+}
+
+button.log-btn {
+  display: block;
+  margin: 5px auto 0 auto;
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  background-color: #ff0000;
+  outline: none;
+  border: none;
+}
+
+button.log-btn:hover {
+  cursor: pointer;
+}
+
+#log-pop-outer {
+  display: none;
+  width: 100%;
+  min-height: 100vh;
+  position: absolute;
+  top: 0;
+  padding-top: 15vh;
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+#log-pop {
+  width: 350px;
+  min-height: 400px;
+  border: 1px solid #ccc;
+  padding: 20px;
+  margin: 0 auto;
+  background-color: #fff;
+}
+
+#log-pop #log-pop-top {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+#log-pop #log-pop-top h3 {
+  vertical-align: top;
+  font-size: 1.35rem;
+}
+
+#log-pop #log-pop-top button {
+  margin-left: auto;
+  background-color: #fff;
+  border: none;
+  outline: none;
+}
+
+#log-pop #log-pop-top button i:hover {
+  cursor: pointer;
+  color: rgba(0, 0, 0, 0.7);
+}
+
+#log-pop .log-item {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  margin: 25px 0;
+}
+
+#log-pop .log-item span {
+  margin-left: auto;
 }
 /*# sourceMappingURL=style.css.map */

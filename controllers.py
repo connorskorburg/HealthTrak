@@ -298,3 +298,24 @@ def deleteExercise(exercise_id):
             return redirect('/dashboard')
         else:
             return redirect('/')
+# show daily log
+def showLog():
+    if not 'user_id' in session.keys():
+        return redirect('/')
+    else:
+        user = User.query.get(session['user_id'])
+        logs = DailyLog.query.filter_by(user_id=user.id).all()
+        parsedLogs = []
+        for log in logs:
+            parsedLogs.append(
+                {
+                    "id": log.id,
+                    "calories_consumed": log.calories_consumed,
+                    "calories_burned": log.calories_burned,
+                    "minutes_worked_out": log.minutes_worked_out,
+                    "created_at": log.created_at.astimezone().strftime("%m-%d-%Y"),
+                    "updated_at": log.updated_at.astimezone().strftime("%m-%d-%Y")
+                }
+            )
+        print(parsedLogs)
+        return render_template("calendar.html", user=user, logs=parsedLogs)

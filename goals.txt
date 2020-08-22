@@ -6,5 +6,6 @@
 -add sleep validation, creation, edit and relationship
 -create methods to find calories consumed, duration of workouts/exercises, and minutes to hours
 
-8/20
--
+8/22
+-add sleep, update sleep, delete sleep
+-add public food db, public workout db
