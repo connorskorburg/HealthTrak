@@ -45,6 +45,26 @@
                     <span>Duration</span>
                     <input type="number" name="hour" placeholder="Hour">
                     <input type="number" name="minutes" placeholder="Minutes">
+                    <span>Category</span>
+                    <select id="workout_category" name="category">
+                        <option value="running">Running</option>
+                        <option value="walking">Walking</option>
+                        <option value="cycling">Cycling</option>
+                        <option value="weight_lifting">Weight Lifting</option>
+                        <option value="other">Other</option>
+                    </select>
+                    <div id="pace-div">
+                        <span>Pace:</span>
+                        <input type="number" name="pace">
+                        <span>Miles:</span>
+                        <input type="number" name="miles">
+                    </div>
+                    <div id="lifting-div">
+                        <span>Sets:</span>
+                        <input type="number" name="sets">
+                        <span>Reps:</span>
+                        <input type="number" name="reps">
+                    </div>
                     <input type="number" name="calories_burned" placeholder="Estimated Calories Burned">
                     <button type="submit">Add Exercise</button>
                 </form>
@@ -52,5 +72,6 @@
         {% endfor %}
     </div>
     <script src="{{ url_for('static', filename='/js/app.js') }}"></script>
+    <script src="{{ url_for('static', filename='/js/workout.js') }}"></script>
 </body>
 </html>

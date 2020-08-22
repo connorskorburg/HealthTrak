@@ -117,12 +117,10 @@ class DailyLog(db.Model):
     @classmethod
     def log_exists(cls):
         all_logs = DailyLog.query.filter_by(user_id=session['user_id']).all()
-        print(all_logs)
         log = ''
         for l in all_logs:
             if l.created_at.astimezone().strftime('%Y-%m-%d') == local_time.strftime('%Y-%m-%d'):
                 log = l
-                print(log)
         if log != '':
             return log
         elif log == '':
@@ -228,6 +226,7 @@ class Food(db.Model):
     fat = db.Column(db.Float, nullable=False)
     protein = db.Column(db.Float, nullable=False)
     quantity = db.Column(db.Float, nullable=False)
+    # category = db.Column(db.String(45))
     public = db.Column(db.Integer, nullable=False)
     created_at = db.Column(db.DateTime, server_default=func.now())
     updated_at = db.Column(db.DateTime, server_default=func.now(), onupdate=func.now())

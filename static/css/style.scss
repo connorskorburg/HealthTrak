@@ -187,7 +187,7 @@ button.log-btn:hover{
     position: absolute;
     top: 0;
     padding-top: 15vh;
-    background-color: rgba(0,0,0,0.1);
+    background-color: rgba(0,0,0,0.2);
 }
 #log-pop {
     width: 350px;
@@ -220,4 +220,7 @@ button.log-btn:hover{
             margin-left: auto;
         }
     }
+}
+#lifting-div{
+    display: none;
 }

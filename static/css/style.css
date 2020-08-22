@@ -209,7 +209,7 @@ button.log-btn:hover {
   position: absolute;
   top: 0;
   padding-top: 15vh;
-  background-color: rgba(0, 0, 0, 0.1);
+  background-color: rgba(0, 0, 0, 0.2);
 }
 
 #log-pop {
@@ -253,5 +253,9 @@ button.log-btn:hover {
 
 #log-pop .log-item span {
   margin-left: auto;
+}
+
+#lifting-div {
+  display: none;
 }
 /*# sourceMappingURL=style.css.map */
