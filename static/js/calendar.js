@@ -82,10 +82,16 @@ function showLog(id) {
             let calories_burned = document.getElementById('calories_burned');
             let calories_consumed = document.getElementById('calories_consumed');
             let minutes_worked_out = document.getElementById('minutes_worked_out');
+            let total_fat = document.getElementById('total_fat');
+            let total_carbs = document.getElementById('total_carbs');
+            let total_protein = document.getElementById('total_protein');
             date.textContent = months[created.getMonth()] + " " + created.getDate();
             calories_burned.textContent = log.calories_burned;
             calories_consumed.textContent = log.calories_consumed;
             minutes_worked_out.textContent = log.minutes_worked_out;
+            total_fat.textContent = log.total_fat + " grams";
+            total_carbs.textContent = log.total_carbs + " grams";
+            total_protein.textContent = log.total_protein + " grams";
         }
     })
 }

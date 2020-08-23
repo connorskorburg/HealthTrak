@@ -291,6 +291,9 @@ def showLog():
                     "calories_consumed": log.calories_consumed,
                     "calories_burned": log.calories_burned,
                     "minutes_worked_out": log.minutes_worked_out,
+                    "total_fat": log.total_fat,
+                    "total_carbs": log.total_carbs,
+                    "total_protein": log.total_protein,
                     "created_at": log.created_at.astimezone().strftime("%m-%d-%Y"),
                     "updated_at": log.updated_at.astimezone().strftime("%m-%d-%Y")
                 }
