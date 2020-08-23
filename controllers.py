@@ -2,6 +2,7 @@ from flask import render_template, redirect, request, flash, session
 from config import db 
 from models import *
 from datetime import datetime, timezone
+from better_profanity import profanity
 
 # render home page
 def home():
@@ -61,33 +62,20 @@ def newFood():
             db.session.add(new_meal)
             db.session.commit()
             # create food
-            food = Food(calories=request.form['calories'], name=request.form['food_name'], carbs=request.form['carbs'], fat=request.form['fat'], protein=request.form['protein'], quantity=request.form['quantity'],public=int(request.form['public']), meal_id=new_meal.id)
-            db.session.add(food)
-            db.session.commit()
+            food = Food.create_food(request.form, new_meal.id)
             # ADD FOOD TO MEAL
             new_meal.food_items.append(food)
             db.session.commit()
-            # find total calories of meal
-            total_cals = (float(new_meal.total_calories) + float(food.calories))
-            new_meal.total_calories = total_cals
-            db.session.commit()
-            # add meal calories to daily log
-            log_exists.calories_consumed = float(log_exists.calories_consumed) + total_cals
-            db.session.commit() 
+            # find total calories, fat, carbs, protein of meal and log
+            addFoodLog(food, new_meal, log_exists, request.form) 
         elif existing_meal != False:
             # create food
-            food = Food(calories=request.form['calories'], name=request.form['food_name'], carbs=request.form['carbs'], fat=request.form['fat'], protein=request.form['protein'], quantity=request.form['quantity'], public=int(request.form['public']), meal_id=existing_meal.id)
-            db.session.add(food)
-            db.session.commit()
+            food = Food.create_food(request.form, existing_meal.id)
             # add food to meal
             existing_meal.food_items.append(food)
             db.session.commit()
             # find total calories of meal
-            total_cals =  (float(existing_meal.total_calories) + float(food.calories))
-            existing_meal.total_calories = total_cals
-            db.session.commit()
-            # add meal calories to daily log
-            log_exists.calories_consumed = float(log_exists.calories_consumed) + float(food.calories)
+            addFoodLog(food, existing_meal, log_exists, request.form)
             db.session.commit() 
         return redirect('/mealtrack')
 # render edit food page
@@ -110,13 +98,9 @@ def updateFood():
         if log_exists == False:
             return redirect('/dashboard')
         if valid_food and log_exists:
-            if float(request.form['calories']) != float(food.calories):
+            if float(request.form['calories']) != float(food.calories) or float(request.form['fat']) != float(food.fat) or float(request.form['carbs']) != float(food.carbs) or float(request.form['protein']) != float(food.protein):
                 # update daily log calories
-                log_exists.calories_consumed = float(log_exists.calories_consumed) - float(food.calories) + float(request.form['calories'])
-                db.session.commit()
-                # update meal calories
-                meal.total_calories = float(meal.total_calories) - float(food.calories) + float(request.form['calories'])
-                db.session.commit()
+                updateFoodLog(food, meal, log_exists, request.form)
             # update food item
             food.name = request.form['food_name']
             food.carbs = request.form['carbs']
@@ -125,6 +109,7 @@ def updateFood():
             food.calories = request.form['calories']
             food.quantity = request.form['quantity']
             food.public = request.form['public']
+            food.category = request.form['category']
             db.session.commit()
             return redirect('/dashboard')
         else:
@@ -137,16 +122,9 @@ def deleteFood(food_id):
         log_exists = DailyLog.log_exists()
         if log_exists:
             food = Food.query.get(int(food_id))
-            # remove calories from meal
             meal = Meal.query.get(food.meal_id)
-            meal.total_calories = float(meal.total_calories) - float(food.calories)
-            db.session.commit()
-            # remove calories from daily calories
-            log_exists.calories_consumed = float(log_exists.calories_consumed) - float(food.calories)
-            db.session.commit()
-            # delete food item
-            db.session.delete(food)
-            db.session.commit()
+            # remove calories from meal
+            deleteFoodLog(food, meal, log_exists)
             return redirect('/dashboard')
         else:
             return redirect('/dashboard')

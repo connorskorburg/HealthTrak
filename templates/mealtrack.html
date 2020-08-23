@@ -25,11 +25,11 @@
                 <input type="text" name="food_name" placeholder="Food Name">
                 <input type="number" name="calories" placeholder="Calories">
                 <span>Carbs</span>
-                <input type="number" name="carbs">
+                <input class="carbs" type="number" value="0" name="carbs">
                 <span>Fat</span>
-                <input type="number" name="fat">
+                <input class="fat" type="number" value="0" name="fat">
                 <span>Protein</span>
-                <input type="number" name="protein">
+                <input class="protein" type="number" value="0" name="protein">
                 <span>Category</span>
                 <select name="category">
                     <option value="fruit">Fruit</option>
@@ -47,7 +47,7 @@
                     <option value="other">Other</option>
                 </select>
                 <span>Quantity</span>
-                <input type="number" name="quantity">
+                <input type="number" id="break" value="1" name="quantity">
                 <span>Can we add this to our Public Database?</span>
                 <select name="public">
                     <option value="1">Yes</option>
@@ -63,13 +63,29 @@
                 <input type="text" name="food_name" placeholder="Food Name">
                 <input type="number" name="calories" placeholder="Calories">
                 <span>Carbs</span>
-                <input type="number" name="carbs">
+                <input class="carbs" type="number" value="0" name="carbs">
                 <span>Fat</span>
-                <input type="number" name="fat">
+                <input class="fat" type="number" value="0" name="fat">
                 <span>Protein</span>
-                <input type="number" name="protein">
+                <input class="protein" type="number" value="0" name="protein">
+                <span>Category</span>
+                <select name="category">
+                    <option value="fruit">Fruit</option>
+                    <option value="vegetables">Vegetable</option>
+                    <option value="meat">Meat</option>
+                    <option value="fish">Fish</option>
+                    <option value="dairy">Dairy</option>
+                    <option value="dairy_alt">Dairy Alternative(lactose free)</option>
+                    <option value="bread">Bread</option>
+                    <option value="pasta">Pasta</option>
+                    <option value="dessert">Dessert</option>
+                    <option value="other_grain">Other Grain</option>
+                    <option value="beverage">Beverage</option>
+                    <option value="vegan">Vegan</option>
+                    <option value="other">Other</option>
+                </select>
                 <span>Quantity</span>
-                <input type="number" name="quantity">
+                <input type="number" id="lunch" value="1" name="quantity">
                 <span>Can we add this to our Public Database?</span>
                 <select name="public">
                     <option value="1">Yes</option>
@@ -85,13 +101,29 @@
                 <input type="text" name="food_name" placeholder="Food Name">
                 <input type="number" name="calories" placeholder="Calories">
                 <span>Carbs</span>
-                <input type="number" name="carbs">
+                <input class="carbs" type="number" value="0" name="carbs">
                 <span>Fat</span>
-                <input type="number" name="fat">
+                <input class="fat" type="number" value="0" name="fat">
                 <span>Protein</span>
-                <input type="number" name="protein">
+                <input class="protein" type="number" value="0" name="protein">
+                <span>Category</span>
+                <select name="category">
+                    <option value="fruit">Fruit</option>
+                    <option value="vegetables">Vegetable</option>
+                    <option value="meat">Meat</option>
+                    <option value="fish">Fish</option>
+                    <option value="dairy">Dairy</option>
+                    <option value="dairy_alt">Dairy Alternative(lactose free)</option>
+                    <option value="bread">Bread</option>
+                    <option value="pasta">Pasta</option>
+                    <option value="dessert">Dessert</option>
+                    <option value="other_grain">Other Grain</option>
+                    <option value="beverage">Beverage</option>
+                    <option value="vegan">Vegan</option>
+                    <option value="other">Other</option>
+                </select>
                 <span>Quantity</span>
-                <input type="number" name="quantity">
+                <input type="number" id="dinner" value="1" name="quantity">
                 <span>Can we add this to our Public Database?</span>
                 <select name="public">
                     <option value="1">Yes</option>
@@ -107,13 +139,29 @@
                 <input type="text" name="food_name" placeholder="Food Name">
                 <input type="number" name="calories" placeholder="Calories">
                 <span>Carbs</span>
-                <input type="number" name="carbs">
+                <input class="carbs" type="number" value="0" name="carbs">
                 <span>Fat</span>
-                <input type="number" name="fat">
+                <input class="fat" type="number" value="0" name="fat">
                 <span>Protein</span>
-                <input type="number" name="protein">
+                <input class="protein" type="number" value="0" name="protein">
+                <span>Category</span>
+                <select name="category">
+                    <option value="fruit">Fruit</option>
+                    <option value="vegetables">Vegetable</option>
+                    <option value="meat">Meat</option>
+                    <option value="fish">Fish</option>
+                    <option value="dairy">Dairy</option>
+                    <option value="dairy_alt">Dairy Alternative(lactose free)</option>
+                    <option value="bread">Bread</option>
+                    <option value="pasta">Pasta</option>
+                    <option value="dessert">Dessert</option>
+                    <option value="other_grain">Other Grain</option>
+                    <option value="beverage">Beverage</option>
+                    <option value="vegan">Vegan</option>
+                    <option value="other">Other</option>
+                </select>
                 <span>Quantity</span>
-                <input type="number" name="quantity">
+                <input type="number" id="snack" value="1" name="quantity">
                 <span>Can we add this to our Public Database?</span>
                 <select name="public">
                     <option value="1">Yes</option>
@@ -124,5 +172,6 @@
         </div>
     </div>
     <script src="{{ url_for('static', filename='/js/app.js') }}"></script>
+    <script src="{{ url_for('static', filename='/js/meal.js') }}"></script>
 </body>
 </html>

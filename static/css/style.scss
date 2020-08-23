@@ -14,8 +14,14 @@ body {
     // background-color: #f78a8a;
     text-align: center;
 }
-h1, h2{
+h1, .daily-log{
     text-align: center;
+}
+.daily-log{
+    color: blue;
+    margin-right: 5px;
+    font-weight: 600;
+    font-size: 1.25rem;
 }
 .error{ color: red; font-weight: bold;}
 form {
@@ -221,6 +227,6 @@ button.log-btn:hover{
         }
     }
 }
-#lifting-div{
+#lifting-div, #other-div{
     display: none;
 }

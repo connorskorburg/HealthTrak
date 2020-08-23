@@ -17,8 +17,15 @@ body {
   text-align: center;
 }
 
-h1, h2 {
+h1, .daily-log {
   text-align: center;
+}
+
+.daily-log {
+  color: blue;
+  margin-right: 5px;
+  font-weight: 600;
+  font-size: 1.25rem;
 }
 
 .error {
@@ -255,7 +262,7 @@ button.log-btn:hover {
   margin-left: auto;
 }
 
-#lifting-div {
+#lifting-div, #other-div {
   display: none;
 }
 /*# sourceMappingURL=style.css.map */

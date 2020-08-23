@@ -3,6 +3,7 @@ from config import db, bcrypt
 from flask import flash, request, session
 import re
 from datetime import datetime, timezone
+from better_profanity import profanity 
 
 utc = datetime.now(timezone.utc)
 local_time = utc.astimezone()
@@ -25,6 +26,51 @@ def calcMinutes(hour, minutes):
     h = float(hour)
     m = float(minutes)
     return float((h * 60) + m)
+
+def addFoodLog(food, meal, log, user_data):
+    # update and save meal
+    meal.total_calories = float(meal.total_calories) + float(food.calories)
+    meal.total_fat = float(meal.total_fat) + float(user_data['fat'])
+    meal.total_carbs = float(meal.total_carbs) + float(user_data['carbs'])
+    meal.total_protein = float(meal.total_protein) + float(user_data['protein'])
+    db.session.commit()
+    # update log and save
+    log.calories_consumed = float(log.calories_consumed) + float(food.calories)
+    log.total_fat = float(log.total_fat) + float(user_data['fat'])
+    log.total_carbs = float(log.total_carbs) + float(user_data['carbs'])
+    log.total_protein = float(log.total_protein) + float(user_data['protein'])
+    db.session.commit() 
+
+def updateFoodLog(food, meal, log, user_data):
+    # update meal and save meal
+    meal.total_calories = float(meal.total_calories) - float(food.calories) + float(request.form['calories'])
+    meal.total_fat = float(meal.total_fat) - float(food.fat) + float(request.form['fat'])
+    meal.total_carbs = float(meal.total_carbs) - float(food.carbs) + float(request.form['carbs'])
+    meal.total_protein = float(meal.total_protein) - float(food.protein) + float(request.form['protein'])
+    db.session.commit()
+    # update log and save log
+    log.calories_consumed = float(log.calories_consumed) - float(food.calories) + float(request.form['calories'])
+    log.total_fat = float(log.total_fat) - float(food.fat) + float(request.form['fat'])
+    log.total_carbs = float(log.total_carbs) - float(food.carbs) + float(request.form['carbs'])
+    log.total_protein = float(log.total_protein) - float(food.protein) + float(request.form['protein'])
+    db.session.commit()
+
+def deleteFoodLog(food, meal, log):
+    # remove info from meal and log
+    meal.total_calories = float(meal.total_calories) - float(food.calories)
+    meal.total_fat = float(meal.total_fat) - float(food.fat)
+    meal.total_carbs = float(meal.total_carbs) - float(food.carbs)
+    meal.total_protein = float(meal.total_protein) - float(food.protein)
+    db.session.commit()
+    # remove info from log
+    log.calories_consumed = float(log.calories_consumed) - float(food.calories)
+    log.total_fat = float(log.total_fat) - float(food.fat)
+    log.total_carbs = float(log.total_carbs) - float(food.carbs)
+    log.total_protein = float(log.total_protein) - float(food.protein)
+    db.session.commit()
+    # delete food
+    db.session.delete(food)
+    db.session.commit()
 
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -50,9 +96,15 @@ class User(db.Model):
         if len(user_data['first_name']) < 1:
             is_valid = False 
             flash("Please Enter a Valid First Name", "reg_error")
+        if profanity.contains_profanity(user_data['first_name']) == True:
+            is_valid = False
+            flash("Please Enter an Appropriate First Name", "reg_error");
         if len(user_data['last_name']) < 1:
             is_valid = False 
             flash("Please Enter a Valid Last Name", "reg_error")
+        if profanity.contains_profanity(user_data['last_name']) == True:
+            is_valid = False
+            flash("Please Enter an Appropriate Last Name", "reg_error");
         if not EMAIL_REGEX.match(user_data['email']):
             is_valid = False
             flash("Please Enter a Valid Email", "reg_error")
@@ -110,6 +162,9 @@ class DailyLog(db.Model):
     calories_consumed = db.Column(db.Float, default=0)
     calories_burned = db.Column(db.Float, default=0)
     minutes_worked_out = db.Column(db.Float, default=0)
+    total_fat = db.Column(db.Float, default=0)
+    total_carbs = db.Column(db.Float, default=0)
+    total_protein = db.Column(db.Float, default=0)
     created_at = db.Column(db.DateTime, server_default=func.now())
     updated_at = db.Column(db.DateTime, server_default=func.now(), onupdate=func.now())
     user_id = db.Column(db.Integer, db.ForeignKey('user.id', ondelete='cascade'), nullable=False)
@@ -151,6 +206,13 @@ class Exercise(db.Model):
     name = db.Column(db.String(100))
     duration = db.Column(db.Float)
     calories_burned = db.Column(db.Integer)
+    category = db.Column(db.String(45), nullable=False)
+    pace = db.Column(db.Float(), nullable=True)
+    miles = db.Column(db.Float(), nullable=True)
+    sets = db.Column(db.Float(), nullable=True)
+    reps = db.Column(db.Float(), nullable=True)
+    description = db.Column(db.Text(), nullable=True)
+    public = db.Column(db.Integer, nullable=False)
     created_at = db.Column(db.DateTime, server_default=func.now())
     updated_at = db.Column(db.DateTime, server_default=func.now(), onupdate=func.now())
     workout_id = db.Column(db.Integer, db.ForeignKey('workout.id', ondelete='cascade'), nullable=False)
@@ -164,6 +226,9 @@ class Exercise(db.Model):
         if len(user_data['exercise_name']) < 2 or user_data['exercise_name'] == '':
             is_valid = False
             flash("Please Enter an Exercise Name", "ex_error")
+        if profanity.contains_profanity(user_data['exercise_name']) == True:
+            is_valid = False
+            flash("Please Enter an Appropriate Exercise Name", "ex_error");
         if user_data['hour'] == '':
             is_valid = False
             flash("Please Enter Amount of Hours", "ex_error")
@@ -190,6 +255,9 @@ class Exercise(db.Model):
         if len(user_data['exercise_name']) < 2 or user_data['exercise_name'] == '':
             is_valid = False
             flash("Please Enter an Exercise Name", "ex2_error")
+        if profanity.contains_profanity(user_data['exercise_name']) == True:
+            is_valid = False
+            flash("Please Enter an Appropriate Exercise Name", "ex2_error");
         if user_data['duration'] == '' or float(user_data['duration']) < 1:
             is_valid = False
             flash("Please Enter Duration", "ex2_error")
@@ -199,6 +267,9 @@ class Meal(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(45))
     total_calories = db.Column(db.Float, default=0)
+    total_fat = db.Column(db.Float, default=0)
+    total_carbs = db.Column(db.Float, default=0)
+    total_protein = db.Column(db.Float, default=0)
     created_at = db.Column(db.DateTime, server_default=func.now())
     updated_at = db.Column(db.DateTime, server_default=func.now(), onupdate=func.now())
     user_id = db.Column(db.Integer, db.ForeignKey('user.id', ondelete='cascade'), nullable=False)
@@ -221,12 +292,12 @@ class Meal(db.Model):
 class Food(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     calories = db.Column(db.Float)
-    name = db.Column(db.String(100))
+    name = db.Column(db.String(100), nullable=False)
     carbs = db.Column(db.Float, nullable=False)
     fat = db.Column(db.Float, nullable=False)
     protein = db.Column(db.Float, nullable=False)
     quantity = db.Column(db.Float, nullable=False)
-    # category = db.Column(db.String(45))
+    category = db.Column(db.String(45))
     public = db.Column(db.Integer, nullable=False)
     created_at = db.Column(db.DateTime, server_default=func.now())
     updated_at = db.Column(db.DateTime, server_default=func.now(), onupdate=func.now())
@@ -239,9 +310,15 @@ class Food(db.Model):
         if len(user_data['food_name']) < 1:
             is_valid = False
             flash("Please Enter A Food Name", "food_error")
+        if profanity.contains_profanity(user_data['food_name']) == True:
+            is_valid = False
+            flash("Please Enter an Appropriate Food Name", "food_error");
         if user_data['calories'] == '':
             is_valid = False 
             flash("Please Enter Calories for Food Item", "food_error")
+        if user_data['category'] == '':
+            is_valid = False
+            flash("Please Select a Food Category", "reg_error")
         if user_data['carbs'] == '' or float(user_data['carbs']) <=0:
             is_valid = False
             flash("Please Enter Carbs for Food Item", "food_error")
@@ -259,8 +336,8 @@ class Food(db.Model):
             flash("Please Select a Public or Private option", "food_error")
         return is_valid
     @classmethod
-    def create_food(cls, user_data):
-        food = Food(calories=user_data['calories'], name=user_data['food_name'], carbs=user_data['carbs'], fat=user_data['fat'], protein=user_data['protein'], quantity=user_data['quantity'])
+    def create_food(cls, user_data, meal_id):
+        food = Food(calories=user_data['calories'], name=user_data['food_name'], carbs=user_data['carbs'], fat=user_data['fat'], protein=user_data['protein'], quantity=user_data['quantity'], public=user_data['public'] ,category=user_data['category'], meal_id=int(meal_id))
         db.session.add(food)
         db.session.commit()
         return food
