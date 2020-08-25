@@ -287,11 +287,14 @@ class Exercise(db.Model):
             if user_data['pace_sec'] == '':
                 is_valid = False
                 flash("Please Enter Seconds for Pace", "ex_error")
-        if user_data['category'] == 'weight_lifing':
-            if user_data['reps'] == '' or user_data['reps'] == 0:
+            if user_data['miles'] == '' or user_data['miles'] == 0:
+                is_valid = False
+                flash("Please Enter Amount of Miles", "ex_error")
+        if user_data['category'] == 'weight_lifting':
+            if user_data['reps'] == '':
                 is_valid = False
                 flash("Please Enter Amount of Repetitions", "ex_error")
-            if user_data['sets'] == '' or user_data['sets'] == 0:
+            if user_data['sets'] == '':
                 is_valid = False
                 flash("Please Enter Amount of Sets", "ex_error")
         if user_data['category'] == 'other':

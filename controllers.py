@@ -182,7 +182,7 @@ def newExercise():
     if not 'user_id' in session.keys():
         return redirect('/')
     else:
-        valid_ex = Exercise.valid_exercise(request.form)
+        valid_ex = Exercise.valid_ex(request.form)
         log_exists = DailyLog.log_exists()
         if valid_ex and log_exists:
             duration = calcMinutes(request.form['hour'], request.form['minutes'])
