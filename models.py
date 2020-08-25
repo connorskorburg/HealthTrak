@@ -265,7 +265,41 @@ class Exercise(db.Model):
     @classmethod
     def valid_ex(cls, user_data):
         is_valid = True
-        
+        if len(user_data['exercise_name']) < 2 or user_data['exercise_name'] == '':
+            is_valid = False
+            flash("Please Enter an Exercise Name", "ex_error")
+        if profanity.contains_profanity(user_data['exercise_name']) == True:
+            is_valid = False
+            flash("Please Enter an Appropriate Exercise Name", "ex_error");
+        if user_data['hour'] == '':
+            is_valid = False
+            flash("Please Enter Amount of Hours", "ex_error")
+        if user_data['minutes'] == '':
+            is_valid = False
+            flash("Please Enter Amount of Minutes", "ex_error")
+        if user_data['calories_burned'] == '':
+            is_valid = False
+            flash("Please Enter Est. Calories Burned", "ex_error")
+        if user_data['category'] == 'running' or user_data['category'] == 'walking' or user_data['category'] == 'cycling':
+            if user_data['pace_min'] == '':
+                is_valid = False
+                flash("Please Enter Minutes for Pace", "ex_error")
+            if user_data['pace_sec'] == '':
+                is_valid = False
+                flash("Please Enter Seconds for Pace", "ex_error")
+        if user_data['category'] == 'weight_lifing':
+            if user_data['reps'] == '' or user_data['reps'] == 0:
+                is_valid = False
+                flash("Please Enter Amount of Repetitions", "ex_error")
+            if user_data['sets'] == '' or user_data['sets'] == 0:
+                is_valid = False
+                flash("Please Enter Amount of Sets", "ex_error")
+        if user_data['category'] == 'other':
+            if user_data['desc'] == '' or profanity.contains_profanity(user_data['desc']) == True:
+                is_valid = False
+                flash("Please Enter Valid Description", "ex_error")
+        return is_valid
+
 
 class Meal(db.Model):
     id = db.Column(db.Integer, primary_key=True)
