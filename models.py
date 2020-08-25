@@ -262,6 +262,10 @@ class Exercise(db.Model):
             is_valid = False
             flash("Please Enter Duration", "ex2_error")
         return is_valid 
+    @classmethod
+    def valid_ex(cls, user_data):
+        is_valid = True
+        
 
 class Meal(db.Model):
     id = db.Column(db.Integer, primary_key=True)
