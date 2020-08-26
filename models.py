@@ -219,33 +219,24 @@ class Exercise(db.Model):
     workout = db.relationship('Workout', foreign_keys=[workout_id])
     # class methods
     @classmethod
-    def valid_exercise(cls, user_data):
-        is_valid = True
-        if user_data['workout_id'] == '':
-            is_valid = False
-        if len(user_data['exercise_name']) < 2 or user_data['exercise_name'] == '':
-            is_valid = False
-            flash("Please Enter an Exercise Name", "ex_error")
-        if profanity.contains_profanity(user_data['exercise_name']) == True:
-            is_valid = False
-            flash("Please Enter an Appropriate Exercise Name", "ex_error");
-        if user_data['hour'] == '':
-            is_valid = False
-            flash("Please Enter Amount of Hours", "ex_error")
-        if user_data['minutes'] == '':
-            is_valid = False
-            flash("Please Enter Amount of Minutes", "ex_error")
-        if user_data['calories_burned'] == '':
-            is_valid = False
-            flash("Please Enter Est. Calories Burned", "ex_error")
-        return is_valid
-    @classmethod
     def create_exercise(cls, user_data):
         duration = calcMinutes(user_data['hour'], user_data['minutes'])
-        exercise = Exercise(name=user_data['exercise_name'], duration=duration, calories_burned=user_data['calories_burned'], workout_id=user_data['workout_id'])
-        db.session.add(exercise)
-        db.session.commit()
-        return exercise 
+        if user_data['category'] == 'running' or user_data['category'] == 'walking' or user_data['category'] == 'cycling':
+            pace = float(duration) / float(user_data['miles'])
+            exercise = Exercise(name=user_data['exercise_name'], duration=duration, calories_burned=float(user_data['calories_burned']), workout_id=user_data['workout_id'], category=user_data['category'], miles=float(user_data['miles']), pace=pace, public=int(user_data['public']))
+            db.session.add(exercise)
+            db.session.commit()
+            return exercise
+        if user_data['category'] == 'weight_lifting':
+            exercise = Exercise(name=user_data['exercise_name'], duration=duration, calories_burned=float(user_data['calories_burned']), workout_id=user_data['workout_id'], category=user_data['category'], sets=float(user_data['sets']), reps=float(user_data['reps']) , public=int(user_data['public']))
+            db.session.add(exercise)
+            db.session.commit()
+            return exercise
+        if user_data['category'] == 'other':
+            exercise = Exercise(name=user_data['exercise_name'], duration=duration, calories_burned=float(user_data['calories_burned']), workout_id=user_data['workout_id'], category=user_data['category'], description=user_data['desc'], public=int(user_data['public']))
+            db.session.add(exercise)
+            db.session.commit()
+            return exercise
     @classmethod
     def valid_ex_update(cls, user_data):
         is_valid = True
@@ -258,13 +249,19 @@ class Exercise(db.Model):
         if profanity.contains_profanity(user_data['exercise_name']) == True:
             is_valid = False
             flash("Please Enter an Appropriate Exercise Name", "ex2_error");
-        if user_data['duration'] == '' or float(user_data['duration']) < 1:
+        if user_data['hours'] == '' or float(user_data['hours']) < 1:
             is_valid = False
-            flash("Please Enter Duration", "ex2_error")
+            flash("Please Enter Hours", "ex2_error")
+        if user_data['minutes'] == '' or float(user_data['minutes']) < 1:
+            is_valid = False
+            flash("Please Enter Minutes", "ex2_error")
         return is_valid 
     @classmethod
     def valid_ex(cls, user_data):
         is_valid = True
+        if user_data['public'] == '':
+            is_valid = False
+            flash("Please Select a Public or Private option", "ex_error")
         if len(user_data['exercise_name']) < 2 or user_data['exercise_name'] == '':
             is_valid = False
             flash("Please Enter an Exercise Name", "ex_error")
@@ -281,12 +278,6 @@ class Exercise(db.Model):
             is_valid = False
             flash("Please Enter Est. Calories Burned", "ex_error")
         if user_data['category'] == 'running' or user_data['category'] == 'walking' or user_data['category'] == 'cycling':
-            if user_data['pace_min'] == '':
-                is_valid = False
-                flash("Please Enter Minutes for Pace", "ex_error")
-            if user_data['pace_sec'] == '':
-                is_valid = False
-                flash("Please Enter Seconds for Pace", "ex_error")
             if user_data['miles'] == '' or user_data['miles'] == 0:
                 is_valid = False
                 flash("Please Enter Amount of Miles", "ex_error")

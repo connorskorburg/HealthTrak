@@ -212,7 +212,11 @@ def editExercise(exercise_id):
     else:
         user = User.query.get(session['user_id'])
         exercise = Exercise.query.get(int(exercise_id))
-        return render_template('editExercise.html', user=user, exercise=exercise)
+        minutes = float(exercise.duration) % 60
+        print(minutes)
+        hours = (float(exercise.duration) - minutes) / float(60)
+        print(hours)
+        return render_template('editExercise.html', user=user, exercise=exercise, minutes=minutes, hours=hours)
 # post method to update exercise
 def updateExercise():
     if not 'user_id' in session.keys():
@@ -225,26 +229,27 @@ def updateExercise():
     else:
         valid_ex = Exercise.valid_ex_update(request.form)
         if valid_ex and log_exists:
+            duration = calcMinutes(float(request.form['hours']), float(request.form['minutes']))
             if float(exercise.calories_burned) != float(request.form['calories_burned']):
-                print("ONE")
                 # update daily cals burned
                 log_exists.calories_burned = float(log_exists.calories_burned) - float(exercise.calories_burned) + float(request.form['calories_burned'])
                 db.session.commit()
                 # update worlout cals burned
                 workout.calories_burned = float(workout.calories_burned) - float(exercise.calories_burned) + float(request.form['calories_burned'])
                 db.session.commit()
-            if float(exercise.duration) != float(request.form['duration']):
-                print("TWO")
-                # update total minutes working out
-                log_exists.minutes_worked_out = float(log_exists.minutes_worked_out) - float(exercise.duration) + float(request.form['duration'])
-                db.session.commit()
-                # update duration for workout
-                workout.duration = float(workout.duration) - float(exercise.duration) + float(request.form['duration'])
-                db.session.commit()
+            # update total minutes working out
+            log_exists.minutes_worked_out = float(log_exists.minutes_worked_out) - float(exercise.duration) + float(duration)
+            db.session.commit()
+            # update duration for workout
+            workout.duration = float(workout.duration) - float(exercise.duration) + float(duration)
+            db.session.commit()
             # update exercise
             exercise.name = request.form['exercise_name']
-            exercise.duration = float(request.form['duration'])
+            exercise.duration = duration
             exercise.calories_burned = float(request.form['calories_burned'])
+            if request.form['category'] == 'running' or request.form['category'] == 'walking' or request.form['category'] == 'cycling':
+                exercise.pace = float(duration) / float(exercise.miles)
+                db.session.commit()
             db.session.commit()
             return redirect('/dashboard')
         else:

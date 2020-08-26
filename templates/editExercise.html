@@ -20,10 +20,14 @@
                 {% endif %}
             {% endwith %}
             <input type="hidden" name="exercise_id" value="{{ exercise.id }}">
+            <input type="hidden" name="category" value="{{ exercise.category }}">
             <span>Name:</span>
             <input type="text" name="exercise_name" value="{{ exercise.name }}">
-            <span>Duration(minutes):</span>
-            <input id="duration" type="number" name="duration" value="{{ exercise.duration }}">
+            <span>Duration:</span>
+            <span>Hours</span>
+            <input type="number" name="hours" value="{{ hours }}">
+            <span>Minutes</span>
+            <input type="number" name="minutes" value="{{ minutes }}">
             <span>Estimated Calories Burned:</span>
             <input type="number" name="calories_burned" value="{{ exercise.calories_burned }}">
             <button type="submit">Update Exercise</button>
