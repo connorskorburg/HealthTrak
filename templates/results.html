@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Categories</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='/css/style.css') }}">
+</head>
+<body>
+    <main id="results-container">
+        <h2>Results for {{ search }}</h2>
+        <a href="/dashboard">Dashboard</a>
+        <section id="results">
+           {% for r in results %}
+           <div class="result">
+               <h3>{{ r.description }}</h3>
+               <p>Fat: {{ r.fat }}</p>
+               <p>Protein: {{ r.protein }}</p>
+               <p>Carbs: {{ r.carbs }}</p>
+               <a href="/food/new/{{ r.id }}">Add to Meal</a>
+           </div>
+           {% endfor %}
+        </section>
+    </main>
+</body>
+</html>

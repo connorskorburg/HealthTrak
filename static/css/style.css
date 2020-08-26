@@ -265,4 +265,16 @@ button.log-btn:hover {
 #lifting-div, #other-div {
   display: none;
 }
+
+#results-container {
+  display: -ms-grid;
+  display: grid;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+#results-container #results {
+  width: 250px;
+}
 /*# sourceMappingURL=style.css.map */

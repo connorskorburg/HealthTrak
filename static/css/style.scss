@@ -230,3 +230,11 @@ button.log-btn:hover{
 #lifting-div, #other-div{
     display: none;
 }
+
+#results-container{
+    display: grid;
+    justify-content: center;
+    #results{
+        width: 250px;
+    }
+}

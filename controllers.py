@@ -3,6 +3,8 @@ from config import db
 from models import *
 from datetime import datetime, timezone
 from better_profanity import profanity
+import requests
+from secret import *
 
 # render home page
 def home():
@@ -305,3 +307,41 @@ def showLog():
             )
         print(parsedLogs)
         return render_template("calendar.html", user=user, logs=parsedLogs)
+
+# food categories and exercise categories
+def search():
+    if not 'user_id' in session.keys():
+        return redirect('/')
+    else:
+        if request.form['search'] == '':
+            return redirect('/')
+        else:
+            session['search'] = request.form['search']
+            return redirect('/searchResults')
+
+# show search results
+def searchResults():
+    if not 'user_id' in session.keys():
+        return redirect('/')
+    else:
+        search = session['search']
+        params = {'api_key': key}
+        data = {'generalSearchInput': search}
+        response = requests.post(
+            r'https://api.nal.usda.gov/fdc/v1/search',
+            params=params,
+            json=data
+        )
+        result = response.json()
+        results = []
+        for i in range(0,9):
+            results.append({
+                "id":  result['foods'][i]['fdcId'],
+                "description":  result['foods'][i]['description'],
+                "protein":  result['foods'][i]['foodNutrients'][4]['value'],
+                "fat":  result['foods'][i]['foodNutrients'][5]['value'],
+                "carbs":  result['foods'][i]['foodNutrients'][6]['value'],
+            })
+        return render_template('results.html', search=search, results=results)
+
+
