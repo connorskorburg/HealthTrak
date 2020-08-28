@@ -89,13 +89,6 @@ def editFood(food_id):
         food = Food.query.get(food_id)
         return render_template('editfood.html', user=user, food=food)
 
-
-
-
-
-
-
-
 # food categories and exercise categories
 def search():
     if not 'user_id' in session.keys():
@@ -144,10 +137,10 @@ def foodQuery():
         return redirect('/')
     else:
         user = User.query.get(session['user_id'])
-        description = request.args.get('desc') 
-        fat = float(request.args.get('fat')) 
-        carbs = float(request.args.get('carbs')) 
-        protein = float(request.args.get('protein'))
+        description = request.form['description'] 
+        fat = float(request.form['fat']) 
+        carbs = float(request.form['carbs']) 
+        protein = float(request.form['protein'])
         calories = float((fat * 9) + (carbs * 4) + (protein * 4)) 
         food = {
             "description": description,
@@ -157,16 +150,6 @@ def foodQuery():
             "calories": calories
         }
         return render_template("newFood.html", food=food, user=user)
-# add food to meal if created, else create meal and add food
-def newFoodInMeal():
-    if not 'user_id' in session.keys():
-        return redirect('/')
-    else:
-        valid_food = Food.validate_food(request.form)
-        log_exists = DailyLog.log_exists()
-        if log_exists == False:
-            return redirect('/dashboard')
-        # meal_exists = 
         
 
 

@@ -332,13 +332,13 @@ class Food(db.Model):
         if user_data['calories'] == '':
             is_valid = False 
             flash("Please Enter Calories for Food Item", "food_error")
-        if user_data['carbs'] == '' or float(user_data['carbs']) <=0:
+        if user_data['carbs'] == '' or float(user_data['carbs']) <0:
             is_valid = False
             flash("Please Enter Carbs for Food Item", "food_error")
-        if user_data['fat'] == '' or float(user_data['fat']) <=0:
+        if user_data['fat'] == '' or float(user_data['fat']) <0:
             is_valid = False
             flash("Please Enter Fat for Food Item", "food_error")
-        if user_data['protein'] == '' or float(user_data['protein']) <=0:
+        if user_data['protein'] == '' or float(user_data['protein']) <0:
             is_valid = False
             flash("Please Enter Protein for Food Item", "food_error")
         if user_data['quantity'] == '' or float(user_data['quantity']) <=0:

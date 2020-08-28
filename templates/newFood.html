@@ -10,7 +10,7 @@
     <h1>Welcome, {{ user.first_name }}</h1>
     <div id="edit-food">
         <a href="/dashboard">Dashboard</a>
-        <form action="/newFoodinMeal" method="post">
+        <form action="/fooditem/new" method="post">
             <h2>Add Food</h2>
             {% with food_error = get_flashed_messages(category_filter = ["food_error"]) %}
                 {% if food_error %}

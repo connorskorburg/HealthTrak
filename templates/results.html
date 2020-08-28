@@ -17,10 +17,18 @@
                <p>Fat: {{ r.fat }}</p>
                <p>Protein: {{ r.protein }}</p>
                <p>Carbs: {{ r.carbs }}</p>
-               <a href="/foodQuery?fat={{r.fat}}&carbs={{r.carbs}}&protein={{r.protein}}&desc={{r.description}}">Add to Meal</a>
+               <form action="/foodQuery" method="post">
+                    <input type="hidden" name="description" value="{{ r.description }}">
+                    <input type="hidden" name="fat" value="{{ r.fat }}">
+                    <input type="hidden" name="carbs" value="{{ r.carbs }}">
+                    <input type="hidden" name="protein" value="{{ r.protein }}">
+                    <button type="submit">Add to Meal</button>
+                </form>
+               <!-- <a class="foodToggle" href="/foodQuery?fat={{r.fat}}&carbs={{r.carbs}}&protein={{r.protein}}&desc={{r.description}}">Add to Meal</a> -->
            </div>
            {% endfor %}
         </section>
     </main>
+    <script src="{{ url_for('static', filename='/js/foodToggle.js') }}"></script>
 </body>
 </html>
