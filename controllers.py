@@ -88,6 +88,88 @@ def editFood(food_id):
         user = User.query.get(session['user_id'])
         food = Food.query.get(food_id)
         return render_template('editfood.html', user=user, food=food)
+
+
+
+
+
+
+
+
+# food categories and exercise categories
+def search():
+    if not 'user_id' in session.keys():
+        return redirect('/')
+    else:
+        if request.form['search'] == '':
+            return redirect('/')
+        else:
+            session['search'] = request.form['search']
+            return redirect('/searchResults')
+
+# show search results
+def searchResults():
+    if not 'user_id' in session.keys():
+        return redirect('/')
+    else:
+        search = session['search']
+        params = {'api_key': key}
+        data = {'generalSearchInput': search}
+        response = requests.post(
+            r'https://api.nal.usda.gov/fdc/v1/search',
+            params=params,
+            json=data
+        )
+        result = response.json()
+        results = []
+        for i in range(0,5):
+            for y in result['foods'][i]['foodNutrients']:
+                if y['nutrientName'] == 'Total lipid (fat)':
+                    fat = y['value']
+                if y['nutrientName'] == 'Carbohydrate, by difference':
+                    carbs = y['value']
+                if y['nutrientName'] == 'Protein':
+                    protein = y['value']
+            results.append({
+                "description":  result['foods'][i]['description'],
+                "protein":  protein,
+                "fat":  fat,
+                "carbs":  carbs,
+            })
+        return render_template('results.html', search=search, results=results)
+
+
+def foodQuery():
+    if not 'user_id' in session.keys():
+        return redirect('/')
+    else:
+        user = User.query.get(session['user_id'])
+        description = request.args.get('desc') 
+        fat = float(request.args.get('fat')) 
+        carbs = float(request.args.get('carbs')) 
+        protein = float(request.args.get('protein'))
+        calories = float((fat * 9) + (carbs * 4) + (protein * 4)) 
+        food = {
+            "description": description,
+            "fat": fat,
+            "carbs": carbs,
+            "protein": protein,
+            "calories": calories
+        }
+        return render_template("newFood.html", food=food, user=user)
+# add food to meal if created, else create meal and add food
+def newFoodInMeal():
+    if not 'user_id' in session.keys():
+        return redirect('/')
+    else:
+        valid_food = Food.validate_food(request.form)
+        log_exists = DailyLog.log_exists()
+        if log_exists == False:
+            return redirect('/dashboard')
+        # meal_exists = 
+        
+
+
 # method to update food 
 def updateFood():
     food = Food.query.get(request.form['food_id'])
@@ -308,64 +390,3 @@ def showLog():
         print(parsedLogs)
         return render_template("calendar.html", user=user, logs=parsedLogs)
 
-# food categories and exercise categories
-def search():
-    if not 'user_id' in session.keys():
-        return redirect('/')
-    else:
-        if request.form['search'] == '':
-            return redirect('/')
-        else:
-            session['search'] = request.form['search']
-            return redirect('/searchResults')
-
-# show search results
-def searchResults():
-    if not 'user_id' in session.keys():
-        return redirect('/')
-    else:
-        search = session['search']
-        params = {'api_key': key}
-        data = {'generalSearchInput': search}
-        response = requests.post(
-            r'https://api.nal.usda.gov/fdc/v1/search',
-            params=params,
-            json=data
-        )
-        result = response.json()
-        results = []
-        for i in range(0,5):
-            for y in result['foods'][i]['foodNutrients']:
-                if y['nutrientName'] == 'Total lipid (fat)':
-                    fat = y['value']
-                if y['nutrientName'] == 'Carbohydrate, by difference':
-                    carbs = y['value']
-                if y['nutrientName'] == 'Protein':
-                    protein = y['value']
-            results.append({
-                "description":  result['foods'][i]['description'],
-                "protein":  protein,
-                "fat":  fat,
-                "carbs":  carbs,
-            })
-        return render_template('results.html', search=search, results=results)
-
-
-def foodQuery():
-    if not 'user_id' in session.keys():
-        return redirect('/')
-    else:
-        user = User.query.get(session['user_id'])
-        description = request.args.get('desc') 
-        fat = float(request.args.get('fat')) 
-        carbs = float(request.args.get('carbs')) 
-        protein = float(request.args.get('protein'))
-        calories = float((fat * 9) + (carbs * 4) + (protein * 4)) 
-        food = {
-            "description": description,
-            "fat": fat,
-            "carbs": carbs,
-            "protein": protein,
-            "calories": calories
-        }
-        return render_template("newFood.html", food=food, user=user)

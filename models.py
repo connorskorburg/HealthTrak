@@ -86,7 +86,6 @@ class User(db.Model):
     password = db.Column(db.String(100))
     created_at = db.Column(db.DateTime, server_default=func.now())
     updated_at = db.Column(db.DateTime, server_default=func.now(), onupdate=func.now())
-    sleep_history = db.relationship('Sleep', back_populates='user', cascade='all, delete, delete-orphan')
     workout_history = db.relationship('Workout', back_populates='user', cascade='all, delete, delete-orphan')
     meals = db.relationship('Meal', back_populates='user', cascade='all, delete, delete-orphan')
     log_history = db.relationship('DailyLog', back_populates='user', cascade='all, delete, delete-orphan')
@@ -179,16 +178,7 @@ class DailyLog(db.Model):
         if log != '':
             return log
         elif log == '':
-            return False  
-
-class Sleep(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    start_time = db.Column(db.DateTime)
-    end_time = db.Column(db.DateTime)
-    created_at = db.Column(db.DateTime, server_default=func.now())
-    updated_at = db.Column(db.DateTime, server_default=func.now(), onupdate=func.now())
-    user_id = db.Column(db.Integer, db.ForeignKey('user.id', ondelete='cascade'), nullable=False)
-    user = db.relationship('User', foreign_keys=[user_id])
+            return False
 
 class Workout(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -206,13 +196,12 @@ class Exercise(db.Model):
     name = db.Column(db.String(100))
     duration = db.Column(db.Float)
     calories_burned = db.Column(db.Integer)
-    category = db.Column(db.String(45), nullable=False)
     pace = db.Column(db.Float(), nullable=True)
     miles = db.Column(db.Float(), nullable=True)
     sets = db.Column(db.Float(), nullable=True)
     reps = db.Column(db.Float(), nullable=True)
+    category = db.Column(db.String(45))
     description = db.Column(db.Text(), nullable=True)
-    public = db.Column(db.Integer, nullable=False)
     created_at = db.Column(db.DateTime, server_default=func.now())
     updated_at = db.Column(db.DateTime, server_default=func.now(), onupdate=func.now())
     workout_id = db.Column(db.Integer, db.ForeignKey('workout.id', ondelete='cascade'), nullable=False)
@@ -223,17 +212,17 @@ class Exercise(db.Model):
         duration = calcMinutes(user_data['hour'], user_data['minutes'])
         if user_data['category'] == 'running' or user_data['category'] == 'walking' or user_data['category'] == 'cycling':
             pace = float(duration) / float(user_data['miles'])
-            exercise = Exercise(name=user_data['exercise_name'], duration=duration, calories_burned=float(user_data['calories_burned']), workout_id=user_data['workout_id'], category=user_data['category'], miles=float(user_data['miles']), pace=pace, public=int(user_data['public']))
+            exercise = Exercise(name=user_data['exercise_name'], duration=duration, calories_burned=float(user_data['calories_burned']), workout_id=user_data['workout_id'], category=user_data['category'], miles=float(user_data['miles']), pace=pace)
             db.session.add(exercise)
             db.session.commit()
             return exercise
         if user_data['category'] == 'weight_lifting':
-            exercise = Exercise(name=user_data['exercise_name'], duration=duration, calories_burned=float(user_data['calories_burned']), workout_id=user_data['workout_id'], category=user_data['category'], sets=float(user_data['sets']), reps=float(user_data['reps']) , public=int(user_data['public']))
+            exercise = Exercise(name=user_data['exercise_name'], duration=duration, calories_burned=float(user_data['calories_burned']), workout_id=user_data['workout_id'], category=user_data['category'], sets=float(user_data['sets']), reps=float(user_data['reps']))
             db.session.add(exercise)
             db.session.commit()
             return exercise
         if user_data['category'] == 'other':
-            exercise = Exercise(name=user_data['exercise_name'], duration=duration, calories_burned=float(user_data['calories_burned']), workout_id=user_data['workout_id'], category=user_data['category'], description=user_data['desc'], public=int(user_data['public']))
+            exercise = Exercise(name=user_data['exercise_name'], duration=duration, calories_burned=float(user_data['calories_burned']), workout_id=user_data['workout_id'], category=user_data['category'], description=user_data['desc'])
             db.session.add(exercise)
             db.session.commit()
             return exercise
@@ -259,9 +248,6 @@ class Exercise(db.Model):
     @classmethod
     def valid_ex(cls, user_data):
         is_valid = True
-        if user_data['public'] == '':
-            is_valid = False
-            flash("Please Select a Public or Private option", "ex_error")
         if len(user_data['exercise_name']) < 2 or user_data['exercise_name'] == '':
             is_valid = False
             flash("Please Enter an Exercise Name", "ex_error")
@@ -329,8 +315,6 @@ class Food(db.Model):
     fat = db.Column(db.Float, nullable=False)
     protein = db.Column(db.Float, nullable=False)
     quantity = db.Column(db.Float, nullable=False)
-    category = db.Column(db.String(45))
-    public = db.Column(db.Integer, nullable=False)
     created_at = db.Column(db.DateTime, server_default=func.now())
     updated_at = db.Column(db.DateTime, server_default=func.now(), onupdate=func.now())
     meal_id = db.Column(db.Integer, db.ForeignKey('meal.id', ondelete='cascade'), nullable=False)
@@ -348,9 +332,6 @@ class Food(db.Model):
         if user_data['calories'] == '':
             is_valid = False 
             flash("Please Enter Calories for Food Item", "food_error")
-        if user_data['category'] == '':
-            is_valid = False
-            flash("Please Select a Food Category", "reg_error")
         if user_data['carbs'] == '' or float(user_data['carbs']) <=0:
             is_valid = False
             flash("Please Enter Carbs for Food Item", "food_error")
@@ -363,13 +344,10 @@ class Food(db.Model):
         if user_data['quantity'] == '' or float(user_data['quantity']) <=0:
             is_valid = False
             flash("Please Enter Quantity of Food Items", "food_error")
-        if user_data['public'] == '':
-            is_valid = False
-            flash("Please Select a Public or Private option", "food_error")
         return is_valid
     @classmethod
     def create_food(cls, user_data, meal_id):
-        food = Food(calories=user_data['calories'], name=user_data['food_name'], carbs=user_data['carbs'], fat=user_data['fat'], protein=user_data['protein'], quantity=user_data['quantity'], public=user_data['public'] ,category=user_data['category'], meal_id=int(meal_id))
+        food = Food(calories=user_data['calories'], name=user_data['food_name'], carbs=user_data['carbs'], fat=user_data['fat'], protein=user_data['protein'], quantity=user_data['quantity'],meal_id=int(meal_id))
         db.session.add(food)
         db.session.commit()
         return food
