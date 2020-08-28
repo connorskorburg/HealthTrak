@@ -334,14 +334,38 @@ def searchResults():
         )
         result = response.json()
         results = []
-        for i in range(0,9):
+        for i in range(0,5):
+            for y in result['foods'][i]['foodNutrients']:
+                if y['nutrientName'] == 'Total lipid (fat)':
+                    fat = y['value']
+                if y['nutrientName'] == 'Carbohydrate, by difference':
+                    carbs = y['value']
+                if y['nutrientName'] == 'Protein':
+                    protein = y['value']
             results.append({
-                "id":  result['foods'][i]['fdcId'],
                 "description":  result['foods'][i]['description'],
-                "protein":  result['foods'][i]['foodNutrients'][4]['value'],
-                "fat":  result['foods'][i]['foodNutrients'][5]['value'],
-                "carbs":  result['foods'][i]['foodNutrients'][6]['value'],
+                "protein":  protein,
+                "fat":  fat,
+                "carbs":  carbs,
             })
         return render_template('results.html', search=search, results=results)
 
 
+def foodQuery():
+    if not 'user_id' in session.keys():
+        return redirect('/')
+    else:
+        user = User.query.get(session['user_id'])
+        description = request.args.get('desc') 
+        fat = float(request.args.get('fat')) 
+        carbs = float(request.args.get('carbs')) 
+        protein = float(request.args.get('protein'))
+        calories = float((fat * 9) + (carbs * 4) + (protein * 4)) 
+        food = {
+            "description": description,
+            "fat": fat,
+            "carbs": carbs,
+            "protein": protein,
+            "calories": calories
+        }
+        return render_template("newFood.html", food=food, user=user)

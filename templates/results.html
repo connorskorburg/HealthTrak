@@ -17,7 +17,7 @@
                <p>Fat: {{ r.fat }}</p>
                <p>Protein: {{ r.protein }}</p>
                <p>Carbs: {{ r.carbs }}</p>
-               <a href="/food/new/{{ r.id }}">Add to Meal</a>
+               <a href="/foodQuery?fat={{r.fat}}&carbs={{r.carbs}}&protein={{r.protein}}&desc={{r.description}}">Add to Meal</a>
            </div>
            {% endfor %}
         </section>
