@@ -373,3 +373,12 @@ def showLog():
         print(parsedLogs)
         return render_template("calendar.html", user=user, logs=parsedLogs)
 
+# show all status
+def stats():
+    if not 'user_id' in session.keys():
+        return redirect('/')
+    else:
+        log = DailyLog.log_exists()
+        user = User.query.get(session['user_id'])
+        return render_template("stats.html", user=user, log=log)
+        
