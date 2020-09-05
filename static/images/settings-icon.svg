@@ -1,0 +1,17 @@
+<svg width="50" height="50" viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path
+        d="M38.9393 24.6154C38.9393 32.5471 32.6268 38.8462 24.9999 38.8462C17.3731 38.8462 11.0605 32.5471 11.0605 24.6154C11.0605 16.6837 17.3731 10.3846 24.9999 10.3846C32.6268 10.3846 38.9393 16.6837 38.9393 24.6154Z"
+        stroke="white" stroke-width="10" />
+    <rect x="18.9395" width="12.1212" height="12.3077" rx="1" fill="white" />
+    <rect x="18.9395" y="37.6923" width="12.1212" height="12.3077" rx="1" fill="white" />
+    <rect x="37.8789" y="18.4615" width="12.1212" height="12.3077" rx="1" fill="white" />
+    <rect width="12.2073" height="12.2224" rx="1"
+        transform="matrix(0.729977 -0.683472 0.672285 0.740292 30.1196 11.4202)" fill="white" />
+    <rect y="18.4615" width="12.1212" height="12.3077" rx="1" fill="white" />
+    <rect width="12.2073" height="12.2224" rx="1"
+        transform="matrix(0.729977 -0.683472 0.672285 0.740292 2.27246 37.4931)" fill="white" />
+    <rect width="12.2073" height="12.2224" rx="1"
+        transform="matrix(-0.729977 -0.683472 -0.672285 0.740292 19.4004 11.4202)" fill="white" />
+    <rect width="12.2073" height="12.2224" rx="1"
+        transform="matrix(-0.729977 -0.683472 -0.672285 0.740292 47.2476 37.4931)" fill="white" />
+</svg>
