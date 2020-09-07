@@ -382,3 +382,17 @@ def stats():
         user = User.query.get(session['user_id'])
         return render_template("stats.html", user=user, log=log)
         
+
+
+# render updated dashboard for styling
+def newDash():
+    if not 'user_id' in session.keys():
+        return redirect('/')
+    else:
+        log_exists = DailyLog.log_exists()
+        if log_exists == False:
+            new_log = DailyLog(user_id=session['user_id'])
+            db.session.add(new_log)
+            db.session.commit()
+        user = User.query.get(session['user_id'])
+        return render_template('newDash.html', user=user, local_time=local_time, log=log_exists)

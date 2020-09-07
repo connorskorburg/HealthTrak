@@ -1,0 +1,357 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Nunito', sans-serif;
+}
+
+:root {
+    --purple: #8C88FA;
+    --pink: #FF95FE;
+    --bgColor: #F0F3F8;
+}
+
+html,body{
+    width: 100%;
+    min-height: 100vh;
+}
+
+body {
+    background-color: var(--bgColor);
+}
+
+#top-nav {
+    width: 100%;
+    background-color: #fff;
+    z-index: 10;
+}
+#top-nav-inner {
+    justify-content: center;
+    display: flex;
+}
+    #top-nav h1 {
+        margin-right: 1rem;
+        padding-top: 0.75rem;
+        padding-left: 0.25rem;
+    }
+    #top-nav h1 span:first-child {
+        color: var(--purple);
+    }
+    #top-nav h1 span:last-child {
+        color: var(--pink);
+    }
+
+
+
+#meals {
+    background-color: var(--bgColor);
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 5%;
+    padding: 2rem 5%;
+}
+
+    #meals article {
+        color: #fff;
+        text-align: center;
+        padding: 1rem 0 1rem 0;
+        background-color: #fff;
+        box-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        border-radius: 0.75rem;
+    }
+
+    .chart-container {
+        margin: 0 auto;
+        width: 75%;
+    }
+    #barChart {
+        background-color: #fff;
+        padding: 1rem;
+        border-radius: 0.5rem;
+        box-shadow: 5px 5px 5px rgba(0,0,0,0.2);
+        margin-bottom: 1rem;
+    }
+    #barChart {
+        margin-right: 1rem;
+    }
+        .food-container {
+            display: none;
+            justify-content: center;
+            text-align: center;
+        }
+            .fat, .carbs, .protein {
+                flex: 1;
+            }
+        .calories-container {
+            display: flex;
+            padding: 0.75rem;
+        }
+        .calories-container img {
+            margin-left: auto;
+        }
+        .calories-container img:hover{
+            transform: scale(1.1) rotate(180deg);
+            
+            cursor: pointer;
+            transition: all 350ms ease-in-out;
+        }
+
+        #meals article h3 {
+            border-bottom: 1px solid #fff;
+            padding-bottom: 1rem;
+        }
+        #meals article p:last-child{
+            padding-top: 1rem;
+            padding-bottom: 0.5rem;
+        }
+
+    #meals article:first-child {
+        background: rgb(143,135,249);
+        background: linear-gradient(135deg, rgba(143,135,249,1) 0%, rgba(231,63,224,1) 100%);
+    }
+    #meals article:nth-of-type(2){
+        background: rgb(236,134,207);
+        background: linear-gradient(135deg, rgba(236,134,207,1) 0%, rgba(245,192,150,1) 67%);
+    }
+    #meals article:nth-of-type(3){
+        background: rgb(69,221,241);
+        background: linear-gradient(135deg, rgba(69,221,241,1) 0%, rgb(150, 167, 245) 67%);
+
+    }
+    #meals article:nth-of-type(4){
+        background: rgb(54,39,254);
+        background: linear-gradient(135deg, rgba(54,39,254,1) 0%, rgba(128,236,243,1) 85%);
+    }
+
+    .todays-log {
+        display: none;
+    }
+    #meals article:nth-of-type(5) p{
+        display: none;
+    }
+    #meals article:nth-of-type(5),
+    #meals article:nth-of-type(6){
+        color: rgba(0,0,0,0.65);
+        background: rgb(255,255,255);
+        background: linear-gradient(180deg, rgba(255,255,255,1) 0%, rgba(211,227,255,1) 100%);
+    }
+
+        #meals article:nth-of-type(6) span:first-child{
+            color: var(--purple);
+        }
+        #meals article:nth-of-type(6) span:last-child {
+            color: var(--pink);
+        }
+    #meals article:nth-of-type(7){
+        background: rgb(255,255,255);
+        background: linear-gradient(180deg, rgba(255,255,255,1) 0%, rgba(244,206,255,1) 100%);
+        grid-column: 1 / -1 ;
+    }
+        .stats-log {
+            padding: 1rem;
+            display: flex;
+        }
+        #meals article:nth-of-type(7) h3,
+        #meals article:nth-of-type(7) p{
+            color: rgba(0,0,0,0.65);
+        }
+
+
+        #workout-cals{
+            padding-top: 1rem;
+            padding-bottom: 0.5rem;
+        }
+#side-nav,
+#bottom-nav,
+#meals article:nth-of-type(6) p:nth-of-type(2),
+#meals article:nth-of-type(6) p:nth-of-type(3),
+#meals article:nth-of-type(6) p:nth-of-type(4){
+    display: none;
+}
+
+
+
+@media screen and (min-width:300px) and (max-width:499px){
+    #meals article:nth-of-type(7){
+        margin-bottom: 8rem;
+    }
+}
+
+@media screen and (min-width:500px) and (max-width:1099px) {
+    #meals article:nth-of-type(5),
+    #meals article:nth-of-type(6){
+        margin-bottom: 8rem;
+    }
+}
+
+
+
+
+
+@media screen and (min-width: 300px) and (max-width:1100px) {
+    #bottom-nav {
+        display: flex;
+        justify-content: center;
+        width: 100%;
+        position: fixed;
+        bottom: 0;
+        z-index: 234;
+        background: rgb(114,108,251);
+        background: linear-gradient(180deg, rgba(114,108,251,1) 0%, rgba(163,124,252,1) 100%);
+        box-shadow: 5px 5px 5px #b9affca6;
+    }
+    #bottom-nav a {
+        text-align: center;
+        align-self: center;
+        flex: 1;
+        padding: 0.5rem;
+    }
+    #bottom-nav a:hover {
+        background-color: #a27bfb;
+        cursor: pointer;
+        transition: all 400ms ease-in-out;
+    }
+    .active {
+        background-color: #a27bfb;
+    }
+
+    #bottom-nav img {
+        width: 50px;
+        height: 50px;
+    }
+
+
+} 
+
+
+
+
+@media screen and (min-width:500px) {
+    .food-container{
+        display: flex;
+        border-bottom: 1px solid #fff;
+        padding: 0.5rem 0;
+    }
+    #meals article p {
+        font-size: 1.1rem;
+    }
+
+
+    .todays-log {
+        display: flex;
+        margin-top: 1rem;
+        padding: 0 1rem;
+    }
+    #meals article:nth-of-type(5) {
+        order: 6;
+    }
+    #meals article:nth-of-type(6) {
+        order: 7;
+    }
+    #meals article:nth-of-type(5) h3 {
+        display: block;
+    }
+    #meals article:nth-of-type(5) p {
+        display: inline-block;
+        margin-top: 1rem;
+        font-size: 1.25rem;
+    }
+    .todays-log span{
+        margin: 0.25rem 0;
+        font-size: 1.25rem;
+        font-weight: bold;
+        color: var(--purple);
+    }
+    .todays-log span:last-child{
+        margin-left: auto;
+    }
+    #workout-cals{
+        padding-bottom: 10%;
+        border-bottom: 1px solid var(--purple);
+    }
+    #meals article:nth-of-type(6) span:first-child{
+        font-size: 2rem;
+        display: block;
+    }
+    #meals article:nth-of-type(6) span:last-child {
+        display: block;
+        font-size: 1.25rem;
+    }
+    #meals article:nth-of-type(6) p:nth-of-type(2),
+    #meals article:nth-of-type(6) p:nth-of-type(3),
+    #meals article:nth-of-type(6) p:nth-of-type(4){
+        display: block;
+        font-weight: bold;
+        background-color: #fff;
+        color: var(--purple);
+        padding: 10% 1rem;
+        border-bottom: 1px solid var(--purple);
+    }
+}
+
+
+
+@media screen and (min-width:1100px) {
+    #top-nav img{
+        margin-left: 5rem;
+    }
+    #meals {
+        grid-template-columns: 1fr 1fr 1fr 1fr;
+        grid-gap: 2.5%;
+        width: calc(100% - 5rem);
+        margin-left: 5rem;
+        padding: 2 2.5%;
+    }
+    #meals article {
+        margin-bottom: 2rem;
+    }
+    #meals article p {
+        font-size: 1.1rem;
+    }
+    #meals article:nth-of-type(6){
+        order: 7;
+        grid-column: 3.5 / 4;
+    }
+    #meals article:nth-of-type(7){
+        order: 6;
+        grid-column: 2 / 4;        
+    }
+
+    #barChart {
+        margin-top: 10%;
+    }
+
+
+    .todays-log {
+        padding: 0 2rem;
+    }
+
+    #side-nav {
+        position: fixed;
+        display: inline-block;
+        top: 0;
+        width: 4.5rem;
+        min-height: 100%;
+        background: rgb(114,108,251);
+        background: linear-gradient(180deg, rgba(114,108,251,1) 0%, rgba(163,124,252,1) 100%);
+        box-shadow: 5px 5px 5px #b9affca6;
+    }
+    .icons {
+        padding-top: 5rem;
+        display: flex;
+        flex-direction: column;
+    }
+    .icons img {
+        width: 72px;
+        padding: 45% 1rem;
+    }
+    .icons img:hover{
+        background-color: #a27bfb;
+        cursor: pointer;
+        transition: all 400ms ease-in-out;
+    }
+
+
+
+}

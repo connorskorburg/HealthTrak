@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='/css/dash.css') }}">
+</head>
+<body>
+
+    <form action="">
+        <input id="calories_consumed" type="hidden" value="{{ log.calories_consumed }}">
+        <input id="calories_burned" type="hidden" value="{{ log.calories_burned }}">
+        <input id="daily_calories" type="hidden" value="{{ user.daily_calories }}">
+        <input type="hidden" id="daily_fat" value="{{ log.total_fat }}">
+        <input type="hidden" id="daily_protein" value="{{ log.total_protein }}">
+        <input type="hidden" id="daily_carbs" value="{{ log.total_carbs }}">
+    </form>
+
+
+
+
+    <nav id="top-nav">
+        <nav id="top-nav-inner">
+            <img src="/static/images/HealthTrak-icon.svg" alt="HealthTrak Icon">
+            <h1><span>Health</span><span>Trak</span></h1>
+        </nav>
+
+    </nav>
+
+    <main id="meals">
+        
+        <article>
+
+            <h3>Breakfast</h3>
+
+
+            <div class="food-container">
+                <div class="fat">
+                    <p>Fat</p>
+                    <p>20g</p>
+                </div>
+                <div class="protein">
+                    <p>Protein</p>
+                    <p>30g</p>
+                </div>
+                <div class="carbs">
+                    <p>Carbs</p>
+                    <p>30g</p>
+                </div>
+            </div>
+            <div class="calories-container">
+                <p>300 Calories</p>
+                <img src="/static/images/plus-icon.svg" alt="">
+            </div>
+        </article>
+
+
+        <article>
+            <h3>Lunch</h3>
+
+            <div class="food-container">
+                <div class="fat">
+                    <p>Fat</p>
+                    <p>20g</p>
+                </div>
+                <div class="protein">
+                    <p>Protein</p>
+                    <p>30g</p>
+                </div>
+                <div class="carbs">
+                    <p>Carbs</p>
+                    <p>30g</p>
+                </div>
+            </div>
+            <div class="calories-container">
+                <p>550 Calories</p>
+                <img src="/static/images/plus-icon.svg" alt="Plus Icon">
+            </div>
+        </article>
+
+
+        <article>
+            <h3>Dinner</h3>
+
+            <div class="food-container">
+                <div class="fat">
+                    <p>Fat</p>
+                    <p>20g</p>
+                </div>
+                <div class="protein">
+                    <p>Protein</p>
+                    <p>30g</p>
+                </div>
+                <div class="carbs">
+                    <p>Carbs</p>
+                    <p>30g</p>
+                </div>
+            </div>
+
+            <div class="calories-container">
+                <p>600 Calories</p>
+                <img src="/static/images/plus-icon.svg" alt="Plus Icon">
+            </div>
+
+        </article>
+
+
+        <article>
+            <h3>Snack</h3>
+
+
+            <div class="food-container">
+                <div class="fat">
+                    <p>Fat</p>
+                    <p>20g</p>
+                </div>
+                <div class="protein">
+                    <p>Protein</p>
+                    <p>30g</p>
+                </div>
+                <div class="carbs">
+                    <p>Carbs</p>
+                    <p>30g</p>
+                </div>
+            </div>
+
+            <div class="calories-container">
+                <p>125 Calories</p>
+                <img src="/static/images/plus-icon.svg" alt="Plus Icon">
+            </div>
+
+        </article>
+
+        <article>
+            <h3>Today's Log</h3>
+            <div class="chart-container">
+                <canvas id="myChart"></canvas>
+            </div>
+            <p>1575 / 1800</p>
+            <div class="todays-log">
+                <span>Fat</span><span>80g</span>
+            </div>
+
+            <div class="todays-log">
+                <span>Protein</span><span>120g</span>
+            </div>
+
+            <div class="todays-log">
+                <span>Carbs</span><span>120g</span>
+            </div>
+
+        </article>
+
+        <article>
+            <h3>Workout Log</h3>
+            <p id="workout-cals"><span>300</span> <span>Cals Burned</span></p>
+            <p>45 Minutes Spent</p>
+            <p>2 Workouts Completed</p>
+            <p>5 Exercises Completed</p>
+        </article>
+
+        <article>
+            <h3>Nutrients Log</h3>
+            <div class="stats-log">
+                <div class="chart-container">
+                    <canvas id="barChart" width="100" height="65"></canvas>
+                </div>
+
+            </div>
+        </article>
+
+    </main>
+
+
+
+    <nav id="side-nav">
+        <div class="icons">
+            <img src="/static/images/dash-icon.svg" alt="Dashboard Icon">
+            <img src="/static/images/meals-icon.svg" alt="Meal Icon">
+            <img src="/static/images/calendar-icon.svg" alt="Calendar Icon">
+            <img src="/static/images/workout-icon.svg" alt="Workout Icon">
+            <img src="/static/images/settings-icon.svg" alt="Gear Icon">
+        </div>
+    </nav>
+    
+    <nav id="bottom-nav">
+
+        <a class="active" href="#">
+            <img src="/static/images/dash-icon.svg" alt="Dashboard Icon">
+        </a>
+
+
+        <a href="#">
+            <img src="/static/images/calendar-icon.svg" alt="Calendar Icon">
+        </a>
+
+
+
+        <a href="#">
+            <img src="/static/images/meals-icon.svg" alt="Meals Icon">
+        </a>
+
+
+        <a href="#">
+            <img src="/static/images/workout-icon.svg" alt="Workout Icon">
+        </a>
+
+
+    </nav>
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js" integrity="sha512-s+xg36jbIujB2S2VKfpGmlC3T5V2TF3lY48DX7u2r9XzGzgPsa6wTpOQA7J9iffvdeBN0q9tKzRxVxw1JviZPg==" crossorigin="anonymous"></script>
+    <script src="{{ url_for('static', filename='/js/stats.js') }}"></script>
+    <script src="{{ url_for('static', filename='/js/barChart.js') }}"></script>
+</body>
+</html>
