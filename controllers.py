@@ -7,6 +7,8 @@ import requests
 from secret import *
 
 # render home page
+def index():
+    return render_template('home.html')
 def home():
     return render_template('index.html')
 # render dashboard
