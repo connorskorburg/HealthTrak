@@ -50,7 +50,7 @@
     }
     #home-nav-inner img:last-child:hover {
         transform: scale(1.05) rotate(180deg);
-        transition: all 350ms ease-in-out;
+        transition: all 500ms ease-in-out;
         cursor: pointer;
     }
     .btn {
@@ -74,8 +74,43 @@
       transition: all 350ms ease-in-out;
     }
 
-  
-  
+#home-nav-mobile {
+    display: none;
+    background-color: var(--purple);
+    position: absolute;
+    width: calc(100% - 2rem);
+    margin-left: 1rem;
+    margin-top: 1rem;
+    padding: 2rem;
+    border-radius: 0.5rem;
+    box-shadow: 4px 4px 4px rgba(0,0,0,0.2);
+}
+    #home-nav-mobile a {
+        border-radius: 0.75rem;
+        padding: 0.75rem 1rem;
+        display: block;
+        text-decoration: none;
+        font-weight: bold;
+        font-size: 1.25rem;
+        background-color: #fff;
+        text-align: center;
+        box-shadow: 2px 2px 3px rgba(0,0,0,0.2);
+
+    }
+    #home-nav-mobile a:first-child {
+        margin-bottom: 0.75rem;
+        background: rgb(255,255,255);
+        background: linear-gradient(180deg, rgba(255,255,255,1) 0%, rgba(244,205,255,1) 100%);
+    }
+    #home-nav-mobile a:last-child {
+        background: rgb(255,255,255);
+        background: linear-gradient(180deg, rgba(255,255,255,1) 0%, rgba(212,228,255,1) 100%);
+    }
+    #home-nav-mobile a:hover {
+        transform: scale(1.02);
+        box-shadow: 4px 4px 6px rgba(0,0,0,0.2);
+        transition: all 350ms ease-in-out;
+    }
   
   /* #blue-background {
     width: 100%;
