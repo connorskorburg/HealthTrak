@@ -205,26 +205,7 @@
     padding: 2rem 1rem;
     background-color: #f5d1ff;
 }
-    #contact-header-outer {
-        width: 100%;
-        text-align: center;
-        background-color: #ffffff;
-        background-color: #F5d1ff;
-        border-bottom: 1px solid #fff;
-    }
-        #contact-header{
-            color: #fff;
-            color: rgba(0,0,0,0.8);
-            box-shadow: 2px 2px 3px rgba(0,0,0,0.2);
-            text-align: center;
-            margin: 2rem auto;
-            padding: 0.5rem 1rem;
-            border-radius: 0.5rem;
-            background-color: var(--purple);
-            background-color: #fff;
-            width: 10rem;
-            display: inline-block;
-        }
+
 
     #contact-inner {
         display: flex;
@@ -251,10 +232,40 @@
     #home-nav {
         padding: 0 5%;
     }
+        #hamburger {
+            display: none;
+        }
+        #home-nav section{
+            display: inline-block;
+            align-self: center;
+            margin-left: auto;
+        }
+            #home-nav section a {
+                font-size: 1.15rem;
+                text-decoration: none;
+                padding-bottom: 0.25rem;
+            }
+            #home-nav section a:first-child {
+                margin-right: 1rem;
+                color: var(--pink);
+            }
+            #home-nav section a:last-child {
+                color: var(--purple);
+            }
+            #home-nav section a:first-child:hover {
+                border-bottom: 2px solid var(--pink);
+                color: var(--purple);
+                transition: all 100ms ease-in-out;
+            }
+            #home-nav section a:last-child:hover {
+                border-bottom: 2px solid var(--purple);
+                color: var(--pink);
+                transition: all 100ms ease-in-out;
+            }
 
     #hero-content{
         flex-direction: row-reverse;
-        padding: 0rem 5% 4rem 5%;
+        padding: 0rem 5% 7rem 5%;
     }
 
         #hero-content img {
@@ -268,17 +279,15 @@
         }
             #hero-content h1 {
                 width: 100%;
-                /* font-size: 2.25rem; */
                 text-align: left;
             }
             #hero-content p {
                 width: 100%;
-                /* font-size: 1.25rem; */
                 text-align: left;
             }
 
     #cards {
-        padding: 2rem 1.5rem;
+        padding: 2rem 5%;
     }
 
 }
@@ -292,4 +301,64 @@
     .card:nth-of-type(2){
         margin-right: 5%;
     }
+    #hero-content{
+        padding: 0rem 5% 9rem 5%;
+    }
+
+        #hero-content img {
+            width: 45%;
+        }
+        #hero-content section {
+            padding-right: 5%;
+            margin: 7.5% 0 0 0;
+        }
+            #hero-content h1 {
+                font-size: 3rem;
+                margin-top: 10%;
+                
+            }
+            #hero-content p {
+                padding: 1rem 0;                
+            }
+}
+
+
+
+@media screen and (min-width:1300px) {
+    #home-nav {
+        padding: 0 10%;
+    }
+    #cards {
+        padding: 2rem 10%;
+    }
+    #hero-content{
+        padding: 0rem 10% 9rem 10%;
+    }
+    #hero-content h1 {
+        font-size: 4rem;
+        margin-top: 7.5%;   
+    }
+}
+
+@media screen and (min-width:1700px) {
+    #home-nav {
+        padding: 0 12.5%;
+    }
+    #cards {
+        padding: 2rem 12.5%;
+    }
+    #hero-content{
+        padding: 0rem 12.5% 9rem 12.5%;
+    }
+        #hero-content h1 {
+            font-size: 5rem;
+            margin-top: 7.5%;   
+        }
+        #hero-content p {
+            padding: 1rem 0;
+            font-size: 1.5rem;                
+        }
+        #hero-content .btn {
+            font-size: 1.5rem;
+        }
 }
