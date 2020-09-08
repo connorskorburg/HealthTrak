@@ -25,14 +25,18 @@
     width: 100%;
     background-color: #fff;
     z-index: 10;
+    padding: 0 1rem;
+    box-shadow: 2px 2px 2px rgba(0,0,0,0.2);
   }
-  #home-nav-inner {
-    justify-content: center;
-    display: flex;
-  }
+    #home-nav section{
+        display: none;
+    }
+    #home-nav-inner {
+        display: flex;
+    }
     #home-nav h1 {
         margin-right: 1rem;
-        padding-top: 0.75rem;
+        padding-top: 1rem;
         padding-left: 0.25rem;
     }
     #home-nav h1 span:first-child {
@@ -41,94 +45,106 @@
     #home-nav h1 span:last-child {
         color: var(--pink);
     }
-    #home-nav-inner img:first-child,
     #home-nav-inner img:last-child {
-        margin-left: 15%;
+        margin-left: auto;
     }
     #home-nav-inner img:last-child:hover {
         transform: scale(1.05) rotate(180deg);
         transition: all 350ms ease-in-out;
         cursor: pointer;
     }
+    .btn {
+      margin: 1.5rem auto;
+      font-size: 1.15rem;
+      text-decoration: none;
+      color: rgba(0,0,0,0.6);
+      border: none;
+      display: inline-block;
+      outline: none;
+      background: rgb(255,255,255);
+      background: linear-gradient(180deg, rgba(255,255,255,1) 0%, rgba(244,206,255,1) 100%);
+      padding: 0.5rem 1rem;
+      border-radius: 0.25rem;
+      box-shadow: 4px 4px 4px rgba(0,0,0,0.2);
+      font-weight: 600;
+    }
+    .btn:hover {
+      transform: scale(1.02);
+      box-shadow: 5px 5px 5px rgba(0,0,0,0.3);
+      transition: all 350ms ease-in-out;
+    }
+
   
   
   
-  .btn {
-    margin: 1.5rem auto;
-    text-decoration: none;
-    color: rgba(0,0,0,0.6);
-    border: none;
-    display: inline-block;
-    outline: none;
-    background: rgb(255,255,255);
-    background: linear-gradient(180deg, rgba(255,255,255,1) 0%, rgba(244,206,255,1) 100%);
-    padding: 0.5rem 1rem;
-    border-radius: 0.25rem;
-    box-shadow: 4px 4px 4px rgba(0,0,0,0.2);
-    font-weight: 600;
-  }
-  .btn:hover {
-    background: rgb(255,255,255);
-    background: linear-gradient(180deg, rgba(255,255,255,1) 0%, rgb(206, 226, 255) 100%);
-    transition: all 500ms ease-in-out;
-  }
-  #blue-background {
+  /* #blue-background {
     width: 100%;
     display: inline-block;
     height: 40rem;
-  }
+  } */
   
   
   
   
-  #hero-content {
+#hero-content {
     width: 100%;
-    padding: 2rem 1rem;
-    display: grid;
-  }
+    padding: 0rem 1rem 4rem 1rem;
+    display: flex;
+    flex-direction: column;
+}
     #hero-content img, #blue-background img {
-        width: 75%;
+        width: 65%;
         display: inline-block;
         margin: 0 auto;
     }
+    #hero-content section {
+        width: 100%;
+        text-align: center;
+    }
     #hero-content h1 {
         color: var(--purple);
-        width: 16rem;
+        width: 20rem;
+        font-size: 2.25rem;
         text-align: center;
-        margin: 1rem auto;
+        margin: 2rem auto 1rem auto;
     }
     #hero-content p {
         color: #838383;
         font-size: 1.25rem;
         text-align: center;
     }
+    
   
   
-  #cards {
+#cards {
     padding: 2rem 1rem;
-    display: grid;
+    display: flex;
+    flex-direction: column;
     text-align: center;
-    grid-gap: 5rem;
     margin-bottom: 3rem;
-  }
+}
     .card{
-      border-radius: 0.5rem;
-      padding: 0rem 1.5rem 3.5rem 1.5rem;
+        flex: 1;
+        box-shadow: 4px 4px 4px rgba(0,0,0,0.2);
+        border-radius: 0.5rem;
+        padding: 0rem 1.5rem 3.5rem 1.5rem;
+        margin-bottom: 4rem;
+    }
+    .card .img-bg {
+      box-shadow: 2px 2px 3px rgba(0,0,0,0.2);
+      position: relative;
+      bottom: 2rem;
+      display: grid;
+      width: 80px;
+      height: 80px;
+      background-color: var(--purple);
+      display: inline-block;
+      padding: 15px;
+      border-radius: 50%;
     }
       .card img  {
         height: 50px;
         width: 50px;
-      }
-      .card .img-bg {
-        position: relative;
-        bottom: 2rem;
-        display: grid;
-        width: 80px;
-        height: 80px;
-        background-color: var(--purple);
-        display: inline-block;
-        padding: 15px;
-        border-radius: 50%;
       }
       .card p {
         color: rgba(0,0,0,0.6);
@@ -149,31 +165,96 @@
     }
   
   
-  #contact {
+#contact {
     width: 100%;
     padding: 2rem 1rem;
     background-color: #f5d1ff;
-  }
-  #contact-header{
-    text-align: center;
-    padding-bottom: 2rem;
-  }
-  
-  #contact-inner {
-      display: flex;
-      margin: 0 auto;
-      width: 100%;
-      justify-content: space-between
+}
+    #contact-header-outer {
+        width: 100%;
+        text-align: center;
+        background-color: #ffffff;
+        background-color: #F5d1ff;
+        border-bottom: 1px solid #fff;
     }
-    #contact-inner a {
-      flex: 1;
-      text-align: center;
+        #contact-header{
+            color: #fff;
+            color: rgba(0,0,0,0.8);
+            box-shadow: 2px 2px 3px rgba(0,0,0,0.2);
+            text-align: center;
+            margin: 2rem auto;
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+            background-color: var(--purple);
+            background-color: #fff;
+            width: 10rem;
+            display: inline-block;
+        }
+
+    #contact-inner {
+        display: flex;
+        margin: 0 auto;
+        width: 100%;
+        justify-content: space-between
     }
-    #contact-inner img {
-      display: inline-block;
-      height: 50px;
-      align-self: center;
+        #contact-inner a {
+            flex: 1;
+            text-align: center;
+        }
+            #contact-inner img {
+                display: inline-block;
+                height: 50px;
+                align-self: center;
+            }
+            #contact-inner img:nth-of-type(2){
+                margin-left: 5px;
+            }
+
+
+
+@media screen and (min-width:750px) {
+    #home-nav {
+        padding: 0 5%;
     }
-    #contact-inner img:nth-of-type(2){
-      margin-left: 5px;
+
+    #hero-content{
+        flex-direction: row-reverse;
+        padding: 0rem 5% 4rem 5%;
     }
+
+        #hero-content img {
+            width: 45%;
+        }
+        #hero-content section {
+            padding-right: 5%;
+            margin: 7.5% 0 0 0;
+            width: 100%;
+            text-align: left;
+        }
+            #hero-content h1 {
+                width: 100%;
+                /* font-size: 2.25rem; */
+                text-align: left;
+            }
+            #hero-content p {
+                width: 100%;
+                /* font-size: 1.25rem; */
+                text-align: left;
+            }
+
+    #cards {
+        padding: 2rem 1.5rem;
+    }
+
+}
+
+
+@media screen and (min-width:1000px) {
+    #cards {
+        flex-direction: row;
+    }
+    .card:nth-of-type(1),
+    .card:nth-of-type(2){
+        margin-right: 5%;
+    }
+}

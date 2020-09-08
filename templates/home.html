@@ -5,68 +5,130 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://fonts.googleapis.com/css2?family=Nunito&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{{ url_for('static', filename='/css/index.css') }}">
+    <script defer src="{{ url_for('static', filename='/js/toggler.js') }}"></script>
     <title>HealthTrak Home</title>
 </head>
 <body>
+
     <nav id="home-nav">
+
         <div id="home-nav-inner">
+
             <img src="../static/images/HealthTrak-icon.svg" alt="HealthTrak Icon">
+
             <h1><span>Health</span><span>Trak</span></h1>
-            <img src="../static/images/hamburger.svg" alt="Hamburger Icon">
+          
+            <section>
+                <a class="btn" href="#">Login</a>
+                <a class="btn" href="#">Sign Up</a>
+            </section>
+
+            <img id="hamburger" src="../static/images/hamburger.svg" alt="Hamburger Icon">
+
         </div>
+
     </nav>
 
-    <!-- <div id="blue-background"> -->
-        <main id="hero-content">
-            <img src="../static/images/hero.svg" alt="Hero Image">
+    <nav id="home-nav-mobile">
+        
+    </nav>
+
+
+
+    <main id="hero-content">
+
+        <img src="../static/images/hero.svg" alt="Hero Image">
+    
+        <section>
+
             <h1>Track Your Health With Ease</h1>
+            
             <p>Log your exercises and meals within minutes</p>
+            
             <a href="#" class="btn">Start Tracking</a>
-        </main>
-    <!-- </div> -->
+            
+        </section>
+    
+    </main>
+
 
     <main id="cards">
 
         <article class="card">
+
             <div class="img-bg">
+
                 <img src="../static/images/workout-icon.svg" alt="Workout Icon">
+
             </div>
+
             <h2>Save Your Workouts</h2>
+
             <p>Input your exercises and save them to your workouts. View you calories burned, duration, and statistics.</p>
+
         </article>
 
 
         <article class="card">
+
             <div class="img-bg">
+
                 <img src="../static/images/meals-icon.svg" alt="Meals Icon">
+
             </div>
+
             <h2>Log Your Meals</h2>
+
             <p>Search from the USDA Food Database to add Food items to your meals. Meals will track calories, nutrients and quantities.</p>
+
         </article>
 
         <article class="card">
+
             <div class="img-bg">
+
                 <img src="../static/images/calendar-icon.svg" alt="Calendar Icon">
+
             </div>
+
             <h2>View Your Progress</h2>
+
             <p>HealthTrak provides a calendar logging each day that you input meals, exercises, and workouts. Each log is saved and can be viewed on the calendar.</p>
+
         </article>
+
     </main>
 
+    <div id="contact-header-outer">
 
-    <h2 id="contact-header">Contact Me</h2>
+        <h2 id="contact-header">Contact Me</h2>
+
+    </div>
+
     <main id="contact">
+
         <section id="contact-inner">
+
             <a href="https://github.com/connorskorburg" target="_blank">
+
                 <img src="../static/images/github.svg" alt="Github Icon">
+
             </a>
+
             <a href="https://linkedin.com/in/connor-skorburg/" target="_blank">
+
                 <img src="../static/images/linkedin.svg" alt="LinkedIn Icon">
+
             </a>
+
             <a href="/mail">
+
                 <img src="../static/images/mail.svg" alt="Mail Icon">
+
             </a>
+
         </section>
+
     </main>
 </body>
 </html>
