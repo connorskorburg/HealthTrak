@@ -111,13 +111,7 @@
         box-shadow: 4px 4px 6px rgba(0,0,0,0.2);
         transition: all 350ms ease-in-out;
     }
-  
-  /* #blue-background {
-    width: 100%;
-    display: inline-block;
-    height: 40rem;
-  } */
-  
+   
   
   
   
@@ -152,11 +146,11 @@
   
   
 #cards {
+    background-color: var(--lightBlue);
     padding: 2rem 1rem;
     display: flex;
     flex-direction: column;
     text-align: center;
-    margin-bottom: 3rem;
 }
     .card{
         flex: 1;
@@ -187,6 +181,7 @@
         margin-top: 2.5rem;
       }
     .card:nth-of-type(1) {
+      margin-top: 4rem;
       background: rgb(255,255,255);
       background: linear-gradient(180deg, rgba(255,255,255,1) 0%, rgba(244,205,255,1) 100%);
     }
@@ -206,7 +201,6 @@
     background-color: #f5d1ff;
 }
 
-
     #contact-inner {
         display: flex;
         margin: 0 auto;
@@ -221,6 +215,11 @@
                 display: inline-block;
                 height: 50px;
                 align-self: center;
+            }
+            #contact-inner a:hover {
+                transform: scale(1.05);
+                transition: all 400ms ease-in-out;
+                
             }
             #contact-inner img:nth-of-type(2){
                 margin-left: 5px;
@@ -296,6 +295,9 @@
 @media screen and (min-width:1000px) {
     #cards {
         flex-direction: row;
+    }
+    .card{
+        margin-top: 4rem;
     }
     .card:nth-of-type(1),
     .card:nth-of-type(2){
