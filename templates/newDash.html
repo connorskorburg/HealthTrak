@@ -21,10 +21,11 @@
 
 
 
-    <nav id="top-nav">
-        <nav id="top-nav-inner">
+    <nav class="top-nav">
+        <nav class="top-nav-inner">
             <img src="/static/images/HealthTrak-icon.svg" alt="HealthTrak Icon">
             <h1><span>Health</span><span>Trak</span></h1>
+            <a href="/logout">Logout</a>
         </nav>
 
     </nav>
@@ -39,22 +40,24 @@
             <div class="food-container">
                 <div class="fat">
                     <p>Fat</p>
-                    <p>{{m.fat}}g</p>
+                    <p>{{m.fat|round|int}}g</p>
                 </div>
 
                 <div class="protein">
                     <p>Protein</p>
-                    <p>{{ m.protein }}g</p>
+                    <p>{{ m.protein|round|int }}g</p>
                 </div>
 
                 <div class="carbs">
                     <p>Carbs</p>
-                    <p>{{ m.carbs}}g</p>
+                    <p>{{ m.carbs|round|int }}g</p>
                 </div>
             </div>
             <div class="calories-container">
-                <p>{{ m.calories }} Calories</p>
-                <img src="/static/images/plus-icon.svg" alt="Plus Icon">
+                <p>{{ m.calories|round|int }} Calories</p>
+                <a href="/mealtrack">
+                    <img src="/static/images/plus-icon.svg" alt="Plus Icon">
+                </a>
             </div>
         </article>
     {% endfor%}
@@ -80,14 +83,23 @@
                 <span>Carbs</span><span>{{ log.total_carbs }}g</span>
             </div>
 
+            <a href="/mealtrack">Log More</a>
+
         </article>
 
         <article>
             <h3>Workout Log</h3>
-            <p id="workout-cals"><span>300</span> <span>Cals Burned</span></p>
-            <p>45 Minutes Spent</p>
-            <p>2 Workouts Completed</p>
-            <p>5 Exercises Completed</p>
+            <p id="workout-cals"><span>{{ log.calories_burned|round|int }}</span> <span>Cals Burned</span></p>
+            <section id="minutes-active">
+                <p>{{ log.minutes_worked_out|round|int }}</p>
+                <p>Minutes Active</p>
+            </section>
+            <section id="workouts-finished">
+                <p>{{ workout_count }}</p>
+                <p>Workouts Finished</p>
+            </section>
+            <a href="/fitness">Log More</a>
+            </div>
         </article>
 
         <article>
@@ -105,13 +117,31 @@
 
 
     <nav id="side-nav">
+        
         <div class="icons">
-            <img src="/static/images/dash-icon.svg" alt="Dashboard Icon">
-            <img src="/static/images/meals-icon.svg" alt="Meal Icon">
-            <img src="/static/images/calendar-icon.svg" alt="Calendar Icon">
-            <img src="/static/images/workout-icon.svg" alt="Workout Icon">
-            <img src="/static/images/settings-icon.svg" alt="Gear Icon">
+            
+            <a href="/dashboard">
+                <img  src="/static/images/dash-icon.svg" alt="Dashboard Icon">
+            </a>
+        
+            <a href="/mealtrack">
+                <img src="/static/images/meals-icon.svg" alt="Meal Icon">
+            </a>
+            
+            <a href="/calendar">
+                <img src="/static/images/calendar-icon.svg" alt="Calendar Icon">
+            </a>
+            
+            <a href="/fitness">
+                <img src="/static/images/workout-icon.svg" alt="Workout Icon">
+            </a>
+            
+            <a href="/settings">
+                <img src="/static/images/settings-icon.svg" alt="Gear Icon">
+            </a>
+
         </div>
+
     </nav>
     
     <nav id="bottom-nav">

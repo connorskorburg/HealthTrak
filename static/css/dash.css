@@ -20,25 +20,40 @@ body {
     background-color: var(--bgColor);
 }
 
-#top-nav {
+.top-nav {
     width: 100%;
     background-color: #fff;
     z-index: 10;
+    padding: 0rem 5%;
 }
-#top-nav-inner {
-    justify-content: center;
+.top-nav-inner {
     display: flex;
 }
-    #top-nav h1 {
+    .top-nav h1 {
         margin-right: 1rem;
-        padding-top: 1rem;
+        align-self: center;
+        /* padding-top: 1rem; */
         padding-left: 0.25rem;
     }
-    #top-nav h1 span:first-child {
+    .top-nav h1 span:first-child {
         color: var(--purple);
     }
-    #top-nav h1 span:last-child {
+    .top-nav h1 span:last-child {
         color: var(--pink);
+    }
+    .top-nav a {
+        margin-left: auto;
+        margin-right: 0.5rem;
+        display: inline-block;
+        align-self: center;
+        text-decoration: none;
+        font-size: 1.15rem;
+        color: var(--purple);
+    }
+    .top-nav a:hover {
+        border-bottom: 2px solid var(--purple);
+        color: var(--pink);
+        transition: all 100ms ease-in-out;
     }
 
 
@@ -48,7 +63,7 @@ body {
     width: 100%;
     display: grid;
     grid-template-columns: 1fr 1fr;
-    grid-gap: 5%;
+    grid-gap: 2.5% 5%;
     padding: 2rem 5%;
 }
 
@@ -85,9 +100,9 @@ body {
             }
         .calories-container {
             display: flex;
-            padding: 0.75rem;
+            padding: 0.75rem 10%;
         }
-        .calories-container img {
+        .calories-container a {
             margin-left: auto;
         }
         .calories-container img:hover{
@@ -96,12 +111,20 @@ body {
             cursor: pointer;
             transition: all 350ms ease-in-out;
         }
-
-        #meals article h3 {
+        #meal article:nth-of-type(1) h3,
+        #meal article:nth-of-type(2) h3,
+        #meal article:nth-of-type(3) h3,
+        #meal article:nth-of-type(4) h3{
             border-bottom: 1px solid #fff;
+        }
+        #meals article h3 {
             padding-bottom: 1rem;
         }
-        #meals article p:last-child{
+        #meals article:nth-of-type(1) p:last-child,
+        #meals article:nth-of-type(2) p:last-child,
+        #meals article:nth-of-type(3) p:last-child,
+        #meals article:nth-of-type(4) p:last-child,
+        #meals article:nth-of-type(5) p:last-child{
             padding-top: 1rem;
             padding-bottom: 0.5rem;
         }
@@ -127,6 +150,7 @@ body {
     .todays-log {
         display: none;
     }
+    #meals article:nth-of-type(5) a,
     #meals article:nth-of-type(5) p{
         display: none;
     }
@@ -162,11 +186,12 @@ body {
             padding-top: 1rem;
             padding-bottom: 0.5rem;
         }
+
+#meals article:nth-of-type(6) a,
 #side-nav,
 #bottom-nav,
-#meals article:nth-of-type(6) p:nth-of-type(2),
-#meals article:nth-of-type(6) p:nth-of-type(3),
-#meals article:nth-of-type(6) p:nth-of-type(4){
+#minutes-active,
+#workouts-finished{
     display: none;
 }
 
@@ -185,7 +210,11 @@ body {
     }
 }
 
-
+@media screen and (min-width: 600px)  {
+    #workouts-finished {
+        margin-bottom: 5%;
+    }
+}
 
 
 
@@ -220,8 +249,6 @@ body {
         width: 50px;
         height: 50px;
     }
-
-
 } 
 
 
@@ -237,6 +264,26 @@ body {
         font-size: 1.1rem;
     }
 
+    #meals article:nth-of-type(5) a,
+    #meals article:nth-of-type(6) a{
+        display: inline-block;
+        text-decoration: none;
+        color: #000;
+        font-size: 1.15rem;
+        background: rgb(255,255,255);
+        background: linear-gradient(180deg, rgba(255,255,255,1) 0%, rgba(244,206,255,1) 100%);
+        border-radius: 0.75rem;
+        padding: 0.5rem 0.75rem;
+        width: 75%;
+        box-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        margin: 10% auto 0 auto;
+    }
+    #meals article:nth-of-type(5) a:hover,
+    #meals article:nth-of-type(6) a:hover {
+        box-shadow: 4px 4px 6px rgba(0,0,0,0.2);
+        transform: scale(1.02);
+        transition: all 400ms ease-in-out;
+    }
 
     .todays-log {
         display: flex;
@@ -266,34 +313,36 @@ body {
     .todays-log span:last-child{
         margin-left: auto;
     }
-    #workout-cals{
-        padding-bottom: 10%;
-        border-bottom: 1px solid var(--purple);
+    #workout-cals,
+    #minutes-active,
+    #workouts-finished{
+        padding-bottom: 7.5%;
     }
-    #meals article:nth-of-type(6) span:first-child{
+    #meals article:nth-of-type(6) span:first-child,
+    #minutes-active p:first-child,
+    #workouts-finished p:first-child{
         font-size: 2rem;
         display: block;
+        color: var(--purple);
     }
-    #meals article:nth-of-type(6) span:last-child {
+    #meals article:nth-of-type(6) span:last-child,
+    #minutes-active p:last-child,
+    #workouts-finished p:last-child {
         display: block;
         font-size: 1.25rem;
+        color: var(--pink);
     }
-    #meals article:nth-of-type(6) p:nth-of-type(2),
-    #meals article:nth-of-type(6) p:nth-of-type(3),
-    #meals article:nth-of-type(6) p:nth-of-type(4){
+    #minutes-active,
+    #workouts-finished {
         display: block;
-        font-weight: bold;
-        background-color: #fff;
-        color: var(--purple);
-        padding: 10% 1rem;
-        border-bottom: 1px solid var(--purple);
     }
+
 }
 
 
 
 @media screen and (min-width:1100px) {
-    #top-nav img{
+    .top-nav img{
         margin-left: 5rem;
     }
     #meals {
@@ -302,6 +351,10 @@ body {
         width: calc(100% - 5rem);
         margin-left: 5rem;
         padding: 2 2.5%;
+    }
+    #meals article:nth-of-type(5) a,
+    #meals article:nth-of-type(6) a{
+        padding: 1rem;
     }
     #meals article {
         margin-bottom: 2rem;
@@ -351,7 +404,9 @@ body {
         cursor: pointer;
         transition: all 400ms ease-in-out;
     }
-
+    .img-active {
+        background-color: #a27bfb;
+    }
 
 
 }

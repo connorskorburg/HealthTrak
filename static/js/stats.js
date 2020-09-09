@@ -2,6 +2,7 @@ let caloriesConsumed = parseFloat(document.getElementById('calories_consumed').v
 let caloriesBurned = parseFloat(document.getElementById('calories_burned').value)
 let caloriesDaily = parseFloat(document.getElementById('daily_calories').value)
 
+Chart.defaults.global.legend.display = false;
 
 const colors = ['#e682fd','#c8b2f7']
 
@@ -48,6 +49,7 @@ var chart = new Chart(ctx, {
             animateScale: true,
             animateRotate: true,
         },
-        onAnimationComlete: addText
+        onAnimationComlete: addText,
+        
     }
 });

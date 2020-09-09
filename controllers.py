@@ -398,7 +398,7 @@ def newDash():
             db.session.commit()
         user = User.query.get(session['user_id'])
         
-        all_meals = Meal.query.filter_by(user_id=session['user_id'])
+        all_meals = Meal.query.filter_by(user_id=session['user_id']).all()
 
         meals = [{
             "name": "Breakfast",
@@ -435,6 +435,11 @@ def newDash():
                         x["carbs"] = m.total_carbs
                         x["calories"] = m.total_calories
         
-        print(meals)
+        workouts = Workout.query.filter_by(user_id=session['user_id']).all()
+        workout_count = 0
+        for w in workouts:
+            if w.created_at.astimezone().strftime('%Y-%m-%d') == local_time.strftime('%Y-%m-%d'):
+                workout_count = workout_count + 1
 
-        return render_template('newDash.html', user=user, local_time=local_time, log=log_exists, meals=meals)
+
+        return render_template('newDash.html', user=user, local_time=local_time, log=log_exists, meals=meals, workout_count=workout_count)

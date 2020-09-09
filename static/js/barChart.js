@@ -35,9 +35,6 @@ let myBarChart = new Chart(ctx2, {
                     min: 0
                 }
             }],
-            xAxes: [{
-                display: false
-            }]
         }
     }
 });
