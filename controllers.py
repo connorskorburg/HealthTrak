@@ -397,4 +397,44 @@ def newDash():
             db.session.add(new_log)
             db.session.commit()
         user = User.query.get(session['user_id'])
-        return render_template('newDash.html', user=user, local_time=local_time, log=log_exists)
+        
+        all_meals = Meal.query.filter_by(user_id=session['user_id'])
+
+        meals = [{
+            "name": "Breakfast",
+            "fat": 0,
+            "protein": 0,
+            "carbs": 0,
+            "calories": 0
+        },{
+            "name": "Lunch",
+            "fat": 0,
+            "protein": 0,
+            "carbs": 0,
+            "calories": 0
+        },{
+            "name": "Dinner",
+            "fat": 0,
+            "protein": 0,
+            "carbs": 0,
+            "calories": 0
+        },{
+            "name": "Snack",
+            "fat": 0,
+            "protein": 0,
+            "carbs": 0,
+            "calories": 0
+        }]
+
+        for m in all_meals:
+            if m.created_at.astimezone().strftime('%Y-%m-%d') == local_time.strftime('%Y-%m-%d'):
+                for x in meals:
+                    if m.name == x["name"]:
+                        x["fat"] = m.total_fat
+                        x["protein"] = m.total_protein
+                        x["carbs"] = m.total_carbs
+                        x["calories"] = m.total_calories
+        
+        print(meals)
+
+        return render_template('newDash.html', user=user, local_time=local_time, log=log_exists, meals=meals)

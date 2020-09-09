@@ -31,124 +31,53 @@
 
     <main id="meals">
         
+       
+
+    {% for m in meals%}
         <article>
-
-            <h3>Breakfast</h3>
-
-
+            <h3>{{ m.name }}</h3>
             <div class="food-container">
                 <div class="fat">
                     <p>Fat</p>
-                    <p>20g</p>
+                    <p>{{m.fat}}g</p>
                 </div>
+
                 <div class="protein">
                     <p>Protein</p>
-                    <p>30g</p>
+                    <p>{{ m.protein }}g</p>
                 </div>
+
                 <div class="carbs">
                     <p>Carbs</p>
-                    <p>30g</p>
+                    <p>{{ m.carbs}}g</p>
                 </div>
             </div>
             <div class="calories-container">
-                <p>300 Calories</p>
-                <img src="/static/images/plus-icon.svg" alt="">
-            </div>
-        </article>
-
-
-        <article>
-            <h3>Lunch</h3>
-
-            <div class="food-container">
-                <div class="fat">
-                    <p>Fat</p>
-                    <p>20g</p>
-                </div>
-                <div class="protein">
-                    <p>Protein</p>
-                    <p>30g</p>
-                </div>
-                <div class="carbs">
-                    <p>Carbs</p>
-                    <p>30g</p>
-                </div>
-            </div>
-            <div class="calories-container">
-                <p>550 Calories</p>
+                <p>{{ m.calories }} Calories</p>
                 <img src="/static/images/plus-icon.svg" alt="Plus Icon">
             </div>
         </article>
+    {% endfor%}
+            
 
 
-        <article>
-            <h3>Dinner</h3>
-
-            <div class="food-container">
-                <div class="fat">
-                    <p>Fat</p>
-                    <p>20g</p>
-                </div>
-                <div class="protein">
-                    <p>Protein</p>
-                    <p>30g</p>
-                </div>
-                <div class="carbs">
-                    <p>Carbs</p>
-                    <p>30g</p>
-                </div>
-            </div>
-
-            <div class="calories-container">
-                <p>600 Calories</p>
-                <img src="/static/images/plus-icon.svg" alt="Plus Icon">
-            </div>
-
-        </article>
-
-
-        <article>
-            <h3>Snack</h3>
-
-
-            <div class="food-container">
-                <div class="fat">
-                    <p>Fat</p>
-                    <p>20g</p>
-                </div>
-                <div class="protein">
-                    <p>Protein</p>
-                    <p>30g</p>
-                </div>
-                <div class="carbs">
-                    <p>Carbs</p>
-                    <p>30g</p>
-                </div>
-            </div>
-
-            <div class="calories-container">
-                <p>125 Calories</p>
-                <img src="/static/images/plus-icon.svg" alt="Plus Icon">
-            </div>
-
-        </article>
-
+        
         <article>
             <h3>Today's Log</h3>
             <div class="chart-container">
                 <canvas id="myChart"></canvas>
             </div>
-            <p>1575 / 1800</p>
+            <p>{{ log.calories_consumed }} / {{ user.daily_calories  }}</p>
             <div class="todays-log">
-                <span>Fat</span><span>80g</span>
+                <span>Fat</span><span>{{ log.total_fat }}g</span>
             </div>
 
             <div class="todays-log">
-                <span>Protein</span><span>120g</span>
+                <span>Protein</span><span>{{ log.total_protein }}g</span>
             </div>
 
             <div class="todays-log">
-                <span>Carbs</span><span>120g</span>
+                <span>Carbs</span><span>{{ log.total_carbs }}g</span>
             </div>
 
         </article>
