@@ -12,6 +12,8 @@
 </head>
 <body>
 
+  <div id="json-logs"></div>
+  
   <nav class="top-nav">
 
     <nav class="top-nav-inner">
@@ -33,6 +35,18 @@
       {% endif %}
     {% endwith %}
   </div>
+
+  <section id="search-food">
+
+    <form action="/search" method="post">
+      
+      <label>Search For Food</label>
+      <input type="text" name="search" placeholder="Apple, Banana..">
+      <button type="submit"><img src="../static/images/search-icon.svg" alt="Search Icon"></button>
+    </form>
+
+  </section>
+
 
   <main id="all-meals">
     {% for m in meals %}

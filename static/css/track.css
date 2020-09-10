@@ -1,6 +1,10 @@
 
 
 
+#json-logs {
+  display: none;
+}
+
 .error-container {
   width: 100%;
   padding:0 5%;
@@ -11,12 +15,61 @@
     margin-bottom: 0.25rem;
   }
 
+#search-food {
+  margin: 2rem 5% 0 5%;
+  box-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+  border-radius: 0.75rem;
+  padding: 1rem;
+  background: rgb(255,255,255);
+  background: linear-gradient(180deg, rgba(255,255,255,1) 0%, rgba(211,227,255,1) 100%);
+}
+
+  #search-food input {
+    width: 100%;
+    outline: none;
+    display: inline-block;
+    border: none;
+    border-radius: 0.75rem;
+    font-size: 1rem;
+    padding: 0.25rem 0.5rem;
+  }
+  #search-food input::placeholder {
+    font-size: 1rem;
+  }
+
+  #search-food form label {
+    margin-bottom: 0.5rem;
+    font-size: 1.15rem;
+    font-weight: 600;
+    display: block;
+    color: var(--purple);
+  }
+
+  #search-food form button{
+    display: inline-block;
+    width: 25px;
+
+    position: relative;
+    bottom: 1.75rem;
+    left: calc(100% - 27px);
+    border: none;
+    outline: none;
+
+    background-color: transparent;
+  }
+  #search-food form button:hover {
+    cursor: pointer;
+    transform: scale(1.05);
+    transition: all 350ms ease-in-out;
+  }
+
+
 #all-meals {
   width: 100%;
   display: grid;
   color: #fff;
   grid-gap: 2.5% 5%;
-  padding: 5%;
+  padding: 1rem 5%;
   margin-bottom: calc(5% + 7rem);
 }
 
