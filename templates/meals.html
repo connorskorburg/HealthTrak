@@ -106,10 +106,80 @@
     {% endfor %}
   </main>
 
+
+
+
+
+
   <main id="meal-pop-outer">
 
     <section id="meal-pop">
-      <h2>Hello</h2>
+      <header>
+        <h2>Add Food</h2>
+        <img id="close-meal-form" src="../static/images/close.svg" alt="Close Icon">
+      </header>
+      {% with food_error = get_flashed_messages(category_filter = ["food_error"]) %}
+      {% if food_error %}
+          {% for food_err in food_error %}
+              <p class="meal-error">{{ food_err }}</p>
+          {% endfor %}
+      {% endif %}
+    {% endwith %}
+      <form action="/fooditem/new" method="post">
+
+        <label>
+          Food Name
+          <input type="text" name="food_name" >
+        </label>
+        <div class="cal-qual-container">
+          
+          <label>
+            Quantity
+            <input type="number" id="break" value="1" name="quantity">
+          </label>
+          
+          <label>
+            Calories
+            <input type="number" name="calories" value="0">
+          </label>
+          
+        </div>
+        
+        <div class="nutrients-container">
+
+          <label>
+            Carbs
+            <input class="carbs" type="number" value="0" name="carbs">
+          </label>
+          
+          <label>
+            Fat
+            <input class="fat" type="number" value="0" name="fat">
+          </label>
+          <label>
+            Protein
+            <input class="protein" type="number" value="0" name="protein">
+          </label>
+          
+        </div>
+        
+        <label>Meal</label>
+
+        <select name="meal_name">
+
+          <option value="Breakfast">Breakfast</option>
+          <option value="Lunch">Lunch</option>
+          <option value="Dinnner">Dinnner</option>
+          <option value="Snack">Snack</option>
+
+        </select>
+
+        <div class="btn-meal-container">
+          <button type="submit">Add Food</button>
+        </div>
+
+      </form>
+
     </section>
 
   </main>

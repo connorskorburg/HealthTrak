@@ -6,7 +6,7 @@
   color: #fff;
   grid-gap: 2.5% 5%;
   padding: 5%;
-  margin-bottom: 10rem;
+  margin-bottom: calc(5% + 7rem);
 }
 
   #all-meals header{
@@ -96,3 +96,103 @@
     padding-top: 1rem;
     font-size: 1.15rem;
   }
+
+
+
+
+
+#meal-pop-outer {
+  display: none;
+  width: 100%;
+  min-height: 100vh;
+  overflow: hidden;
+  position: fixed;
+  bottom: 0;
+  padding-top: 5vh;
+  background-color: rgba(0, 0, 0, 0.3);
+}
+
+
+
+#meal-pop {
+  color: rgba(0,0,0,0.65);
+  background: rgb(255,255,255);
+  background: linear-gradient(180deg, rgba(255,255,255,1) 0%, rgba(211,227,255,1) 100%);
+  border-radius: 0.5rem;
+}
+  #meal-pop header {
+    display: flex;
+    margin-bottom: 1rem;
+  }
+    #meal-pop header img {
+      margin-left: auto;
+    }
+    #meal-pop header img:hover {
+      cursor: pointer;
+      transform: scale(1.1);
+      transition: all 350ms ease-in-out;
+    }
+  
+
+
+
+  #meal-pop form {
+    width: 100%;
+  }
+    #meal-pop form label {
+      font-weight: 600;
+      color: var(--purple);
+    }
+
+    #meal-pop form input {
+      width: 100%;
+      background-color: transparent;
+      border: none;
+      border-bottom: 2px solid #fff;
+      outline: none;
+      margin-bottom: 0.5rem;
+    }
+    #meal-pop form select, #meal-pop form select option {
+      width: 100%;
+      font-size: 1rem;
+      outline: none;
+      border: none;
+      background-color: transparent;
+    }
+
+    .nutrients-container, .cal-qual-container {
+      display: flex;
+      justify-content: space-between;
+      text-align: center;
+    }
+
+    .nutrients-container input, .cal-qual-container input {
+      text-align: center;
+    }
+
+    #meal-pop form input:focus {
+      border-bottom: 3px solid var(--pink);
+    }
+    #meal-pop form input::placeholder {
+      font-size: 1rem;
+    }
+    .btn-meal-container {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+    }
+      #meal-pop form button {
+        display: inline-block;
+        width: 10rem;
+        background: rgb(255,255,255);
+        background: linear-gradient(180deg, rgba(255,255,255,1) 0%, rgba(244,206,255,1) 100%);
+        outline: none;
+        margin: 1rem auto;
+        padding: 0.5rem 1.25rem;
+        border-radius: 1.25rem;
+        border: none;
+        font-size: 1rem;
+        font-weight: bold;
+        -webkit-box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+                box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+      }

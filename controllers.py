@@ -102,7 +102,7 @@ def meals():
 def newFood():
     valid_food = Food.validate_food(request.form)
     if not valid_food or request.form['meal_name'] == '':
-        return redirect('/mealtrack')
+        return redirect('/meals')
     else:
         log_exists = DailyLog.log_exists()
         if log_exists == False:

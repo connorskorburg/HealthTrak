@@ -115,7 +115,7 @@ body {
   background: rgb(255,255,255);
   background: linear-gradient(180deg, rgba(255,255,255,1) 0%, rgba(244,206,255,1) 100%);
 }
-.btn-container button:hover {
+.btn-container button:hover, .btn-meal-container button:hover {
   background-color: #fff;
   transform: scale(1.02);
   cursor: pointer;
@@ -158,10 +158,10 @@ body {
   cursor: pointer;
 }
 
-#log-pop-outer, #meal-pop-outer {
+#log-pop-outer {
   display: none;
   width: 100%;
-  min-height: 100vh;
+  min-height: 100%;
   position: absolute;
   top: 0;
   padding-top: 15vh;
@@ -177,14 +177,8 @@ body {
     background-color: #fff;
   }
 
-  #meal-pop {
-    color: rgba(0,0,0,0.65);
-    background: rgb(255,255,255);
-    background: linear-gradient(180deg, rgba(255,255,255,1) 0%, rgba(211,227,255,1) 100%);
-    border-radius: 0.5rem;
-  }
 
-  #log-pop #log-pop-top, #meal-pop {
+  #log-pop #log-pop-top {
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
