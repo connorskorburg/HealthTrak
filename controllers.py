@@ -59,24 +59,28 @@ def meals():
         all_meals = Meal.query.filter_by(user_id=session['user_id']).all()
 
         meals = [{
+            "id": None,
             "name": "Breakfast",
             "fat": 0,
             "protein": 0,
             "carbs": 0,
             "calories": 0
         },{
+            "id": None,
             "name": "Lunch",
             "fat": 0,
             "protein": 0,
             "carbs": 0,
             "calories": 0
         },{
+            "id": None,
             "name": "Dinner",
             "fat": 0,
             "protein": 0,
             "carbs": 0,
             "calories": 0
         },{
+            "id": None,
             "name": "Snack",
             "fat": 0,
             "protein": 0,
@@ -88,11 +92,12 @@ def meals():
             if m.created_at.astimezone().strftime('%Y-%m-%d') == local_time.strftime('%Y-%m-%d'):
                 for x in meals:
                     if m.name == x["name"]:
+                        x["id"] = m.id
                         x["fat"] = m.total_fat
                         x["protein"] = m.total_protein
                         x["carbs"] = m.total_carbs
                         x["calories"] = m.total_calories
-        return render_template('meals.html', user=user, meals=meals)
+        return render_template('meals.html', user=user, meals=meals, local_time=local_time)
 # add food item to meal
 def newFood():
     valid_food = Food.validate_food(request.form)

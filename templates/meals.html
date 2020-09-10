@@ -8,6 +8,7 @@
   <link rel="shortcut icon" href="../static/images/HealthTrak-icon.svg" type="image/x-icon">
   <link rel="stylesheet" href="{{ url_for('static', filename='/css/calendar.css') }}">
   <link rel="stylesheet" href="{{ url_for('static', filename='/css/track.css') }}">
+  <script defer src="{{ url_for('static', filename='/js/mealToggler.js') }}"></script>
 </head>
 <body>
 
@@ -29,7 +30,7 @@
     {% for m in meals %}
     <article id="{{m.name}}-content">
       
-      <header>
+      <header class="meal-header">
 
         <h3>{{ m.name }}</h3>
         <img src="../static/images/plus-icon.svg" alt="Plus Icon">
@@ -39,12 +40,66 @@
       <div class="dropdown">
       
         <p>{{ m.calories|round|int }} Calories</p>
-        <img src="../static/images/dropdown.svg" alt="Dropdown Icon">
+        <img class="dropdown-img" data-alt-src="{{ m.name }}-display" src="../static/images/dropdown.svg" alt="Dropdown Icon">
       
       </div>
       
       <div class="meal-content">
+        {% for meal in user.meals%}
+          {% if meal.created_at.astimezone().strftime('%Y-%m-%d') == local_time.strftime('%Y-%m-%d') and meal.id == m.id %}
+            {% for food in meal.food_items %}
+              {% if food.created_at.astimezone().strftime('%Y-%m-%d') == local_time.strftime('%Y-%m-%d') %}
+              <div class="{{ m.name }}-display food-content">
 
+                <header class="food-header">
+
+                  <p>{{ food.name }} </p>
+                  <div class="food-img-container">
+                    <a href="/fooditem/edit/{{ food.id }}">
+                      <img src="../static/images/edit-icon.svg" alt="Edit Icon">
+                    </a>
+                    <a href="./fooditem/delete/{{food.id}}">
+                      <img src="../static/images/close-white.svg" alt="White Close Icon">
+                    </a>
+                  </div>
+
+                </header>
+
+                <div class="calories-display">
+
+                  <p>{{ food.calories|round|int }} Calories</p>
+
+                </div>
+                  
+                <div class="food-nutrients">
+
+                  <div class="fat-content">
+
+                    <p>Fat</p>
+                    <p>{{food.fat|round|int}}g</p>
+                    
+                  </div>
+
+                  <div class="protein-content">
+
+                      <p>Protein</p>
+                      <p>{{ food.protein|round|int }}g</p>
+
+                  </div>
+
+                  <div class="carbs-content">
+
+                      <p>Carbs</p>
+                      <p>{{ food.carbs|round|int }}g</p>
+
+                  </div>
+                  
+                </div>
+              </div>
+              {% endif %}
+            {% endfor %}
+          {% endif %}
+        {% endfor %}
       
       </div>
     </article>

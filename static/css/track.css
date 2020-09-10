@@ -13,19 +13,31 @@
     display: flex;
     width: 100%;
     border-bottom: 1px solid #fff;
-    padding: 1rem;
+    padding: 1rem 1.5rem;
   }
-
-    #all-meals header img {
+  #all-meals .food-header {
+    border-top: 1px solid #fff;
+  }
+    #all-meals .food-header p {
+      width: 75%;
+      margin-right: auto;
+      text-align: left;
+    }
+    #all-meals .meal-header img, #all-meals .food-img-container {
       margin-left: auto;
     }
+    .food-img-container a {
+      text-decoration: none;
+    }
 
-    #all-meals header img:hover{
+    #all-meals .meal-header img:hover, .food-img-container img:hover{
       transform: scale(1.1) rotate(180deg);
       cursor: pointer;
       transition: all 350ms ease-in-out;
     }
-
+    .food-img-container img:first-child {
+      margin-right: 0.5rem;
+    }
   #all-meals article {
     color: #fff;
     text-align: center;
@@ -55,9 +67,11 @@
     background: rgb(54,39,254);
     background: linear-gradient(135deg, rgba(54,39,254,1) 0%, rgba(128,236,243,1) 85%);
   }
-
+  .food-content{
+    display: none;
+  }
   .dropdown{
-    padding: 1rem;
+    padding: 1rem 1.5rem;
     width: 100%;
     display: flex;
   }
@@ -71,3 +85,14 @@
       cursor: pointer;
       transition: all 300ms ease-in-out;
     }
+
+  .food-nutrients {
+    display: flex;
+    justify-content: space-between;
+    padding: 1rem 2rem;
+
+  } 
+  .calories-display {
+    padding-top: 1rem;
+    font-size: 1.15rem;
+  }

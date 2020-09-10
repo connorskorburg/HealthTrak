@@ -1,5 +1,6 @@
 let mealBtns = document.querySelectorAll('.meal p')
 let workoutBtns = document.querySelectorAll('.workout p')
+let dropdownButton = document.querySelectorAll('.dropdown-img')
 
 function toggleForm(btns){
     btns.forEach(btn => {
@@ -18,3 +19,4 @@ function toggleForm(btns){
 
 toggleForm(mealBtns);
 toggleForm(workoutBtns);
+// toggleForm(dropdownButton);
