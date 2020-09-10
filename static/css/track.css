@@ -1,5 +1,16 @@
 
 
+
+.error-container {
+  width: 100%;
+  padding:0 5%;
+  color: #ff0000;
+}
+  .meal-error {
+    font-weight: 600;
+    margin-bottom: 0.25rem;
+  }
+
 #all-meals {
   width: 100%;
   display: grid;
@@ -9,17 +20,22 @@
   margin-bottom: calc(5% + 7rem);
 }
 
-  #all-meals header{
+  #all-meals .meal-header{
     display: flex;
     width: 100%;
     border-bottom: 1px solid #fff;
     padding: 1rem 1.5rem;
   }
   #all-meals .food-header {
+    width: 100%;
+    display: flex;
+    padding: 1rem 1.5rem;
     border-top: 1px solid #fff;
   }
     #all-meals .food-header p {
-      width: 75%;
+      /* width: 75%; */
+      font-weight: 600;
+      font-size: 1.15rem;
       margin-right: auto;
       text-align: left;
     }
@@ -93,8 +109,10 @@
 
   } 
   .calories-display {
-    padding-top: 1rem;
+    padding: 0.25rem 2rem;
+    /* text-align: left; */
     font-size: 1.15rem;
+    font-weight: 600;
   }
 
 

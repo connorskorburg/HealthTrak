@@ -23,8 +23,16 @@
     </nav>
 
   </nav>
+  <div class="error-container">
 
-
+    {% with food_error = get_flashed_messages(category_filter = ["food_error"]) %}
+      {% if food_error %}
+        {% for food_err in food_error %}
+          <p class="meal-error">{{ food_err }}</p>
+        {% endfor %}
+      {% endif %}
+    {% endwith %}
+  </div>
 
   <main id="all-meals">
     {% for m in meals %}
@@ -33,7 +41,7 @@
       <header class="meal-header">
 
         <h3>{{ m.name }}</h3>
-        <img src="../static/images/plus-icon.svg" alt="Plus Icon">
+        <img class="new-meal" src="../static/images/plus-icon.svg" alt="Plus Icon">
         
       </header>
       
@@ -118,13 +126,6 @@
         <h2>Add Food</h2>
         <img id="close-meal-form" src="../static/images/close.svg" alt="Close Icon">
       </header>
-      {% with food_error = get_flashed_messages(category_filter = ["food_error"]) %}
-      {% if food_error %}
-          {% for food_err in food_error %}
-              <p class="meal-error">{{ food_err }}</p>
-          {% endfor %}
-      {% endif %}
-    {% endwith %}
       <form action="/fooditem/new" method="post">
 
         <label>
