@@ -1,0 +1,73 @@
+
+
+#all-meals {
+  width: 100%;
+  display: grid;
+  color: #fff;
+  grid-gap: 2.5% 5%;
+  padding: 5%;
+  margin-bottom: 10rem;
+}
+
+  #all-meals header{
+    display: flex;
+    width: 100%;
+    border-bottom: 1px solid #fff;
+    padding: 1rem;
+  }
+
+    #all-meals header img {
+      margin-left: auto;
+    }
+
+    #all-meals header img:hover{
+      transform: scale(1.1) rotate(180deg);
+      cursor: pointer;
+      transition: all 350ms ease-in-out;
+    }
+
+  #all-meals article {
+    color: #fff;
+    text-align: center;
+    padding: 1rem 0 1rem 0;
+    background-color: #fff;
+    box-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+    border-radius: 0.75rem;
+  }
+
+  #Breakfast-content{
+    background: rgb(143,135,249);
+    background: linear-gradient(135deg, rgba(143,135,249,1) 0%, rgba(231,63,224,1) 100%);
+  }
+
+  #Lunch-content{
+    background: rgb(236,134,207);
+    background: linear-gradient(135deg, rgba(236,134,207,1) 0%, rgba(245,192,150,1) 67%);
+  }
+
+  #Dinner-content{
+    background: rgb(69,221,241);
+    background: linear-gradient(135deg, rgba(69,221,241,1) 0%, rgb(150, 167, 245) 67%);
+
+  }
+
+  #Snack-content{
+    background: rgb(54,39,254);
+    background: linear-gradient(135deg, rgba(54,39,254,1) 0%, rgba(128,236,243,1) 85%);
+  }
+
+  .dropdown{
+    padding: 1rem;
+    width: 100%;
+    display: flex;
+  }
+
+    .dropdown img {
+      margin-left: auto;
+    }
+    
+    .dropdown img:hover {
+      transform: scale(1.25);
+      cursor: pointer;
+      transition: all 300ms ease-in-out;
+    }

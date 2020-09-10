@@ -49,6 +49,50 @@ def mealtrack():
     else:
         user = User.query.get(session['user_id'])
         return render_template('mealtrack.html', user=user)
+
+def meals():
+    if not 'user_id' in session.keys():
+        return redirect('/')
+    else:
+        user = User.query.get(session['user_id'])
+        
+        all_meals = Meal.query.filter_by(user_id=session['user_id']).all()
+
+        meals = [{
+            "name": "Breakfast",
+            "fat": 0,
+            "protein": 0,
+            "carbs": 0,
+            "calories": 0
+        },{
+            "name": "Lunch",
+            "fat": 0,
+            "protein": 0,
+            "carbs": 0,
+            "calories": 0
+        },{
+            "name": "Dinner",
+            "fat": 0,
+            "protein": 0,
+            "carbs": 0,
+            "calories": 0
+        },{
+            "name": "Snack",
+            "fat": 0,
+            "protein": 0,
+            "carbs": 0,
+            "calories": 0
+        }]
+
+        for m in all_meals:
+            if m.created_at.astimezone().strftime('%Y-%m-%d') == local_time.strftime('%Y-%m-%d'):
+                for x in meals:
+                    if m.name == x["name"]:
+                        x["fat"] = m.total_fat
+                        x["protein"] = m.total_protein
+                        x["carbs"] = m.total_carbs
+                        x["calories"] = m.total_calories
+        return render_template('meals.html', user=user, meals=meals)
 # add food item to meal
 def newFood():
     valid_food = Food.validate_food(request.form)

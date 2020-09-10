@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Meals</title>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito&display=swap" rel="stylesheet">
+  <link rel="shortcut icon" href="../static/images/HealthTrak-icon.svg" type="image/x-icon">
+  <link rel="stylesheet" href="{{ url_for('static', filename='/css/calendar.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='/css/track.css') }}">
+</head>
+<body>
+
+  <nav class="top-nav">
+
+    <nav class="top-nav-inner">
+        
+        <img src="/static/images/HealthTrak-icon.svg" alt="HealthTrak Icon">
+        <h1><span>Health</span><span>Trak</span></h1>
+        <a href="/logout">Logout</a>
+        
+    </nav>
+
+  </nav>
+
+
+
+  <main id="all-meals">
+    {% for m in meals %}
+    <article id="{{m.name}}-content">
+      
+      <header>
+
+        <h3>{{ m.name }}</h3>
+        <img src="../static/images/plus-icon.svg" alt="Plus Icon">
+        
+      </header>
+      
+      <div class="dropdown">
+      
+        <p>{{ m.calories|round|int }} Calories</p>
+        <img src="../static/images/dropdown.svg" alt="Dropdown Icon">
+      
+      </div>
+      
+      <div class="meal-content">
+
+      
+      </div>
+    </article>
+    {% endfor %}
+  </main>
+
+  <main id="meal-pop-outer">
+
+    <section id="meal-pop">
+      <h2>Hello</h2>
+    </section>
+
+  </main>
+
+
+
+
+
+
+
+
+
+
+
+
+  <nav class="side-nav">
+        
+    <div class="icons">
+        
+        <a href="/dashboard">
+            <img  src="/static/images/dash-icon.svg" alt="Dashboard Icon">
+        </a>
+    
+        <a href="/mealtrack">
+            <img src="/static/images/meals-icon.svg" alt="Meal Icon">
+        </a>
+        
+        <a href="/calendar">
+            <img src="/static/images/calendar-icon.svg" alt="Calendar Icon">
+        </a>
+        
+        <a href="/fitness">
+            <img src="/static/images/workout-icon.svg" alt="Workout Icon">
+        </a>
+        
+        <a href="/settings">
+            <img src="/static/images/settings-icon.svg" alt="Gear Icon">
+        </a>
+
+    </div>
+
+</nav>
+
+
+
+
+<nav class="bottom-nav">
+
+    <a  href="/newDash">
+        <img src="/static/images/dash-icon.svg" alt="Dashboard Icon">
+    </a>
+
+
+    <a class="active" href="#">
+        <img src="/static/images/calendar-icon.svg" alt="Calendar Icon">
+    </a>
+
+
+
+    <a href="/mealtrack">
+        <img src="/static/images/meals-icon.svg" alt="Meals Icon">
+    </a>
+
+
+    <a href="/fitness">
+        <img src="/static/images/workout-icon.svg" alt="Workout Icon">
+    </a>
+
+
+</nav>
+  
+</body>
+</html>

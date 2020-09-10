@@ -36,7 +36,6 @@ body {
   .top-nav h1 {
       margin-right: 1rem;
       align-self: center;
-      /* padding-top: 1rem; */
       padding-left: 0.25rem;
   }
   .top-nav h1 span:first-child {
@@ -86,7 +85,6 @@ body {
 #calendar-tbl {
   margin: 0 5%;
   background-color: var(--lightBlue);
-  /* margin-bottom: 5rem; */
   border-radius: 0.5rem;
   box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.2);
   width: 90%;
@@ -160,58 +158,65 @@ body {
   cursor: pointer;
 }
 
-#log-pop-outer {
+#log-pop-outer, #meal-pop-outer {
   display: none;
   width: 100%;
   min-height: 100vh;
   position: absolute;
   top: 0;
   padding-top: 15vh;
-  background-color: rgba(0, 0, 0, 0.2);
+  background-color: rgba(0, 0, 0, 0.3);
 }
 
-#log-pop {
-  width: 350px;
-  min-height: 400px;
-  border: 1px solid #ccc;
-  padding: 20px;
-  margin: 0 auto;
-  background-color: #fff;
-}
+  #log-pop, #meal-pop {
+    width: 350px;
+    min-height: 400px;
+    border: 1px solid #ccc;
+    padding: 20px;
+    margin: 0 auto;
+    background-color: #fff;
+  }
 
-#log-pop #log-pop-top {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-}
+  #meal-pop {
+    color: rgba(0,0,0,0.65);
+    background: rgb(255,255,255);
+    background: linear-gradient(180deg, rgba(255,255,255,1) 0%, rgba(211,227,255,1) 100%);
+    border-radius: 0.5rem;
+  }
 
-#log-pop #log-pop-top h3 {
-  vertical-align: top;
-  font-size: 1.35rem;
-}
+  #log-pop #log-pop-top, #meal-pop {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+  }
 
-#log-pop #log-pop-top button {
-  margin-left: auto;
-  background-color: #fff;
-  border: none;
-  outline: none;
-}
+    #log-pop #log-pop-top h3 {
+      vertical-align: top;
+      font-size: 1.35rem;
+    }
 
-#log-pop #log-pop-top button img:hover {
-  cursor: pointer;
-  transform: scale(1.04);
-}
+    #log-pop #log-pop-top button {
+      margin-left: auto;
+      background-color: #fff;
+      border: none;
+      outline: none;
+    }
 
-#log-pop .log-item {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  margin: 25px 0;
-}
+    #log-pop #log-pop-top button img:hover {
+      cursor: pointer;
+      transform: scale(1.04);
+    }
 
-#log-pop .log-item span {
-  margin-left: auto;
-}
+    #log-pop .log-item {
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: flex;
+      margin: 25px 0;
+    }
+
+    #log-pop .log-item span {
+      margin-left: auto;
+    }
 
 #calendar-tbl tr, 
 #calendar-tbl th, 
@@ -252,7 +257,6 @@ body {
 
 
 @media screen and (min-width:1100px) {
-
   .btn-container button {
     font-size: 1.25rem;
     margin-bottom: 2rem;
@@ -264,6 +268,9 @@ body {
     width: calc(90% - 5rem);
     margin-left: calc(5rem + 5%);
     margin-right: 5%;
+  }
+  #calendar-tbl td {
+    padding: 1.5% 0;
   }
   #year {
     margin-right: 5rem;
