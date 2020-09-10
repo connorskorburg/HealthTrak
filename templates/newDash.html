@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard</title>
     <link href="https://fonts.googleapis.com/css2?family=Nunito&display=swap" rel="stylesheet">
+    <link rel="shortcut icon" href="../static/images/HealthTrak-icon.svg" type="image/x-icon">
     <link rel="stylesheet" href="{{ url_for('static', filename='/css/dash.css') }}">
 </head>
 <body>
@@ -116,7 +117,7 @@
 
 
 
-    <nav id="side-nav">
+    <nav class="side-nav">
         
         <div class="icons">
             
@@ -144,25 +145,25 @@
 
     </nav>
     
-    <nav id="bottom-nav">
+    <nav class="bottom-nav">
 
         <a class="active" href="#">
             <img src="/static/images/dash-icon.svg" alt="Dashboard Icon">
         </a>
 
 
-        <a href="#">
+        <a href="/calendar">
             <img src="/static/images/calendar-icon.svg" alt="Calendar Icon">
         </a>
 
 
 
-        <a href="#">
+        <a href="/mealtrack">
             <img src="/static/images/meals-icon.svg" alt="Meals Icon">
         </a>
 
 
-        <a href="#">
+        <a href="/fitness">
             <img src="/static/images/workout-icon.svg" alt="Workout Icon">
         </a>
 

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calendar</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog==" crossorigin="anonymous" />
+    <link href="https://fonts.googleapis.com/css2?family=Nunito&display=swap" rel="stylesheet">
+    <!-- <link rel="stylesheet" href="{{ url_for('static', filename='/css/style.css') }}"> -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='/css/calendar.css') }}">
+</head>
+<body>
+
+    <nav class="top-nav">
+        <nav class="top-nav-inner">
+            <img src="/static/images/HealthTrak-icon.svg" alt="HealthTrak Icon">
+            <h1><span>Health</span><span>Trak</span></h1>
+            <a href="/logout">Logout</a>
+        </nav>
+
+    </nav>
+
+
+    <div class="container-2">
+        <div id="logs">{{ logs|tojson }}</div>
+        <table>
+            <caption>
+                <span id="month"></span>
+                <span id="year"></span>
+                <br>
+                <a href="/dashboard">Dashboard</a>
+            </caption>
+            <thead>
+                <tr>
+                    <th>Sun</th>
+                    <th>Mon</th>
+                    <th>Tues</th>
+                    <th>Wed</th>
+                    <th>Thurs</th>
+                    <th>Fri</th>
+                    <th>Sat</th>
+                </tr>
+            </thead>
+            <tbody id="cal-content"></tbody>
+        </table>
+        <div class="btn-container">
+            <button onclick=previous()>Previous</button>
+            <button onclick=next()>Next</button>
+        </div>
+    </div>
+    <div id="log-pop-outer">
+        <div id="log-pop">
+            <div id="log-pop-top">
+                <h3 id="log-date"></h3>
+                <button onclick="hideLog()"> 
+                    <!-- <i class="fas fa-times fa-2x"></i> -->
+                    <img src="../static/images/close.svg" alt="Close Icon">
+                </button>
+            </div>
+            <div class="log-item">
+                <p>Calories Burned:</p>
+                <span id="calories_burned"></span>
+            </div>
+            <div class="log-item">
+                <p>Calories Consumed:</p>
+                <span id="calories_consumed"></span>
+            </div>
+            <div class="log-item">
+                <p>Minutes Worked Out:</p>
+                <span id="minutes_worked_out"></span>
+            </div>
+            <div class="log-item">
+                <p>Total Fat:</p>
+                <span id="total_fat"></span>
+            </div>
+            <div class="log-item">
+                <p>Total Carbs:</p>
+                <span id="total_carbs"></span>
+            </div>
+            <div class="log-item">
+                <p>Total Protein:</p>
+                <span id="total_protein"></span>
+            </div>
+        </div>
+    </div>
+    <script src="{{ url_for('static', filename='/js/calendar.js') }}"></script>
+</body>
+</html>

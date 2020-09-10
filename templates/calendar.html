@@ -5,42 +5,78 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Calendar</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog==" crossorigin="anonymous" />
-    <link rel="stylesheet" href="{{ url_for('static', filename='/css/style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito&display=swap" rel="stylesheet">
+    <link rel="shortcut icon" href="../static/images/HealthTrak-icon.svg" type="image/x-icon">
+    <!-- <link rel="stylesheet" href="{{ url_for('static', filename='/css/style.css') }}"> -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='/css/calendar.css') }}">
 </head>
 <body>
-    <div class="container-2">
-        <div id="logs">{{ logs|tojson }}</div>
-        <table>
-            <caption>
-                <span id="month"></span>
-                <span id="year"></span>
-                <br>
-                <a href="/dashboard">Dashboard</a>
-            </caption>
-            <thead>
-                <tr>
-                    <th>Sun</th>
-                    <th>Mon</th>
-                    <th>Tues</th>
-                    <th>Wed</th>
-                    <th>Thurs</th>
-                    <th>Fri</th>
-                    <th>Sat</th>
-                </tr>
-            </thead>
-            <tbody id="cal-content"></tbody>
-        </table>
-        <div class="btn-container">
-            <button onclick=previous()>Previous</button>
-            <button onclick=next()>Next</button>
-        </div>
+
+    <nav class="top-nav">
+
+        <nav class="top-nav-inner">
+            
+            <img src="/static/images/HealthTrak-icon.svg" alt="HealthTrak Icon">
+            <h1><span>Health</span><span>Trak</span></h1>
+            <a href="/logout">Logout</a>
+            
+        </nav>
+
+    </nav>
+
+
+
+    <div id="logs">{{ logs|tojson }}</div>
+
+    <table id="calendar-tbl">
+
+        <caption>
+
+            <span id="month"></span>
+            <span id="year"></span>
+
+        </caption>
+
+        <thead>
+            <tr>
+                <th>S</th>
+                <th>M</th>
+                <th>T</th>
+                <th>W</th>
+                <th>T</th>
+                <th>F</th>
+                <th>S</th>
+            </tr>
+            <!-- <tr>
+                <th>Sun</th>
+                <th>Mon</th>
+                <th>Tues</th>
+                <th>Wed</th>
+                <th>Thurs</th>
+                <th>Fri</th>
+                <th>Sat</th>
+            </tr> -->
+        </thead>
+
+        <tbody id="cal-content"></tbody>
+
+    </table>
+
+
+    <div class="btn-container">
+        <button onclick=previous()>Previous</button>
+        <button onclick=next()>Next</button>
     </div>
+
+
+
     <div id="log-pop-outer">
         <div id="log-pop">
             <div id="log-pop-top">
                 <h3 id="log-date"></h3>
                 <button onclick="hideLog()"> 
-                    <i class="fas fa-times fa-2x"></i>
+                    <!-- <i class="fas fa-times fa-2x"></i> -->
+                    <img src="../static/images/close.svg" alt="Close Icon">
                 </button>
             </div>
             <div class="log-item">
@@ -69,6 +105,76 @@
             </div>
         </div>
     </div>
+
+
+
+
+    <nav class="side-nav">
+        
+        <div class="icons">
+            
+            <a href="/dashboard">
+                <img  src="/static/images/dash-icon.svg" alt="Dashboard Icon">
+            </a>
+        
+            <a href="/mealtrack">
+                <img src="/static/images/meals-icon.svg" alt="Meal Icon">
+            </a>
+            
+            <a href="/calendar">
+                <img src="/static/images/calendar-icon.svg" alt="Calendar Icon">
+            </a>
+            
+            <a href="/fitness">
+                <img src="/static/images/workout-icon.svg" alt="Workout Icon">
+            </a>
+            
+            <a href="/settings">
+                <img src="/static/images/settings-icon.svg" alt="Gear Icon">
+            </a>
+
+        </div>
+
+    </nav>
+
+
+
+
+
+
+
+
+
+
+
+
+    <nav class="bottom-nav">
+
+        <a  href="/newDash">
+            <img src="/static/images/dash-icon.svg" alt="Dashboard Icon">
+        </a>
+
+
+        <a class="active" href="#">
+            <img src="/static/images/calendar-icon.svg" alt="Calendar Icon">
+        </a>
+
+
+
+        <a href="/mealtrack">
+            <img src="/static/images/meals-icon.svg" alt="Meals Icon">
+        </a>
+
+
+        <a href="/fitness">
+            <img src="/static/images/workout-icon.svg" alt="Workout Icon">
+        </a>
+
+
+    </nav>
+
+
+
     <script src="{{ url_for('static', filename='/js/calendar.js') }}"></script>
 </body>
 </html>

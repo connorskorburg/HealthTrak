@@ -50,17 +50,15 @@ function showCal(month, year){
                 let p = document.createElement('p');
                 p.appendChild(document.createTextNode(date));
                 if(date === today.getDate() && year === today.getFullYear() && month === today.getMonth()) {
-                    td.classList.add("bg-info");
+                    td.classList.add("today");
                 }
                 parsedLogs.forEach(log => {
                     let created = new Date(log.created_at);
                     if(date === created.getDate() && year === created.getFullYear() && month === created.getMonth()){
                         td.classList.add('log-td');
-                        let button = document.createElement('button');
-                        button.setAttribute("onclick", `showLog(${log.id})`)
-                        button.classList.add('log-btn');
-                        p.appendChild(button);
-                    }  
+                        p.setAttribute("onclick", `showLog(${log.id})`);
+                        p.classList.add('log-btn');
+                    }
                 });
                 td.appendChild(p);
                 row.appendChild(td)
