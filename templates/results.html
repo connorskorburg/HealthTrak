@@ -4,31 +4,120 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Categories</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='/css/style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito&display=swap" rel="stylesheet">
+    <link rel="shortcut icon" href="../static/images/HealthTrak-icon.svg" type="image/x-icon">
+    <!-- <link rel="stylesheet" href="{{ url_for('static', filename='/css/style.css') }}"> -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='/css/calendar.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='/css/track.css') }}">
 </head>
 <body>
-    <main id="results-container">
-        <h2>Results for {{ search }}</h2>
-        <a href="/dashboard">Dashboard</a>
-        <section id="results">
-           {% for r in results %}
-           <div class="result">
-               <h3>{{ r.description }}</h3>
-               <p>Fat: {{ r.fat }}</p>
-               <p>Protein: {{ r.protein }}</p>
-               <p>Carbs: {{ r.carbs }}</p>
-               <form action="/foodQuery" method="post">
-                    <input type="hidden" name="description" value="{{ r.description }}">
-                    <input type="hidden" name="fat" value="{{ r.fat }}">
-                    <input type="hidden" name="carbs" value="{{ r.carbs }}">
-                    <input type="hidden" name="protein" value="{{ r.protein }}">
-                    <button type="submit">Add to Meal</button>
-                </form>
-               <!-- <a class="foodToggle" href="/foodQuery?fat={{r.fat}}&carbs={{r.carbs}}&protein={{r.protein}}&desc={{r.description}}">Add to Meal</a> -->
-           </div>
-           {% endfor %}
-        </section>
+
+    <nav class="top-nav">
+
+        <nav class="top-nav-inner">
+            
+            <img src="/static/images/HealthTrak-icon.svg" alt="HealthTrak Icon">
+            <h1><span>Health</span><span>Trak</span></h1>
+    
+            <section class="food-search-nav">
+    
+              <form action="/search" method="post">
+    
+                <input type="text" name="search" placeholder="Apple, Banana..">
+                <!-- <button type="submit"><img src="../static/images/search-icon.svg" alt="Search Icon"></button> -->
+                <button type="submit"></button>
+                
+              </form>
+    
+            </section>
+    
+            <a href="/logout">Logout</a>
+            
+        </nav>
+    
+    </nav>
+
+
+    <section class="search-food">
+
+    <form action="/search" method="post">
+        
+        <label>Search For More</label>
+        <input type="text" name="search" placeholder="Apple, Banana..">
+        <button type="submit"><img src="../static/images/search-icon.svg" alt="Search Icon"></button>
+
+    </form>
+
+    </section>
+
+
+
+    <main id="search-results">
+
+
     </main>
+    
+
+
+
+    <nav class="side-nav">
+        
+        <div class="icons">
+            
+            <a href="/dashboard">
+                <img  src="/static/images/dash-icon.svg" alt="Dashboard Icon">
+            </a>
+        
+            <a href="/mealtrack">
+                <img src="/static/images/meals-icon.svg" alt="Meal Icon">
+            </a>
+            
+            <a href="/calendar">
+                <img src="/static/images/calendar-icon.svg" alt="Calendar Icon">
+            </a>
+            
+            <a href="/fitness">
+                <img src="/static/images/workout-icon.svg" alt="Workout Icon">
+            </a>
+            
+            <a href="/settings">
+                <img src="/static/images/settings-icon.svg" alt="Gear Icon">
+            </a>
+    
+        </div>
+    
+    </nav>
+    
+    
+    
+    
+    <nav class="bottom-nav">
+    
+        <a  href="/newDash">
+            <img src="/static/images/dash-icon.svg" alt="Dashboard Icon">
+        </a>
+    
+    
+        <a href="/calendar">
+            <img src="/static/images/calendar-icon.svg" alt="Calendar Icon">
+        </a>
+    
+    
+    
+        <a href="/mealtrack">
+            <img src="/static/images/meals-icon.svg" alt="Meals Icon">
+        </a>
+    
+    
+        <a href="/fitness">
+            <img src="/static/images/workout-icon.svg" alt="Workout Icon">
+        </a>
+    
+    
+    </nav>
+
+
+
     <script src="{{ url_for('static', filename='/js/foodToggle.js') }}"></script>
 </body>
 </html>

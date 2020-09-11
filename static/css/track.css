@@ -10,7 +10,7 @@
     margin-bottom: 0.25rem;
   }
 
-#search-food {
+.search-food {
   margin: 2rem 5% 0 5%;
   box-shadow: 2px 2px 4px rgba(0,0,0,0.2);
   border-radius: 0.75rem;
@@ -19,7 +19,7 @@
   background: linear-gradient(180deg, rgba(255,255,255,1) 0%, rgba(211,227,255,1) 100%);
 }
 
-  #search-food input {
+  .search-food input {
     width: 100%;
     outline: none;
     display: inline-block;
@@ -29,12 +29,12 @@
     font-size: 1rem;
     padding: 0.25rem 0.5rem;
   }
-  #search-food input::placeholder {
+  .search-food input::placeholder {
     font-size: 1rem;
     background-color: #fff;
   }
 
-  #search-food form label {
+  .search-food form label {
     margin-bottom: 0.5rem;
     font-size: 1.15rem;
     font-weight: 600;
@@ -42,7 +42,7 @@
     color: var(--purple);
   }
 
-  #search-food form button{
+  .search-food form button{
     display: inline-block;
     width: 25px;
     position: relative;
@@ -53,7 +53,7 @@
 
     background-color: transparent;
   }
-  #search-food form button:hover {
+  .search-food form button:hover {
     cursor: pointer;
     transform: scale(1.05);
     transition: all 350ms ease-in-out;
@@ -268,7 +268,7 @@
 
 
 
-.meal-nutrients, #food-search-nav{
+.meal-nutrients, .food-search-nav{
   display: none;
 }
 
@@ -278,7 +278,7 @@
     grid-template-columns: 1fr 1fr;
     grid-gap: 5%;
   }
-  #search-food {
+  .search-food {
     padding: 1rem 5%;
   }
   .meal-nutrients {
@@ -295,20 +295,20 @@
     margin-left: 5rem;
     margin-bottom: 0;
   }
-  #search-food {
+  .search-food {
     display: none;
   }
-  #food-search-nav {
+  .food-search-nav {
     margin-left: 1rem;
     display: inline-block;
     margin-top: 1.15rem;
   }
-  #food-search-nav form {
+  .food-search-nav form {
     width: 14rem;
     display: flex;
 
   }
-    #food-search-nav input {
+    .food-search-nav input {
       display: inline-block;
       width: 12rem;
       outline: none;
@@ -319,13 +319,13 @@
       font-size: 1rem;
       padding: 0.25rem 0.5rem;
     }
-    #food-search-nav input::placeholder {
+    .food-search-nav input::placeholder {
       font-size: 1rem;
       color: white;
       font-size: 1rem;
       background-color: var(--lightBlue);
     }
-    #food-search-nav form button{
+    .food-search-nav form button{
       background: url('/static/images/search-icon.svg') no-repeat;
       position: relative;
       right: 1.75rem;
@@ -337,7 +337,7 @@
       border: none;
       outline: none;
     }
-    #food-search-nav form button:hover {
+    .food-search-nav form button:hover {
       cursor: pointer;
       transform: scale(1.02);
       box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);

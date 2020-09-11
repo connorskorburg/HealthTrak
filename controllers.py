@@ -167,7 +167,7 @@ def searchResults():
         )
         result = response.json()
         results = []
-        for i in range(0,5):
+        for i in range(0,9):
             for y in result['foods'][i]['foodNutrients']:
                 if y['nutrientName'] == 'Total lipid (fat)':
                     fat = y['value']
