@@ -111,7 +111,7 @@ body {
   background: rgb(255,255,255);
   background: linear-gradient(180deg, rgba(255,255,255,1) 0%, rgba(211,227,255,1) 100%);
 }
-.btn-container button:last-child {
+.btn-container button:last-child, #food-update-form {
   background: rgb(255,255,255);
   background: linear-gradient(180deg, rgba(255,255,255,1) 0%, rgba(244,206,255,1) 100%);
 }
@@ -251,6 +251,12 @@ body {
 
 
 @media screen and (min-width:1100px) {
+  #food-update-form {
+    margin: 2rem auto;
+  }
+  #food-update-form input, #food-update-form::placeholder, #food-update-form label{
+    font-size: 1.15rem;
+  }
   .btn-container button {
     font-size: 1.25rem;
     margin-bottom: 2rem;
@@ -307,6 +313,93 @@ body {
 
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* styling for edit form */
+#food-update-form {
+  padding: 1.5rem;
+  width: 350px;
+  margin: 1rem auto;
+  border-radius: 1rem;
+  box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.2);
+}
+  #food-update-form h2 {
+    color: var(--purple);
+    margin-bottom: 1rem;
+  }
+  #food-update-form label {
+    color: var(--purple);
+    font-weight: 600;
+  }
+  #food-update-form input {
+    width: 100%;
+    background-color: transparent;
+    border: none;
+    border-bottom: 2px solid #fff;
+    outline: none;
+    margin-bottom: 0.75rem;
+  }
+  #food-update-form input:focus {
+    border-bottom: 3px solid var(--pink);
+  }
+  #food-update-form input::placeholder {
+    font-size: 1rem;
+  }
+  .btn-food-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+    .btn-food-container button {
+      border: none;
+      outline: none;
+      display: inline-block;
+      background: rgb(255,255,255);
+      background: linear-gradient(180deg, rgba(255,255,255,1) 0%, rgba(211,227,255,1) 100%);
+      margin: 0.75rem auto;
+      padding: 0.75rem 1.25rem;
+      border-radius: 1.25rem;
+      font-size: 1rem;
+      font-weight: bold;
+      -webkit-box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+              box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+    }
+    .btn-food-container button:hover {
+      cursor: pointer;
+      transform: scale(1.02);
+      box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.2);
+      transition: all 350ms ease-in-out;
+    }
+    
+
+
+
+
+/* styling for edit form */
+
+
+
+
+
+
+
+
+
+
+
 
 
 

@@ -227,8 +227,6 @@ def updateFood():
             food.protein = request.form['protein']
             food.calories = request.form['calories']
             food.quantity = request.form['quantity']
-            food.public = request.form['public']
-            food.category = request.form['category']
             db.session.commit()
             return redirect('/dashboard')
         else:
