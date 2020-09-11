@@ -12,7 +12,7 @@
 </head>
 <body>
 
-  <div id="json-logs"></div>
+
   
   <nav class="top-nav">
 
@@ -20,11 +20,25 @@
         
         <img src="/static/images/HealthTrak-icon.svg" alt="HealthTrak Icon">
         <h1><span>Health</span><span>Trak</span></h1>
+
+        <section id="food-search-nav">
+
+          <form action="/search" method="post">
+
+            <input type="text" name="search" placeholder="Apple, Banana..">
+            <!-- <button type="submit"><img src="../static/images/search-icon.svg" alt="Search Icon"></button> -->
+            <button type="submit"></button>
+            
+          </form>
+
+        </section>
+
         <a href="/logout">Logout</a>
         
     </nav>
 
   </nav>
+
   <div class="error-container">
 
     {% with food_error = get_flashed_messages(category_filter = ["food_error"]) %}
@@ -58,6 +72,33 @@
         <img class="new-meal" src="../static/images/plus-icon.svg" alt="Plus Icon">
         
       </header>
+
+      <section class="meal-nutrients" >
+        
+        <div>
+
+          <p>Fat</p>
+          <p>{{ m.fat|round|int }}g</p>
+          
+        </div>
+
+        <div>
+
+          <p>Protein</p>
+          <p>{{ m.protein|round|int }}g</p>
+
+        </div>
+
+        <div>
+
+          <p>Carbs</p>
+          <p>{{ m.carbs|round|int }}</p>
+
+        </div>
+
+
+
+      </section>
       
       <div class="dropdown">
       

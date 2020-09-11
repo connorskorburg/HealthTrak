@@ -97,6 +97,7 @@ def meals():
                         x["protein"] = m.total_protein
                         x["carbs"] = m.total_carbs
                         x["calories"] = m.total_calories
+
         return render_template('meals.html', user=user, meals=meals, local_time=local_time)
 # add food item to meal
 def newFood():

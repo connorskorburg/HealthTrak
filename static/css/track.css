@@ -1,10 +1,5 @@
 
 
-
-#json-logs {
-  display: none;
-}
-
 .error-container {
   width: 100%;
   padding:0 5%;
@@ -29,12 +24,14 @@
     outline: none;
     display: inline-block;
     border: none;
+    background-color: #fff;
     border-radius: 0.75rem;
     font-size: 1rem;
     padding: 0.25rem 0.5rem;
   }
   #search-food input::placeholder {
     font-size: 1rem;
+    background-color: #fff;
   }
 
   #search-food form label {
@@ -48,7 +45,6 @@
   #search-food form button{
     display: inline-block;
     width: 25px;
-
     position: relative;
     bottom: 1.75rem;
     left: calc(100% - 27px);
@@ -267,3 +263,85 @@
         -webkit-box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
                 box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
       }
+
+
+
+
+
+.meal-nutrients, #food-search-nav{
+  display: none;
+}
+
+
+@media screen and (min-width:750px) {
+  #all-meals {
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 5%;
+  }
+  #search-food {
+    padding: 1rem 5%;
+  }
+  .meal-nutrients {
+    display: flex;
+    padding: 2rem;
+    border-bottom: 1px solid #fff;
+    justify-content: space-between;
+  }
+}
+
+@media screen and (min-width:1100px) {
+  #all-meals {
+    width: calc(100% - 5rem);
+    margin-left: 5rem;
+    margin-bottom: 0;
+  }
+  #search-food {
+    display: none;
+  }
+  #food-search-nav {
+    margin-left: 1rem;
+    display: inline-block;
+    margin-top: 1.15rem;
+  }
+  #food-search-nav form {
+    width: 14rem;
+    display: flex;
+
+  }
+    #food-search-nav input {
+      display: inline-block;
+      width: 12rem;
+      outline: none;
+      color: white;
+      border: none;
+      background-color: var(--lightBlue);
+      border-radius: 1rem;
+      font-size: 1rem;
+      padding: 0.25rem 0.5rem;
+    }
+    #food-search-nav input::placeholder {
+      font-size: 1rem;
+      color: white;
+      font-size: 1rem;
+      background-color: var(--lightBlue);
+    }
+    #food-search-nav form button{
+      background: url('/static/images/search-icon.svg') no-repeat;
+      position: relative;
+      right: 1.75rem;
+      bottom: 0.15rem;
+      margin-top: 0.25rem;
+      border-radius: 50%;
+      width: 25px;
+      height: 25px;
+      border: none;
+      outline: none;
+    }
+    #food-search-nav form button:hover {
+      cursor: pointer;
+      transform: scale(1.02);
+      box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+      transition: all 350ms ease-in-out;
+    }
+
+}
