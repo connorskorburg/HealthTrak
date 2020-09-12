@@ -168,7 +168,7 @@
 
 
 
-#meal-pop-outer {
+#meal-pop-outer, .search-pop-outer {
   display: none;
   width: 100%;
   min-height: 100vh;
@@ -179,22 +179,29 @@
   background-color: rgba(0, 0, 0, 0.3);
 }
 
+.search-pop {
+  width: 350px;
+  min-height: 400px;
+  border: 1px solid #ccc;
+  padding: 20px;
+  margin: 0 auto;
+  background-color: #fff;
+}
 
-
-#meal-pop {
+#meal-pop, .search-pop {
   color: rgba(0,0,0,0.65);
   background: rgb(255,255,255);
   background: linear-gradient(180deg, rgba(255,255,255,1) 0%, rgba(211,227,255,1) 100%);
   border-radius: 0.5rem;
 }
-  #meal-pop header {
+  #meal-pop header, .search-pop header {
     display: flex;
     margin-bottom: 1rem;
   }
-    #meal-pop header img {
+    #meal-pop header img, .search-pop header img {
       margin-left: auto;
     }
-    #meal-pop header img:hover {
+    #meal-pop header img:hover, .search-pop header img:hover {
       cursor: pointer;
       transform: scale(1.1);
       transition: all 350ms ease-in-out;
@@ -203,15 +210,15 @@
 
 
 
-  #meal-pop form {
+  #meal-pop form, .search-pop form {
     width: 100%;
   }
-    #meal-pop form label {
+    #meal-pop form label, .search-pop label {
       font-weight: 600;
       color: var(--purple);
     }
 
-    #meal-pop form input {
+    #meal-pop form input, .search-pop form input {
       width: 100%;
       background-color: transparent;
       border: none;
@@ -219,7 +226,8 @@
       outline: none;
       margin-bottom: 0.5rem;
     }
-    #meal-pop form select, #meal-pop form select option {
+    #meal-pop form select, #meal-pop form select option, 
+    .search-pop form select, .search-pop form select option {
       width: 100%;
       font-size: 1rem;
       outline: none;
@@ -237,10 +245,10 @@
       text-align: center;
     }
 
-    #meal-pop form input:focus {
+    #meal-pop form input:focus, .search-pop form input:focus {
       border-bottom: 3px solid var(--pink);
     }
-    #meal-pop form input::placeholder {
+    #meal-pop form input::placeholder, .search-pop form input::placeholder {
       font-size: 1rem;
     }
     .btn-meal-container {
@@ -248,7 +256,7 @@
       display: flex;
       justify-content: center;
     }
-      #meal-pop form button {
+      #meal-pop form button, .search-pop form button {
         display: inline-block;
         width: 10rem;
         background: rgb(255,255,255);

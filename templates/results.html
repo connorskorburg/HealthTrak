@@ -89,17 +89,98 @@
             
             <div class="btn-search-container">
 
-                <button>Add</button>
+                <button data-alt-cls="result-btn-{{ r.id }}" class="res-btn">Add</button>
 
             </div>
             
 
         </article>
 
+
+
+
+
+       
+
         {% endfor %}
 
     </main>
     
+
+
+
+    <main class="search-pop-outer">
+
+        <section class="search-pop">
+
+            <header>
+
+                <h3>Add Food</h3>
+                <img id="close-meal-form" src="../static/images/close.svg" alt="Close Icon">
+
+            </header>
+
+
+
+            <form action="/fooditem/new" method="post">
+
+                <label>
+                  Food Name
+                  <input type="text" name="food_name" >
+                </label>
+                <div class="cal-qual-container">
+                  
+                  <label>
+                    Quantity
+                    <input type="number" id="break" value="1" name="quantity">
+                  </label>
+                  
+                  <label>
+                    Calories
+                    <input type="number" name="calories" value="0">
+                  </label>
+                  
+                </div>
+                
+                <div class="nutrients-container">
+        
+                  <label>
+                    Carbs
+                    <input class="carbs" type="number" value="0" name="carbs">
+                  </label>
+                  
+                  <label>
+                    Fat
+                    <input class="fat" type="number" value="0" name="fat">
+                  </label>
+                  <label>
+                    Protein
+                    <input class="protein" type="number" value="0" name="protein">
+                  </label>
+                  
+                </div>
+                
+                <label>Meal</label>
+        
+                <select name="meal_name">
+        
+                  <option value="Breakfast">Breakfast</option>
+                  <option value="Lunch">Lunch</option>
+                  <option value="Dinnner">Dinnner</option>
+                  <option value="Snack">Snack</option>
+        
+                </select>
+        
+                <div class="btn-meal-container">
+                  <button type="submit">Add Food</button>
+                </div>
+        
+              </form>
+
+        </section>
+
+    </main>
+
 
 
 
