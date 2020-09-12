@@ -89,7 +89,7 @@
             
             <div class="btn-search-container">
 
-                <button data-alt-cls="result-btn-{{ r.id }}" class="res-btn">Add</button>
+                <button data-alt-cls="{{ r.id }}" class="res-btn">Add</button>
 
             </div>
             
@@ -116,17 +116,17 @@
             <header>
 
                 <h3>Add Food</h3>
-                <img id="close-meal-form" src="../static/images/close.svg" alt="Close Icon">
+                <img id="close-res-form" src="../static/images/close.svg" alt="Close Icon">
 
             </header>
 
 
 
-            <form action="/fooditem/new" method="post">
+            <form class="results-form" action="/fooditem/new" method="post">
 
                 <label>
                   Food Name
-                  <input type="text" name="food_name" >
+                  <input class="desc-results" type="text" name="food_name" >
                 </label>
                 <div class="cal-qual-container">
                   
@@ -137,7 +137,7 @@
                   
                   <label>
                     Calories
-                    <input type="number" name="calories" value="0">
+                    <input class="cal-results" step="any" min="0" type="number" name="calories">
                   </label>
                   
                 </div>
@@ -146,16 +146,16 @@
         
                   <label>
                     Carbs
-                    <input class="carbs" type="number" value="0" name="carbs">
+                    <input class="carbs-results" step="any" min="0" type="number" name="carbs">
                   </label>
                   
                   <label>
                     Fat
-                    <input class="fat" type="number" value="0" name="fat">
+                    <input class="fat-results" step="any" min="0" type="number" name="fat">
                   </label>
                   <label>
                     Protein
-                    <input class="protein" type="number" value="0" name="protein">
+                    <input class="protein-results" step="any" min="0" type="number" name="protein">
                   </label>
                   
                 </div>

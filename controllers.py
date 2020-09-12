@@ -22,6 +22,7 @@ def dashboard():
             db.session.add(new_log)
             db.session.commit()
         user = User.query.get(session['user_id'])
+        # session['log'] = log_exists
         return render_template('dashboard.html', user=user, local_time=local_time, log_exists=log_exists)
 # register user 
 def register():
@@ -447,6 +448,8 @@ def newDash():
             db.session.commit()
         user = User.query.get(session['user_id'])
         
+        # session['log'] = log_exists
+
         all_meals = Meal.query.filter_by(user_id=session['user_id']).all()
 
         meals = [{
