@@ -12,6 +12,8 @@
 </head>
 <body>
 
+    <div id="hidden-results">{{ results|tojson }}</div>
+
     <nav class="top-nav">
 
         <nav class="top-nav-inner">
@@ -54,6 +56,47 @@
 
     <main id="search-results">
 
+        {% for r in results %}
+        
+        <article class="result-display">
+            
+            <h3>{{ r.description }}</h3>
+
+            <section class="search-nutrients" >
+
+                <div>
+                    
+                    <p>Fat</p>
+                    <p>{{ r.fat }}</p>
+
+                </div>
+
+                <div>
+
+                    <p>Protein</p>
+                    <p>{{ r.protein }}</p>
+
+                </div>
+
+                <div>
+
+                    <p>Carbs</p>
+                    <p>{{ r.carbs }}</p>
+
+                </div>
+
+            </section>
+            
+            <div class="btn-search-container">
+
+                <button>Add</button>
+
+            </div>
+            
+
+        </article>
+
+        {% endfor %}
 
     </main>
     

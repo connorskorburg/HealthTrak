@@ -132,7 +132,7 @@
     background: rgb(54,39,254);
     background: linear-gradient(135deg, rgba(54,39,254,1) 0%, rgba(128,236,243,1) 85%);
   }
-  .food-content{
+  .food-content, #hidden-results{
     display: none;
   }
   .dropdown{
@@ -345,3 +345,70 @@
     }
 
 }
+
+
+
+/* search results styling  */
+
+#search-results {
+  margin-bottom: 5rem;
+  display: grid;
+  width: 100%;
+  padding: 2rem 5%;
+  grid-gap: 2rem 5%;
+}
+  .result-display {
+    color: rgba(0, 0, 0, 0.8);
+    padding: 1rem 0;
+    box-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+    border-radius: 0.75rem;
+    background: rgb(255,255,255);
+    background: linear-gradient(180deg, rgba(255,255,255,1) 0%, rgba(244,206,255,1) 100%);
+  }
+  .result-display h3 {
+    padding: 0 2rem 1rem 2rem;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.8);
+  }
+  .search-nutrients {
+    padding: 0.75rem 0;
+    /* font-size: 1rem; */
+
+    display: flex;
+    align-content: space-between;
+    text-align: center;
+    /* padding: 0.75rem 10%; */
+  }
+    .search-nutrients div {
+      flex: 1;
+    }
+    .btn-search-container {
+      padding: 1rem 2rem 0rem 2rem;
+      border-top: 1px solid rgba(0,0,0,0.8);
+    }
+      .btn-search-container button {
+        width: 100%;
+        font-weight: 600;
+        font-size: 1rem;
+        padding: 0.5rem;
+        border: none;
+        outline: none;
+        background: rgb(255,255,255);
+        background: linear-gradient(180deg, rgba(255,255,255,1) 0%, rgba(211,227,255,1) 100%);
+        border-radius: 0.25rem;
+        box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+      }
+
+      .btn-search-container button:hover {
+        cursor: pointer;
+        transform: scale(1.02);
+        box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.2);
+        transition: all 350ms ease-in-out;
+      }
+
+
+
+
+
+
+
+/* search results styling  */

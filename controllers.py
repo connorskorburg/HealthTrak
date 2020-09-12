@@ -176,6 +176,7 @@ def searchResults():
                 if y['nutrientName'] == 'Protein':
                     protein = y['value']
             results.append({
+                "id": i + 1,
                 "description":  result['foods'][i]['description'],
                 "protein":  protein,
                 "fat":  fat,
