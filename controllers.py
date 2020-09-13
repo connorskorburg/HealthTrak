@@ -11,6 +11,12 @@ def index():
     return render_template('home.html')
 def home():
     return render_template('index.html')
+
+def renderLogin():
+    pass
+
+def renderRegister():
+    pass
 # render dashboard
 def dashboard():
     if not 'user_id' in session.keys():
@@ -22,6 +28,8 @@ def dashboard():
             db.session.add(new_log)
             db.session.commit()
         user = User.query.get(session['user_id'])
+        print(log_exists)
+        print(request.url_rule)
         # session['log'] = log_exists
         return render_template('dashboard.html', user=user, local_time=local_time, log_exists=log_exists)
 # register user 
