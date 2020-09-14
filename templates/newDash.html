@@ -7,6 +7,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Nunito&display=swap" rel="stylesheet">
     <link rel="shortcut icon" href="../static/images/HealthTrak-icon.svg" type="image/x-icon">
     <link rel="stylesheet" href="{{ url_for('static', filename='/css/dash.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='/css/track.css') }}">
 </head>
 <body>
 
@@ -56,7 +57,7 @@
             </div>
             <div class="calories-container">
                 <p>{{ m.calories|round|int }} Calories</p>
-                <a href="/mealtrack">
+                <a class="toggleMeal" href="#">
                     <img src="/static/images/plus-icon.svg" alt="Plus Icon">
                 </a>
             </div>
@@ -169,6 +170,79 @@
 
 
     </nav>
+
+
+
+    <main id="dash-meal-outer" class="meal-pop-outer">
+
+        <section class="meal-pop">
+          <header>
+            <h2>Add Food</h2>
+            <img id="close-dash-form" src="../static/images/close.svg" alt="Close Icon">
+          </header>
+          <form action="/fooditem/new" method="post">
+    
+            <label>
+              Food Name
+              <input type="text" name="food_name" >
+            </label>
+            <div class="cal-qual-container">
+              
+              <label>
+                Quantity
+                <input type="number" id="break" value="1" name="quantity">
+              </label>
+              
+              <label>
+                Calories
+                <input type="number" name="calories" value="0">
+              </label>
+              
+            </div>
+            
+            <div class="nutrients-container">
+    
+              <label>
+                Carbs
+                <input class="carbs" type="number" value="0" name="carbs">
+              </label>
+              
+              <label>
+                Fat
+                <input class="fat" type="number" value="0" name="fat">
+              </label>
+              <label>
+                Protein
+                <input class="protein" type="number" value="0" name="protein">
+              </label>
+              
+            </div>
+            
+            <label>Meal</label>
+    
+            <select name="meal_name">
+    
+              <option value="Breakfast">Breakfast</option>
+              <option value="Lunch">Lunch</option>
+              <option value="Dinnner">Dinnner</option>
+              <option value="Snack">Snack</option>
+    
+            </select>
+    
+            <div class="btn-meal-container">
+              <button type="submit">Add Food</button>
+            </div>
+    
+          </form>
+    
+        </section>
+    
+      </main>
+
+
+
+
+
 
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js" integrity="sha512-s+xg36jbIujB2S2VKfpGmlC3T5V2TF3lY48DX7u2r9XzGzgPsa6wTpOQA7J9iffvdeBN0q9tKzRxVxw1JviZPg==" crossorigin="anonymous"></script>

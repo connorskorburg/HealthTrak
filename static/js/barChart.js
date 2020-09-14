@@ -38,3 +38,19 @@ let myBarChart = new Chart(ctx2, {
         }
     }
 });
+
+
+
+
+// dash toggler 
+
+const toggleBtns =  document.querySelectorAll('.toggleMeal');
+const mealForm = document.getElementById('dash-meal-outer');
+
+document.getElementById('close-dash-form').addEventListener('click', () => mealForm.style.display = 'none');
+
+toggleBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+        mealForm.style.display = 'block';
+    })
+})
