@@ -25,7 +25,7 @@
       </nav>
 
 
-    <form id="food-update-form" action="/updateFood" method="post">
+    <form class="update-form" action="/updateFood" method="post">
         <h2>Update {{ food.name }}</h2>
         {% with food_error = get_flashed_messages(category_filter = ["food_error"]) %}
             {% if food_error %}

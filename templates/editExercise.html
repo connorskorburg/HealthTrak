@@ -4,35 +4,126 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Edit Exercise</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='/css/style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='/css/calendar.css') }}">
 </head>
 <body>
-    <h1>Welcome, {{ user.first_name }}</h1>
-    <div id="edit-exercise">
-        <a href="/dashboard">Dashboard</a>
-        <form action="/updateExercise" method="post">
-            <h2>Update Exercise</h2>
-            {% with ex2_error = get_flashed_messages(category_filter = ["ex2_error"]) %}
-                {% if ex2_error %}
-                    {% for ex_err in ex2_error %}
-                        <p class="error">{{ ex_err }}</p>
-                    {% endfor %}
-                {% endif %}
-            {% endwith %}
-            <input type="hidden" name="exercise_id" value="{{ exercise.id }}">
-            <input type="hidden" name="category" value="{{ exercise.category }}">
-            <span>Name:</span>
+    <!-- <div id="edit-exercise"> -->
+
+    <nav class="top-nav">
+
+        <nav class="top-nav-inner">
+            
+            <img src="/static/images/HealthTrak-icon.svg" alt="HealthTrak Icon">
+            <h1><span>Health</span><span>Trak</span></h1>
+    
+    
+            <a href="/logout">Logout</a>
+            
+        </nav>
+    
+    </nav>
+
+
+
+    <form class="update-form" action="/updateExercise" method="post">
+        <h2>Update Exercise</h2>
+        {% with ex2_error = get_flashed_messages(category_filter = ["ex2_error"]) %}
+            {% if ex2_error %}
+                {% for ex_err in ex2_error %}
+                    <p class="error">{{ ex_err }}</p>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+        <input type="hidden" name="exercise_id" value="{{ exercise.id }}">
+        <input type="hidden" name="category" value="{{ exercise.category }}">
+        
+        <label>
+            Exercise Name
             <input type="text" name="exercise_name" value="{{ exercise.name }}">
-            <span>Duration:</span>
-            <span>Hours</span>
+        </label>
+        
+        <label>
+            Hours
             <input type="number" name="hours" value="{{ hours }}">
-            <span>Minutes</span>
+        </label>
+
+        <label>
+            Minutes
             <input type="number" name="minutes" value="{{ minutes }}">
-            <span>Estimated Calories Burned:</span>
+        </label>
+
+        <label>
+            Calories Burned
             <input type="number" name="calories_burned" value="{{ exercise.calories_burned }}">
+        </label>
+        
+        <div class="btn-food-container">
             <button type="submit">Update Exercise</button>
-        </form>
-    </div>
+        </div>
+        
+    </form>
+    <!-- </div> -->
+
+
+    <nav class="side-nav">
+        
+        <div class="icons">
+            
+            <a href="/dashboard">
+                <img  src="/static/images/dash-icon.svg" alt="Dashboard Icon">
+            </a>
+        
+            <a href="/mealtrack">
+                <img src="/static/images/meals-icon.svg" alt="Meal Icon">
+            </a>
+            
+            <a href="/calendar">
+                <img src="/static/images/calendar-icon.svg" alt="Calendar Icon">
+            </a>
+            
+            <a href="/fitness">
+                <img src="/static/images/workout-icon.svg" alt="Workout Icon">
+            </a>
+            
+            <a href="/settings">
+                <img src="/static/images/settings-icon.svg" alt="Gear Icon">
+            </a>
+    
+        </div>
+    
+    </nav>
+    
+    
+    
+    
+    <nav class="bottom-nav">
+    
+        <a  href="/newDash">
+            <img src="/static/images/dash-icon.svg" alt="Dashboard Icon">
+        </a>
+    
+    
+        <a href="/calendar">
+            <img src="/static/images/calendar-icon.svg" alt="Calendar Icon">
+        </a>
+    
+    
+    
+        <a href="/mealtrack">
+            <img src="/static/images/meals-icon.svg" alt="Meals Icon">
+        </a>
+    
+    
+        <a href="/fitness">
+            <img src="/static/images/workout-icon.svg" alt="Workout Icon">
+        </a>
+    
+    
+    </nav>
+
+
+
+
     <script src="{{ url_for('static', filename='/js/editEx.js') }}"></script>
 </body>
 </html>
