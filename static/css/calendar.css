@@ -476,16 +476,22 @@ body {
 
 #workout-content{
   padding: 2rem 5%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
   #new-workout-form {
+    width: 100%;
+    margin: 0 auto;
     box-shadow: 2px 2px 4px rgba(0,0,0,0.2);
     border-radius: 0.75rem;
     padding: 1rem;
+    max-width: 750px;
     background: rgb(255,255,255);
     background: linear-gradient(180deg, rgba(255,255,255,1) 0%, rgba(211,227,255,1) 100%);
   }
 
-  #new-workout-form button {
+  #new-workout-form button, .ex-form button {
     font-size: 1rem;
     width: 100%;
     border: none;
@@ -506,10 +512,144 @@ body {
     transition: all 350ms ease-in-out;
   }
 
+  .workout {
+    max-width: 750px;
+    margin: 1rem auto;
+    background: rgb(236,134,207);
+    background: linear-gradient(135deg, rgba(236,134,207,1) 0%, rgba(245,192,150,1) 67%);
+    margin-top: 1rem;
+    border-radius: 0.75rem;
+    color: #fff;
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+  }
 
+  .workout a:hover {
+    transform: scale(1.05);
+    cursor: pointer;
+    transition: all 350ms ease-in-out;
+  }
+  
+  .workout ul li {
+    border-bottom: 1px solid #fff;
+    list-style-type: none;
+  }
 
+  .ex-content {
+    display: flex;
+    text-align: center;
+    flex-direction: space-between;
+    font-size: 1.15rem;
+    padding: 1rem 1.5rem;
+  }
 
+  .workout ul li article {
+    flex: 1;
+  }
 
+  .workout section {
+    padding-bottom: 1rem;
+    display: flex;
+    justify-content: space-evenly;
+  }
 
+  .workout section a {
+    text-decoration: none;
+  }
 
+.workouts {
+  margin-bottom: 5rem;
+}
+
+#lifting-div, #other-div {
+  display: none;
+}
+
+  .ex-form {
+    padding: 1rem;
+  }
+  .ex-form select {
+    width: 100%;
+    background-color: transparent;
+    outline: none;
+    border: none;
+    border-bottom: 1px solid #fff;
+    margin-bottom: 0.5rem;
+
+    color: #fff;
+  }
+    .ex-form option {
+      font-size: 1rem;
+      background-color: #000;
+    }
+  .ex-form input {
+    width: 100%;
+    display: block;
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+    background-color: transparent;
+    border: none;
+    outline: none;
+    color: #fff;
+    border-bottom: 1px solid #fff;
+  }
+  .ex-form input:focus {
+    border-bottom: 2px solid var(--pink);
+  }
+  .ex-form textarea:focus {
+    outline: 2px solid var(--pink);
+  }
+  .ex-form input::placeholder {
+    color: #fff;
+  }
+
+  .ex-form label {
+    font-weight: 600;
+    color: var(--purple);
+  }
+  .ex-form textarea {
+    outline: none;
+    border: none;
+    resize: none;
+    width: 100%;
+  }
+  .flex {
+    width: 100%;
+    padding: 1rem;
+    display: flex;
+    justify-content: center;
+  }
+  .duration-flex {
+    display: flex;
+  }
+    .duration-flex label {
+      flex: 1;
+    }
+  .add-ex {
+    width: 100%;
+    font-size: 1rem;
+    box-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+    border-radius: 0.75rem;
+    padding: 0.5rem 1rem;
+    font-weight: 600;
+    color: #000;
+    text-align: center;
+    background: rgb(255,255,255);
+    background: linear-gradient(180deg, rgba(255,255,255,1) 0%, rgba(211,227,255,1) 100%);
+  }
+  .add-ex:hover {
+    transform: scale(1.01);
+    cursor: pointer;
+    box-shadow: 3px 3px 6px rgba(0,0,0,0.2);
+    transition: all 350ms ease-in-out;
+  }
+  /* .ex-form button {
+    width: 100%;
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+    font-weight: 600;
+    border: none;
+    outline: none;
+    border-radius: 0.75rem;
+
+  } */
 /* fitness page */

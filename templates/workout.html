@@ -65,77 +65,144 @@
             
             <div class="workout">
                 
-                <h3>{{ w.name }}</h3>
-                
-                <a href="/workout/delete/{{ w.id }}">Delete Workout</a>
-                
+                <header>
+                    
+                    <h3>{{ w.name }}</h3>
+                    <a href="/workout/delete/{{ w.id }}"><img src="../static/images/close-white.svg" alt="White Close Icon"></a>
+                    
+                </header>
+
                 <ul>
                     {% for ex in w.exercises %}
-                    <li>{{ ex.name }}</li>
+                    <li>
+                        <div class="ex-content">
+
+                            <article>
+                                <p>Exercise</p>
+                                <p>{{ ex.name }}</p>
+                            </article>
+                            
+                            <article>
+                                <p>Duration</p>
+                                <p>{{ ex.duration|round|int }} Min</p>
+                            </article>
+                            
+                            <article>
+                                <p>Cals Burned</p>
+                                <p>{{ ex.calories_burned|round|int }}</p>
+                            </article>
+
+                        </div>
+
+                        <section>
+
+                            <a href="/exercise/edit/{{ ex.id }}">
+                                
+                                <img src="../static/images/edit-icon.svg" alt="Edit Icon">
+
+                            </a>
+
+                            <a href="/exercise/delete/{{ ex.id }}">
+                            
+                                <img src="../static/images/close-white.svg" alt="White Close Icon">
+
+                            </a>
+
+                        </section>
+                            
+                    </li>
                     {% endfor%}
                 </ul>
+
+                <div class="flex">
+
+                    <p data-alt-src='{{ w.name }}' class="add-ex">Add Exercise</p>
+                </div>
                 
-                <p data-alt-src='{{ w.name }}'>Add Exercise</p>
-                
-                <form id='{{ w.name }}' action="/exercise/new" method="post">
+                <form class="ex-form" id='{{ w.name }}' action="/exercise/new" method="post">
                     
                     <input type="hidden" name="workout_id" value="{{ w.id }}">
                     
-                    <input type="text" name="exercise_name" placeholder="Exercise Name">
-                    
-                    <span>Duration</span>
-                    
-                    <input type="number" name="hour" placeholder="Hour">
-                    
-                    <input type="number" name="minutes" placeholder="Minutes">
-                    
-                    <span>Category</span>
-                    
-                    
-                    <select id="workout_category" name="category">
+                    <label>
+                        Exercise Name
+                        <input type="text" name="exercise_name">
+                    </label>
+
+                    <section class="duration-flex">
+
+                        <label>
+                            Hour
+                            <input type="number" name="hour">
+                        </label>
                         
-                        <option value="running">Running</option>
+                        <label>
+                            Min
+                            <input type="number" name="minutes">
+                        </label>
                         
-                        <option value="walking">Walking</option>
-                        
-                        <option value="cycling">Cycling</option>
-                        
-                        <option value="weight_lifting">Weight Lifting</option>
-                        
-                        <option value="other">Other</option>
-                    </select>
+                    </section>
                     
+                    <label>
+                        Category
+                        <select id="workout_category" name="category">
+                            
+                            <option value="running">Running</option>
+                            
+                            <option value="walking">Walking</option>
+                            
+                            <option value="cycling">Cycling</option>
+                            
+                            <option value="weight_lifting">Weight Lifting</option>
+                            
+                            <option value="other">Other</option>
+                        </select>
+                        
+                    </label>
+
                     <div id="pace-div">
                         
-                        <span>Miles:</span>
-                        
-                        <input type="number" value="1" name="miles">
-                        
+                        <label>
+                            Miles:
+                            <input type="number" value="1" name="miles">
+                        </label>
+
                     </div>
                     
                     <div id="lifting-div">
                         
-                        <span>Sets:</span>
-                        
-                        <input type="number" value="1" name="sets">
-                        
-                        <span>Reps:</span>
-                        
-                        <input type="number" value="1" name="reps">
+                        <label>
+                            Sets:
+                            <input type="number" value="1" name="sets">
+                        </label>
+                            
+                        <label>
+                            Reps:
+                            <input type="number" value="1" name="reps">
+                        </label>
                         
                     </div>
-                    
+                        
                     <div id="other-div">
-                        
-                        <span>Description:</span>
-                        
-                        <textarea name="desc"></textarea>
+
+                        <label>
+                            Description:
+                            <textarea name="desc"></textarea>
+                        </label>
                         
                     </div>
+                        
+                    <label>
+                        Calories Burned
+                        <input type="number" name="calories_burned">
+                    </label>
+                        
+
+                        
+                        
                     
-                    <input type="number" name="calories_burned" placeholder="Estimated Calories Burned">
-                    
-                    <button type="submit">Add Exercise</button>
+                    <div class="btn-meal-container">
+                        <button type="submit">Add To Workout</button>
+                    </div>
                     
                 </form>
                 
