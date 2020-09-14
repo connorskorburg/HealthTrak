@@ -329,6 +329,8 @@ body {
 
 
 /* styling for edit form */
+
+
 #food-update-form {
   padding: 1.5rem;
   width: 350px;
@@ -426,20 +428,6 @@ body {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 @media screen and (min-width: 300px) and (max-width:1100px) {
   .bottom-nav {
       display: flex;
@@ -476,3 +464,52 @@ body {
 
 
 /* import from dash.css */
+
+
+
+
+
+/* fitness page */
+.workouts .workout form {
+  display: none;
+}
+
+#workout-content{
+  padding: 2rem 5%;
+}
+  #new-workout-form {
+    box-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+    border-radius: 0.75rem;
+    padding: 1rem;
+    background: rgb(255,255,255);
+    background: linear-gradient(180deg, rgba(255,255,255,1) 0%, rgba(211,227,255,1) 100%);
+  }
+
+  #new-workout-form button {
+    font-size: 1rem;
+    width: 100%;
+    border: none;
+    outline: none;
+    border-radius: 0.75rem;
+    margin-top: 0.75rem;
+    padding: 0.5rem 0;
+    font-weight: 600;
+    background: rgb(255, 255, 255);
+    background: linear-gradient(180deg, rgba(255,255,255,1) 0%, rgba(244,206,255,1) 100%);
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+  }
+
+  #new-workout-form button:hover {
+    transform: scale(1.02);
+    box-shadow: 3px 3px 6px rgba(0,0,0,0.2);
+    cursor: pointer;
+    transition: all 350ms ease-in-out;
+  }
+
+
+
+
+
+
+
+/* fitness page */

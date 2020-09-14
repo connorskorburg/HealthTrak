@@ -4,75 +4,221 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Fitness</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='/css/style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito&display=swap" rel="stylesheet">
+    <link rel="shortcut icon" href="../static/images/HealthTrak-icon.svg" type="image/x-icon">
+    <link rel="stylesheet" href="{{ url_for('static', filename='/css/calendar.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='/css/track.css') }}">
 </head>
 <body>
-    <h1>Welcome, {{ user.first_name }}</h1>
-    <a href="/dashboard">Dashboard</a>
-    <form action="/workout/new" method="post">
-        <h3>Create New Workout</h3>
-        {% with workout_error = get_flashed_messages(category_filter = ["workout_error"]) %}
+
+    <nav class="top-nav">
+
+        <nav class="top-nav-inner">
+            
+            <img src="/static/images/HealthTrak-icon.svg" alt="HealthTrak Icon">
+            <h1><span>Health</span><span>Trak</span></h1>
+            <a href="/logout">Logout</a>
+            
+        </nav>
+
+    </nav>
+
+
+
+
+
+    <main id="workout-content">
+
+        
+        <form id="new-workout-form" action="/workout/new" method="post">
+            
+            <h3>Create New Workout</h3>
+            
+            {% with workout_error = get_flashed_messages(category_filter = ["workout_error"]) %}
             {% if workout_error %}
-                {% for work_err in workout_error %}
-                    <p class="error">{{ work_err }}</p>
-                {% endfor %}
+            {% for work_err in workout_error %}
+            <p class="error">{{ work_err }}</p>
+            {% endfor %}
             {% endif %}
-        {% endwith %}
-        <input type="text" name="workout_name" placeholder="Name">
-        <button type="submit">Create Workout</button>
-    </form>
-    <div class="workouts">
-        {% with ex_error = get_flashed_messages(category_filter = ["ex_error"]) %}
+            {% endwith %}
+            
+            <input type="text" name="workout_name" placeholder="Workout Name">
+            
+            <button type="submit">Create Workout</button>
+            
+            
+        </form>
+        
+        
+        <div class="workouts">
+            
+            
+            {% with ex_error = get_flashed_messages(category_filter = ["ex_error"]) %}
             {% if ex_error %}
-                {% for ex_err in ex_error %}
-                    <p class="error">{{ ex_err }}</p>
-                {% endfor %}
+            {% for ex_err in ex_error %}
+            <p class="error">{{ ex_err }}</p>
+            {% endfor %}
             {% endif %}
-        {% endwith %}
-        {% for w in workouts %}
+            {% endwith %}
+            {% for w in workouts %}
+            
+            
             <div class="workout">
+                
                 <h3>{{ w.name }}</h3>
+                
                 <a href="/workout/delete/{{ w.id }}">Delete Workout</a>
+                
                 <ul>
                     {% for ex in w.exercises %}
-                        <li>{{ ex.name }}</li>
+                    <li>{{ ex.name }}</li>
                     {% endfor%}
                 </ul>
+                
                 <p data-alt-src='{{ w.name }}'>Add Exercise</p>
+                
                 <form id='{{ w.name }}' action="/exercise/new" method="post">
+                    
                     <input type="hidden" name="workout_id" value="{{ w.id }}">
+                    
                     <input type="text" name="exercise_name" placeholder="Exercise Name">
+                    
                     <span>Duration</span>
+                    
                     <input type="number" name="hour" placeholder="Hour">
+                    
                     <input type="number" name="minutes" placeholder="Minutes">
+                    
                     <span>Category</span>
+                    
+                    
                     <select id="workout_category" name="category">
+                        
                         <option value="running">Running</option>
+                        
                         <option value="walking">Walking</option>
+                        
                         <option value="cycling">Cycling</option>
+                        
                         <option value="weight_lifting">Weight Lifting</option>
+                        
                         <option value="other">Other</option>
                     </select>
+                    
                     <div id="pace-div">
+                        
                         <span>Miles:</span>
+                        
                         <input type="number" value="1" name="miles">
+                        
                     </div>
+                    
                     <div id="lifting-div">
+                        
                         <span>Sets:</span>
+                        
                         <input type="number" value="1" name="sets">
+                        
                         <span>Reps:</span>
+                        
                         <input type="number" value="1" name="reps">
+                        
                     </div>
+                    
                     <div id="other-div">
+                        
                         <span>Description:</span>
+                        
                         <textarea name="desc"></textarea>
+                        
                     </div>
+                    
                     <input type="number" name="calories_burned" placeholder="Estimated Calories Burned">
+                    
                     <button type="submit">Add Exercise</button>
+                    
                 </form>
+                
             </div>
-        {% endfor %}
-    </div>
+            
+            {% endfor %}
+            
+        </div>
+        
+    </main>
+
+
+
+
+
+
+
+    <nav class="side-nav">
+        
+        <div class="icons">
+            
+            <a href="/dashboard">
+                <img  src="/static/images/dash-icon.svg" alt="Dashboard Icon">
+            </a>
+        
+            <a href="/mealtrack">
+                <img src="/static/images/meals-icon.svg" alt="Meal Icon">
+            </a>
+            
+            <a href="/calendar">
+                <img src="/static/images/calendar-icon.svg" alt="Calendar Icon">
+            </a>
+            
+            <a href="/fitness">
+                <img src="/static/images/workout-icon.svg" alt="Workout Icon">
+            </a>
+            
+            <a href="/settings">
+                <img src="/static/images/settings-icon.svg" alt="Gear Icon">
+            </a>
+
+        </div>
+
+    </nav>
+
+
+
+
+
+
+
+
+
+
+
+
+    <nav class="bottom-nav">
+
+        <a  href="/newDash">
+            <img src="/static/images/dash-icon.svg" alt="Dashboard Icon">
+        </a>
+
+
+        <a class="active" href="#">
+            <img src="/static/images/calendar-icon.svg" alt="Calendar Icon">
+        </a>
+
+
+
+        <a href="/mealtrack">
+            <img src="/static/images/meals-icon.svg" alt="Meals Icon">
+        </a>
+
+
+        <a href="/fitness">
+            <img src="/static/images/workout-icon.svg" alt="Workout Icon">
+        </a>
+
+
+    </nav>
+
+
+
     <script src="{{ url_for('static', filename='/js/app.js') }}"></script>
     <script src="{{ url_for('static', filename='/js/workout.js') }}"></script>
 </body>

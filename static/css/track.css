@@ -19,7 +19,7 @@
   background: linear-gradient(180deg, rgba(255,255,255,1) 0%, rgba(211,227,255,1) 100%);
 }
 
-  .search-food input {
+  .search-food input, #new-workout-form input {
     width: 100%;
     outline: none;
     display: inline-block;
@@ -29,12 +29,12 @@
     font-size: 1rem;
     padding: 0.25rem 0.5rem;
   }
-  .search-food input::placeholder {
+  .search-food input::placeholder, #new-workout-form input::placeholder {
     font-size: 1rem;
     background-color: #fff;
   }
 
-  .search-food form label {
+  .search-food form label, #new-workout-form h3 {
     margin-bottom: 0.5rem;
     font-size: 1.15rem;
     font-weight: 600;
