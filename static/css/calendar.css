@@ -158,11 +158,11 @@ body {
   cursor: pointer;
 }
 
-#log-pop-outer {
+#log-pop-outer{
   display: none;
   width: 100%;
   min-height: 100%;
-  position: absolute;
+  position: fixed;
   top: 0;
   padding-top: 15vh;
   background-color: rgba(0, 0, 0, 0.3);

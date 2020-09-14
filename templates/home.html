@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://fonts.googleapis.com/css2?family=Nunito&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{{ url_for('static', filename='/css/index.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='/css/track.css') }}">
     <link rel="shortcut icon" href="../static/images/HealthTrak-icon.svg" type="image/x-icon">
     <script defer src="{{ url_for('static', filename='/js/toggler.js') }}"></script>
     <title>HealthTrak Home</title>
@@ -20,8 +21,8 @@
             <h1><span>Health</span><span>Trak</span></h1>
           
             <section>
-                <a href="#">Login</a>
-                <a href="#">Sign Up</a>
+                <a id="login-button" href="#">Login</a>
+                <a id="reg-button" href="#">Sign Up</a>
             </section>
 
             <img id="hamburger" src="../static/images/hamburger.svg" alt="Hamburger Icon">
@@ -31,8 +32,8 @@
     </nav>
 
     <nav id="home-nav-mobile">
-        <a href="#">Login</a>
-        <a href="#">Sign Up</a>
+        <a id="login-mobile" href="#">Login</a>
+        <a id="reg-mobile" href="#">Sign Up</a>
     </nav>
 
 
@@ -127,5 +128,138 @@
         </section>
 
     </main>
+
+
+
+
+    <main id="login-pop-outer">
+
+        <section id="login-pop">
+
+            <header>
+                
+                <h2>Login</h2>
+                <img id="close-login-form" src="../static/images/close.svg" alt="Close Icon">
+              
+            </header>
+
+            <form action="/login" method="post">
+                <label>
+                    Email
+                    <input type="text" name="email">
+                </label>
+                <label>
+                    Password
+                    <input type="password" name="password">
+                </label>
+                <div class="btn-meal-container">
+                    <button type="submit">Login</button>
+                </div>
+            </form>
+
+        </section>
+
+    </main>
+
+
+
+    <main id="reg-pop-outer">
+
+        <section id="reg-pop">
+
+            <header>
+                <h2>Register</h2>
+                <img id="close-reg-form" src="../static/images/close.svg" alt="Close Icon">
+            </header>
+
+            <form action="/register" method="post">
+                
+                <label>
+                    First Name
+                    <input type="text" name="first_name">
+                </label>
+
+                <label>
+                    Last Name
+                    <input type="text" name="last_name">
+                </label>
+
+                <label>
+                    Email
+                    <input type="text" name="email">
+                </label>
+
+                <div class="reg-form-container">
+                
+                    <label class="flex-50">
+                        Age
+                        <input type="number" name="age" min="0">
+                    </label>
+                    <label class="flex-50">
+                        Sex
+                        <select name="sex">
+                            <option value="1">Male</option>
+                            <option value="2">Female</option>
+                        </select>
+                    </label>
+                </div>
+
+                <p class="hw">Height & Weight</p>
+                
+                <div class="reg-form-container ta-center">
+                    <label>
+                        Feet
+                        <input type="number" name="feet" min="0">
+                    </label>
+                    
+                    <label>
+                        Inches
+                        <input type="number" name="inches" min="0">
+                    </label>
+                    
+                    <label>
+                        Weight
+                        <input type="number" name="weight" min="0">
+                    </label>
+                </div>
+
+                <label>
+                    Activity Level
+                    <select name="activity">
+                        <option value="1.2">Little or No Exercise</option>
+                        <option value="1.375">Exercise 1-3 Days a Week</option>
+                        <option value="1.55">Exercise 3-5 Days a Week</option>
+                        <option value="1.725">Exercise 6-7 Days a Week</option>
+                        <option value="1.9">Exercise/Sports or 2x Training Everyday</option>
+                    </select>
+                </label>
+
+                <label>
+                    Password
+                    <input type="password" name="password" >
+                </label>
+
+                <label>
+                    Confirm Password
+                    <input type="password" name="confirm_password" >
+                </label>
+
+                <div class="btn-meal-container">
+                    <button type="submit">Register</button>
+                </div>
+
+            </form>
+
+
+
+        </section>
+
+
+
+
+    </main>
+
+
+    <script src="{{ url_for('static', filename='/js/homeToggler.js') }}"></script>
 </body>
 </html>

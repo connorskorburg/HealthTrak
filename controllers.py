@@ -11,12 +11,6 @@ def index():
     return render_template('home.html')
 def home():
     return render_template('index.html')
-
-def renderLogin():
-    pass
-
-def renderRegister():
-    pass
 # render dashboard
 def dashboard():
     if not 'user_id' in session.keys():

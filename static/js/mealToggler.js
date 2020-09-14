@@ -1,6 +1,7 @@
 
 let mealBtns = document.querySelectorAll('.new-meal');
 let mealForm = document.getElementById('meal-pop-outer');
+
 console.log(mealBtns);
 
 mealBtns.forEach(mealBtn => {
@@ -12,6 +13,7 @@ mealBtns.forEach(mealBtn => {
 document.getElementById('close-meal-form').addEventListener('click', () => {
   mealForm.style.display = 'none';
 })
+
 
 
 let dropdownButton = document.querySelectorAll('.dropdown-img')
