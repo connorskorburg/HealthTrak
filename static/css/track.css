@@ -321,13 +321,17 @@
   grid-gap: 2rem 5%;
 }
   .result-display {
-    /* color: rgba(0, 0, 0, 0.8); */
-    color: #fff;
+    color: rgba(0, 0, 0, 0.8);
+    /* color: #fff; */
     padding: 1rem 0;
     box-shadow: 2px 2px 4px rgba(0,0,0,0.2);
     border-radius: 0.75rem;
-    background: rgb(54,39,254);
-    background: linear-gradient(135deg, rgba(54,39,254,1) 0%, rgba(128,236,243,1) 85%);
+    /* background: rgb(143,135,249); */
+    /* background: linear-gradient(135deg, rgba(143,135,249,1) 0%, rgba(231,63,224,1) 100%); */
+    background: rgb(255,255,255);
+    background: linear-gradient(180deg, rgba(255,255,255,1) 0%, rgba(244,206,255,1) 100%);
+    /* background: rgb(54,39,254);
+    background: linear-gradient(135deg, rgba(54,39,254,1) 0%, rgba(128,236,243,1) 85%); */
     /* background: rgb(255,255,255); */
     /* background: linear-gradient(180deg, rgba(255,255,255,1) 0%, rgba(244,206,255,1) 100%); */
   }
@@ -405,6 +409,10 @@
 }
 
 @media screen and (min-width:1100px) {
+  .error-container {
+    width: 100%;
+    padding:0 5% 0 calc(5% + 5rem);
+  }
   #all-meals,#workout-content {
     width: calc(100% - 5rem);
     margin-left: 5rem;
@@ -472,5 +480,5 @@
 
 
 #reg-pop-outer{
-  display: block;
+  display: none;
 }

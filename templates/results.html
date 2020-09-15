@@ -6,7 +6,6 @@
     <title>Categories</title>
     <link href="https://fonts.googleapis.com/css2?family=Nunito&display=swap" rel="stylesheet">
     <link rel="shortcut icon" href="../static/images/HealthTrak-icon.svg" type="image/x-icon">
-    <!-- <link rel="stylesheet" href="{{ url_for('static', filename='/css/style.css') }}"> -->
     <link rel="stylesheet" href="{{ url_for('static', filename='/css/calendar.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='/css/track.css') }}">
 </head>
@@ -26,7 +25,6 @@
               <form action="/search" method="post">
     
                 <input type="text" name="search" placeholder="Apple, Banana..">
-                <!-- <button type="submit"><img src="../static/images/search-icon.svg" alt="Search Icon"></button> -->
                 <button type="submit"></button>
                 
               </form>
@@ -188,11 +186,11 @@
         
         <div class="icons">
             
-            <a href="/dashboard">
+            <a href="/newDash">
                 <img  src="/static/images/dash-icon.svg" alt="Dashboard Icon">
             </a>
         
-            <a href="/mealtrack">
+            <a href="/meals">
                 <img src="/static/images/meals-icon.svg" alt="Meal Icon">
             </a>
             
@@ -228,7 +226,7 @@
     
     
     
-        <a href="/mealtrack">
+        <a href="/meals">
             <img src="/static/images/meals-icon.svg" alt="Meals Icon">
         </a>
     

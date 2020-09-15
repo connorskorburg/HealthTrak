@@ -193,7 +193,9 @@ body {
 #workouts-finished{
     display: none;
 }
-
+.active {
+    background-color: #a27bfb;
+}
 
 
 @media screen and (min-width:300px) and (max-width:499px){
@@ -239,9 +241,6 @@ body {
         background-color: #a27bfb;
         cursor: pointer;
         transition: all 400ms ease-in-out;
-    }
-    .active {
-        background-color: #a27bfb;
     }
 
     .bottom-nav img {
