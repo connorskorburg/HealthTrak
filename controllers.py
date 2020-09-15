@@ -497,3 +497,22 @@ def newDash():
 
 
         return render_template('newDash.html', user=user, local_time=local_time, log=log_exists, meals=meals, workout_count=workout_count)
+
+
+
+def settings():
+    if not 'user_id' in session.keys():
+        return redirect('/')
+    else:
+        return render_template('settings.html')
+
+def updateSettings():
+    if not 'user_id' in session.keys():
+        return redirect('/')
+    else:
+        print(request)
+        return redirect('/settings')
+
+
+def reg():
+    return render_template('reg.html')

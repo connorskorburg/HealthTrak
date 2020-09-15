@@ -364,3 +364,24 @@
             font-size: 1.5rem;
         }
 }
+
+
+@media screen and (min-height: 550px) and (min-width:500px) {
+    #reg-pop {
+        width: 450px !important;
+    }
+    #reg-pop form {
+        display: flex;
+    }
+        #reg-pop form section:first-child {
+            /* padding-top: 1.85rem; */
+            padding-right: 10px;
+            border-right: 2px solid var(--pink);
+        }
+        #reg-pop form section:last-child {
+            padding-left: 10px;
+        }
+            #reg-pop form section:last-child select {
+                padding-bottom: 0.5rem;
+            }
+}

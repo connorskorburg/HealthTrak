@@ -238,12 +238,9 @@ class Exercise(db.Model):
         if profanity.contains_profanity(user_data['exercise_name']) == True:
             is_valid = False
             flash("Please Enter an Appropriate Exercise Name", "ex2_error");
-        if user_data['hours'] == '' or float(user_data['hours']) < 1:
+        if (user_data['hours'] == '' or float(user_data['hours']) < 1) and (user_data['minutes'] == '' or float(user_data['minutes']) < 1):
             is_valid = False
-            flash("Please Enter Hours", "ex2_error")
-        if user_data['minutes'] == '' or float(user_data['minutes']) < 1:
-            is_valid = False
-            flash("Please Enter Minutes", "ex2_error")
+            flash("Please Enter Duration", "ex2_error")
         return is_valid 
     @classmethod
     def valid_ex(cls, user_data):

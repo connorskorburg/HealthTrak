@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Edit Exercise</title>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito&display=swap" rel="stylesheet">
+    <link rel="shortcut icon" href="/static/images/HealthTrak-icon.svg" type="image/x-icon">
     <link rel="stylesheet" href="{{ url_for('static', filename='/css/calendar.css') }}">
 </head>
 <body>
@@ -30,7 +32,7 @@
         {% with ex2_error = get_flashed_messages(category_filter = ["ex2_error"]) %}
             {% if ex2_error %}
                 {% for ex_err in ex2_error %}
-                    <p class="error">{{ ex_err }}</p>
+                    <p class="meal-error">{{ ex_err }}</p>
                 {% endfor %}
             {% endif %}
         {% endwith %}

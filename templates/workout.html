@@ -33,14 +33,25 @@
         <form id="new-workout-form" action="/workout/new" method="post">
             
             <h3>Create New Workout</h3>
-            
-            {% with workout_error = get_flashed_messages(category_filter = ["workout_error"]) %}
-            {% if workout_error %}
-            {% for work_err in workout_error %}
-            <p class="error">{{ work_err }}</p>
-            {% endfor %}
-            {% endif %}
-            {% endwith %}
+
+                {% with workout_error = get_flashed_messages(category_filter = ["workout_error"]) %}
+                    {% if workout_error %}
+                        {% for work_err in workout_error %}
+                            <p class="meal-error">{{ work_err }}</p>
+                        {% endfor %}
+                    {% endif %}
+                {% endwith %}
+
+
+                {% with ex_error = get_flashed_messages(category_filter = ["ex_error"]) %}
+                    {% if ex_error %}
+                        {% for ex_err in ex_error %}
+                            <p class="meal-error">{{ ex_err }}</p>
+                        {% endfor %}
+                    {% endif %}
+                {% endwith %}
+
+
             
             <input type="text" name="workout_name" placeholder="Workout Name">
             
@@ -51,15 +62,7 @@
         
         
         <div class="workouts">
-            
-            
-            {% with ex_error = get_flashed_messages(category_filter = ["ex_error"]) %}
-            {% if ex_error %}
-            {% for ex_err in ex_error %}
-            <p class="error">{{ ex_err }}</p>
-            {% endfor %}
-            {% endif %}
-            {% endwith %}
+
             {% for w in workouts %}
             
             

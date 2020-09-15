@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/css2?family=Nunito&display=swap" rel="stylesheet">
+  <link rel="shortcut icon" href="../static/images/HealthTrak-icon.svg" type="image/x-icon">
+  <link rel="stylesheet" href="{{ url_for('static', filename='/css/calendar.css') }}">
+  <title>Settings</title>
+</head>
+<body>
+
+  <nav class="top-nav">
+
+    <nav class="top-nav-inner">
+        
+        <img src="/static/images/HealthTrak-icon.svg" alt="HealthTrak Icon">
+        <h1><span>Health</span><span>Trak</span></h1>
+        <a href="/logout">Logout</a>
+        
+    </nav>
+
+  </nav>
+
+
+  <form class="update-form" action="/updateSettings" method="post">
+    <h2>Update Settings</h2>
+
+    <label>
+        
+        <input type="text" name="exercise_name">
+    </label>
+    
+    <label>
+        Hours
+        <input type="number" name="hours" >
+    </label>
+
+    <label>
+        Minutes
+        <input type="number" name="minutes">
+    </label>
+
+    <label>
+        Calories Burned
+        <input type="number" name="calories_burned">
+    </label>
+    
+    <div class="btn-food-container">
+        <button type="submit">Update Exercise</button>
+    </div>
+    
+</form>
+
+
+  <nav class="side-nav">
+        
+    <div class="icons">
+        
+        <a href="/newDash">
+            <img  src="/static/images/dash-icon.svg" alt="Dashboard Icon">
+        </a>
+    
+        <a href="/meals">
+            <img src="/static/images/meals-icon.svg" alt="Meal Icon">
+        </a>
+        
+        <a href="/calendar">
+            <img src="/static/images/calendar-icon.svg" alt="Calendar Icon">
+        </a>
+        
+        <a href="/fitness">
+            <img src="/static/images/workout-icon.svg" alt="Workout Icon">
+        </a>
+        
+        <a href="/settings">
+            <img src="/static/images/settings-icon.svg" alt="Gear Icon">
+        </a>
+
+    </div>
+
+</nav>
+
+
+
+
+
+
+
+
+
+
+
+
+<nav class="bottom-nav">
+
+    <a  href="/newDash">
+        <img src="/static/images/dash-icon.svg" alt="Dashboard Icon">
+    </a>
+
+
+    <a  href="/calendar">
+        <img src="/static/images/calendar-icon.svg" alt="Calendar Icon">
+    </a>
+
+
+
+    <a href="/meals">
+        <img src="/static/images/meals-icon.svg" alt="Meals Icon">
+    </a>
+
+
+    <a href="/fitness">
+        <img src="/static/images/workout-icon.svg" alt="Workout Icon">
+    </a>
+
+
+</nav>
+
+
+
+
+
+    
+
+
+</nav>
+</body>
+</html>

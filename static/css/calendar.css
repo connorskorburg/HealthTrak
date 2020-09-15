@@ -1,5 +1,14 @@
 /* this is styling from dashboard */
-
+.error-container {
+  width: 100%;
+  padding:0 5%;
+  color: #ff0000;
+}
+  .meal-error {
+    color: #ff0000;
+    font-weight: 600;
+    margin-bottom: 0.25rem;
+  }
 
 *{
   margin: 0;
@@ -348,7 +357,7 @@ body {
     color: var(--purple);
     font-weight: 600;
   }
-  .update-form input {
+  .update-form input, .update-form select {
     width: 100%;
     background-color: transparent;
     border: none;
@@ -356,7 +365,7 @@ body {
     outline: none;
     margin-bottom: 0.75rem;
   }
-  .update-form input:focus {
+  .update-form input:focus, .update-form select:focus {
     border-bottom: 3px solid var(--pink);
   }
   .update-form input::placeholder {
@@ -644,14 +653,140 @@ body {
     box-shadow: 3px 3px 6px rgba(0,0,0,0.2);
     transition: all 350ms ease-in-out;
   }
-  /* .ex-form button {
-    width: 100%;
-    padding: 0.5rem 1rem;
-    font-size: 1rem;
-    font-weight: 600;
-    border: none;
-    outline: none;
-    border-radius: 0.75rem;
 
-  } */
 /* fitness page */
+
+
+
+
+
+
+
+
+
+
+
+/* settings page */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* settings page */
+
+
+/* reg form */
+.hw {
+  text-align: center;
+  font-weight: 600;
+  padding: 0.25rem;
+  color: var(--pink);
+}
+.ta-center {
+  text-align: center;
+}
+.flex-50 {
+  flex: 1;
+}
+#sex {
+  border: none;
+}
+#reg {
+  margin-bottom: 0;
+}
+#reg h3 {
+  color: var(--pink);
+  padding-bottom: 0.5rem;
+}
+.reg-form-container {
+  display: flex;
+  align-items: baseline;
+}
+  #reg header img {
+    margin-left: auto;
+    align-self: flex-start;
+  }
+
+
+  .btn-meal-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+    #reg button {
+      display: inline-block;
+      width: 10rem;
+      background: rgb(255,255,255);
+      background: linear-gradient(180deg, rgba(255,255,255,1) 0%, rgba(212,228,255,1) 100%);
+      outline: none;
+      margin: 1rem auto;
+      padding: 0.5rem 1.25rem;
+      border-radius: 1.25rem;
+      border: none;
+      font-size: 1rem;
+      font-weight: bold;
+      -webkit-box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+              box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+    }
+
+  @media screen and (min-width:300px) and (max-width: 500px) {
+    #reg input, #reg select, #reg select option, #reg label, .hw {
+      font-size: 0.85rem;
+    }
+    #reg input {
+      background-color: transparent;
+      margin-bottom: 0.25rem;
+    }
+  }
+
+
+
+  @media screen and (min-width:501px) and (max-width:1099px) {
+    #age {
+      padding-bottom: .05rem;
+    }
+    #reg {
+      margin-bottom: 1rem;
+    }
+  }
+
+
+  @media screen and (min-width:1100px) {
+    #sex {
+      border-bottom: 2px solid #fff;
+    }
+    #reg label {
+      margin-bottom: 1.25rem;
+    }
+    #reg .flex-container{
+      display: flex;
+    } 
+
+    #reg {
+      padding: 1.5rem 2rem;
+      width: 750px;
+    }
+    .flex-container section {
+      flex: 1;
+    }
+    .flex-container section:first-child {
+      padding-right: 2rem;
+    }
+    .flex-container section:last-child {
+      padding-left: 2rem;
+    }
+  }
+/* reg form */

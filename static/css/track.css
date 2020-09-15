@@ -6,6 +6,7 @@
   color: #ff0000;
 }
   .meal-error {
+    color: #ff0000;
     font-weight: 600;
     margin-bottom: 0.25rem;
   }
@@ -322,39 +323,27 @@
 }
   .result-display {
     color: rgba(0, 0, 0, 0.8);
-    /* color: #fff; */
     padding: 1rem 0;
     box-shadow: 2px 2px 4px rgba(0,0,0,0.2);
     border-radius: 0.75rem;
-    /* background: rgb(143,135,249); */
-    /* background: linear-gradient(135deg, rgba(143,135,249,1) 0%, rgba(231,63,224,1) 100%); */
     background: rgb(255,255,255);
     background: linear-gradient(180deg, rgba(255,255,255,1) 0%, rgba(244,206,255,1) 100%);
-    /* background: rgb(54,39,254);
-    background: linear-gradient(135deg, rgba(54,39,254,1) 0%, rgba(128,236,243,1) 85%); */
-    /* background: rgb(255,255,255); */
-    /* background: linear-gradient(180deg, rgba(255,255,255,1) 0%, rgba(244,206,255,1) 100%); */
   }
   .result-display h3 {
     padding: 0 2rem 1rem 2rem;
-    /* border-bottom: 1px solid rgba(0, 0, 0, 0.8); */
     border-bottom: 1px solid #fff;
   }
   .search-nutrients {
     padding: 0.75rem 0;
-    /* font-size: 1rem; */
-
     display: flex;
     align-content: space-between;
     text-align: center;
-    /* padding: 0.75rem 10%; */
   }
     .search-nutrients div {
       flex: 1;
     }
     .btn-search-container {
       padding: 1rem 2rem 0rem 2rem;
-      /* border-top: 1px solid rgba(0,0,0,0.8); */
       border-top: 1px solid #fff;
     }
       .btn-search-container button {
@@ -370,7 +359,7 @@
         box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
       }
 
-      .btn-search-container button:hover, #login-pop form button:hover {
+      .btn-search-container button:hover, #login-pop form button:hover, .btn-meal-container button:hover {
         cursor: pointer;
         transform: scale(1.02);
         box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.2);
