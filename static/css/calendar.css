@@ -695,6 +695,13 @@ body {
   padding: 0.25rem;
   color: var(--pink);
 }
+.hw-bg {
+  text-align: center;
+  font-weight: 600;
+  padding: 0.25rem;
+  color: var(--pink);
+  font-size: 1.15rem;
+}
 .ta-center {
   text-align: center;
 }
@@ -790,3 +797,9 @@ body {
     }
   }
 /* reg form */
+
+.success {
+  background-color: rgb(162, 216, 162);
+  color: rgb(15, 56, 15);
+  padding: 0.5rem 0;
+}

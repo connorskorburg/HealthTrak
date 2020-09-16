@@ -537,13 +537,26 @@ def settings():
     if not 'user_id' in session.keys():
         return redirect('/')
     else:
-        return render_template('settings.html')
+        user = User.query.get(session['user_id'])
+        user_feet = int(float(user.height) / float(12))
+        print(user_feet)
+        user_inches = int(float(user.height) % float(12))
+        print(user_inches)
+        return render_template('settings.html', user=user, user_feet=user_feet, user_inches=user_inches)
 
 def updateSettings():
     if not 'user_id' in session.keys():
         return redirect('/')
     else:
-        print(request)
+        print(request.form)
+        valid_settings = User.validate_settings(request.form)
+        if valid_settings:
+            user = User.query.get(session['user_id'])
+            user.height = float((12 * int(request.form['feet'])) + int(request.form['inches']))
+            user.weight = float(request.form['weight'])
+            user.daily_calories = float(request.form['daily_calories'])
+            db.session.commit()
+            flash('User Information has been successfully updated!', 'success_msg')
         return redirect('/settings')
 
 

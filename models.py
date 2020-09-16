@@ -155,7 +155,22 @@ class User(db.Model):
             else:
                 flash("Password Did Not Match", "login_error")
                 return user
-
+    @classmethod 
+    def validate_settings(cls, user_data):
+        is_valid = True
+        if float(user_data['activity']) != 1.2 and float(user_data['activity']) != 1.375 and float(user_data['activity']) != 1.55 and float(user_data['activity']) != 1.725 and float(user_data['activity']) != 1.9:
+            is_valid = False 
+            flash("Please Select Activity Level", "settings_error")
+        if request.form['feet'] == '' or request.form['inches'] == '':
+            is_valid = False
+            flash("Please Enter a Valid Height", "settings_error")
+        if len(user_data['weight']) < 1:
+            is_valid = False 
+            flash("Please Enter a Vaild Weight", "settings_error")    
+        if len(user_data['daily_calories']) < 1 or user_data['daily_calories'] == '':
+            is_valid = False
+            flash("Please Enter a Valid Entry for Daily Calories", "settings_error")
+        return is_valid
 class DailyLog(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     calories_consumed = db.Column(db.Float, default=0)
