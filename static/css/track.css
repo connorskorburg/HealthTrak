@@ -160,7 +160,6 @@
   } 
   .calories-display {
     padding: 0.25rem 2rem;
-    /* text-align: left; */
     font-size: 1.15rem;
     font-weight: 600;
   }
@@ -405,7 +404,7 @@
   #all-meals,#workout-content {
     width: calc(100% - 5rem);
     margin-left: 5rem;
-    margin-bottom: 0;
+    margin-bottom: 1rem;
   }
   .workouts {
     margin-bottom: 0;

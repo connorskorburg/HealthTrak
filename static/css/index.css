@@ -227,6 +227,30 @@
 
 
 
+
+#mail-card {
+    display: none;
+    padding-bottom: 1rem;
+    background-color: var(--lightBlue);
+
+    width: 100%;
+    /* display: flex; */
+    justify-content: center;
+}
+    #mail-card article {
+        padding: 1rem;
+        background-color: #000;
+        border-radius: 0.75rem;
+        box-shadow: 3px 3px 6px rgba(0,0,0,0.2);
+        width: 350px;
+        text-align: center;
+    }
+        #mail-card article h3, #mail-card article h4 {
+            padding: 0.5rem 1rem;
+            color: #fff;
+        }
+
+
 @media screen and (min-width:750px) {
     #home-nav {
         padding: 0 5%;

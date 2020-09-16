@@ -6,6 +6,7 @@
   <title>Meals</title>
   <link href="https://fonts.googleapis.com/css2?family=Nunito&display=swap" rel="stylesheet">
   <link rel="shortcut icon" href="../static/images/HealthTrak-icon.svg" type="image/x-icon">
+  <link rel="stylesheet" href="{{ url_for('static', filename='/css/nav.css') }}">
   <link rel="stylesheet" href="{{ url_for('static', filename='/css/calendar.css') }}">
   <link rel="stylesheet" href="{{ url_for('static', filename='/css/track.css') }}">
   <script defer src="{{ url_for('static', filename='/js/mealToggler.js') }}"></script>
@@ -225,7 +226,7 @@
 
           <option value="Breakfast">Breakfast</option>
           <option value="Lunch">Lunch</option>
-          <option value="Dinnner">Dinnner</option>
+          <option value="Dinner">Dinnner</option>
           <option value="Snack">Snack</option>
 
         </select>
