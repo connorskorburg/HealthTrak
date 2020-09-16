@@ -707,18 +707,18 @@ body {
 #reg {
   margin-bottom: 0;
 }
-#reg h3 {
-  color: var(--pink);
-  padding-bottom: 0.5rem;
-}
-.reg-form-container {
-  display: flex;
-  align-items: baseline;
-}
-  #reg header img {
-    margin-left: auto;
-    align-self: flex-start;
+  #reg h3 {
+    color: var(--pink);
+    padding-bottom: 0.5rem;
   }
+  .reg-form-container {
+    display: flex;
+    align-items: baseline;
+  }
+    #reg header img {
+      margin-left: auto;
+      align-self: flex-start;
+    }
 
 
   .btn-meal-container {
