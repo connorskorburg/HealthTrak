@@ -4,99 +4,249 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='/css/style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito&display=swap" rel="stylesheet">
+    <link rel="shortcut icon" href="../static/images/HealthTrak-icon.svg" type="image/x-icon">
+    <link rel="stylesheet" href="{{ url_for('static', filename='/css/dash.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='/css/track.css') }}">
 </head>
 <body>
-    <h1>Welcome, {{ user.first_name }}</h1>
-    <a href="/logout">Logout</a>
-    <table>
-        <thead>
-            <th>First Name</th>
-            <th>Last Name</th>
-            <th>Email</th>
-            <th>Age</th>
-            <th>Sex</th>
-            <th>Height(Inches)</th>
-            <th>Weight(lbs)</th>
-            <th>Activity Level</th>
-            <th>Daily Calories</th>
-        </thead>
-        <tr>
-            <td>{{ user.first_name }}</td>
-            <td>{{ user.last_name }}</td>
-            <td>{{ user.email }}</td>
-            <td>{{ user.age }}</td>
-            {% if user.sex == 1 %}
-            <td>Male</td>
-            {% elif user.sex == 2 %}
-            <td>Female</td>
-            {% endif %}
-            <td>{{ user.height }}</td>
-            <td>{{ user.weight }}</td>
-            <td>{{ user.activity }}</td>
-            <td>{{ user.daily_calories }}</td>
-        </tr>
-    </table>
-    <a href="/fitness">Add Exercise</a>
-    <a href="/mealtrack">Add Meal</a>
-    <a href="/calendar">Your Log</a>
-    <a href="/stats">Stats</a>
-    {% if log_exists != False %}
-    <div class="daily-log-div">
-        <span class="daily-log"> Total Calories Consumed: {{ log_exists.calories_consumed }}</span> |
-        <span class="daily-log"> Total Calories Burned: {{ log_exists.calories_burned }}</span> |
-        <span class="daily-log"> Total Minutes Working Out: {{ log_exists.minutes_worked_out }}</span> |
-        <span class="daily-log"> Total Fat: {{ log_exists.total_fat }}</span> |
-        <span class="daily-log"> Total Carbs: {{ log_exists.total_carbs }}</span> |
-        <span class="daily-log"> Total Protein: {{ log_exists.total_protein }}</span>
-    </div>
-    {% endif %}
-    <div id="meals-display">
-        {% for meal in user.meals%}
-            {% if meal.created_at.astimezone().strftime('%Y-%m-%d') == local_time.strftime('%Y-%m-%d') %}
-            <div class="meal-display">
-                <h3>{{ meal.name }}: {{ meal.total_calories }}</h3>
-                <p>Fat: {{ meal.total_fat }} | Carbs: {{ meal.total_carbs }} | Protein: {{ meal.total_protein }}</p>
-                <ul>
-                    {% for food in meal.food_items %}
-                    {% if food.created_at.astimezone().strftime('%Y-%m-%d') == local_time.strftime('%Y-%m-%d') %}
-                    <h4>{{ food.name }}</h4>
-                    <a href="/fooditem/edit/{{ food.id }}">Edit</a>
-                    <a href="/fooditem/delete/{{ food.id }}">Delete</a>
-                    <ul>
-                        <li>Carbs: {{ food.carbs }}g</li>
-                        <li>Fat: {{ food.fat }}g</li>
-                        <li>Protein: {{ food.protein }}g</li>
-                        <li>Calories: {{ food.calories }}</li>
-                    </ul>
-                    {% endif %}
-                    {% endfor %}
-                </ul>
+
+    <form action="">
+        <input id="calories_consumed" type="hidden" value="{{ log.calories_consumed }}">
+        <input id="calories_burned" type="hidden" value="{{ log.calories_burned }}">
+        <input id="daily_calories" type="hidden" value="{{ user.daily_calories }}">
+        <input type="hidden" id="daily_fat" value="{{ log.total_fat }}">
+        <input type="hidden" id="daily_protein" value="{{ log.total_protein }}">
+        <input type="hidden" id="daily_carbs" value="{{ log.total_carbs }}">
+    </form>
+
+
+
+
+    <nav class="top-nav">
+        <nav class="top-nav-inner">
+            <img src="/static/images/HealthTrak-icon.svg" alt="HealthTrak Icon">
+            <h1><span>Health</span><span>Trak</span></h1>
+            <a href="/logout">Logout</a>
+        </nav>
+
+    </nav>
+
+    <main id="meals">
+        
+       
+
+    {% for m in meals%}
+        <article>
+            <h3>{{ m.name }}</h3>
+            <div class="food-container">
+                <div class="fat">
+                    <p>Fat</p>
+                    <p>{{m.fat|round|int}}g</p>
+                </div>
+
+                <div class="protein">
+                    <p>Protein</p>
+                    <p>{{ m.protein|round|int }}g</p>
+                </div>
+
+                <div class="carbs">
+                    <p>Carbs</p>
+                    <p>{{ m.carbs|round|int }}g</p>
+                </div>
             </div>
-            {% endif %}
-        {% endfor %}
-    </div>
-    <div id="workouts-display">
-        {% for workout in user.workout_history %}
-            {% if workout.created_at.astimezone().strftime('%Y-%m-%d') == local_time.strftime('%Y-%m-%d') %}
-            <div class="workout-display">
-                <h2>{{ workout.name }} | {{ workout.calories_burned }} Cals Burned | {{ workout.duration }} minutes</h2>
-                {% for ex in workout.exercises %}
-                    {% if ex.created_at.astimezone().strftime('%Y-%m-%d') == local_time.strftime('%Y-%m-%d'):%}
-                    <ul>
-                        <h4>{{ ex.name }}</h4>
-                        <a href="/exercise/edit/{{ ex.id }}">Edit</a>
-                        <a href="/exercise/delete/{{ ex.id }}">Delete</a>
-                        <ul>
-                            <li>Duration: {{ ex.duration }} Minutes</li>
-                            <li>Calories Burned: {{ ex.calories_burned }}</li>
-                        </ul>
-                        {% endif %}
-                    {% endfor %}
-                </ul>
+            <div class="calories-container">
+                <p>{{ m.calories|round|int }} Calories</p>
+                <a class="toggleMeal" href="#">
+                    <img src="/static/images/plus-icon.svg" alt="Plus Icon">
+                </a>
             </div>
-            {% endif %}
-        {% endfor%}
-    </div>
+        </article>
+    {% endfor%}
+            
+
+
+        
+        <article>
+            <h3>Today's Log</h3>
+            <div class="chart-container">
+                <canvas id="myChart"></canvas>
+            </div>
+            <p>{{ log.calories_consumed }} / {{ user.daily_calories  }}</p>
+            <div class="todays-log">
+                <span>Fat</span><span>{{ log.total_fat }}g</span>
+            </div>
+
+            <div class="todays-log">
+                <span>Protein</span><span>{{ log.total_protein }}g</span>
+            </div>
+
+            <div class="todays-log">
+                <span>Carbs</span><span>{{ log.total_carbs }}g</span>
+            </div>
+
+            <a href="/meals">Log More</a>
+
+        </article>
+
+        <article>
+            <h3>Workout Log</h3>
+            <p id="workout-cals"><span>{{ log.calories_burned|round|int }}</span> <span>Cals Burned</span></p>
+            <section id="minutes-active">
+                <p>{{ log.minutes_worked_out|round|int }}</p>
+                <p>Minutes Active</p>
+            </section>
+            <section id="workouts-finished">
+                <p>{{ workout_count }}</p>
+                <p>Workouts Finished</p>
+            </section>
+            <a href="/fitness">Log More</a>
+            </div>
+        </article>
+
+        <article>
+            <h3>Nutrients Log</h3>
+            <div class="stats-log">
+                <div class="chart-container">
+                    <canvas id="barChart" width="100" height="65"></canvas>
+                </div>
+
+            </div>
+        </article>
+
+    </main>
+
+
+
+    <nav class="side-nav">
+        
+        <div class="icons">
+            
+            <a class="active" href="#">
+                <img  src="/static/images/dash-icon.svg" alt="Dashboard Icon">
+            </a>
+        
+            <a href="/meals">
+                <img src="/static/images/meals-icon.svg" alt="Meal Icon">
+            </a>
+            
+            <a href="/calendar">
+                <img src="/static/images/calendar-icon.svg" alt="Calendar Icon">
+            </a>
+            
+            <a href="/fitness">
+                <img src="/static/images/workout-icon.svg" alt="Workout Icon">
+            </a>
+            
+            <a href="/settings">
+                <img src="/static/images/settings-icon.svg" alt="Gear Icon">
+            </a>
+
+        </div>
+
+    </nav>
+    
+    <nav class="bottom-nav">
+
+        <a class="active" href="#">
+            <img src="/static/images/dash-icon.svg" alt="Dashboard Icon">
+        </a>
+
+
+        <a href="/calendar">
+            <img src="/static/images/calendar-icon.svg" alt="Calendar Icon">
+        </a>
+
+
+
+        <a href="/meals">
+            <img src="/static/images/meals-icon.svg" alt="Meals Icon">
+        </a>
+
+
+        <a href="/fitness">
+            <img src="/static/images/workout-icon.svg" alt="Workout Icon">
+        </a>
+
+
+    </nav>
+
+
+
+    <main id="dash-meal-outer" class="meal-pop-outer">
+
+        <section class="meal-pop">
+          <header>
+            <h2>Add Food</h2>
+            <img id="close-dash-form" src="../static/images/close.svg" alt="Close Icon">
+          </header>
+          <form action="/fooditem/new" method="post">
+    
+            <label>
+              Food Name
+              <input type="text" name="food_name" >
+            </label>
+            <div class="cal-qual-container">
+              
+              <label>
+                Quantity
+                <input type="number" id="break" value="1" name="quantity">
+              </label>
+              
+              <label>
+                Calories
+                <input type="number" name="calories" value="0">
+              </label>
+              
+            </div>
+            
+            <div class="nutrients-container">
+    
+              <label>
+                Carbs
+                <input class="carbs" type="number" value="0" name="carbs">
+              </label>
+              
+              <label>
+                Fat
+                <input class="fat" type="number" value="0" name="fat">
+              </label>
+              <label>
+                Protein
+                <input class="protein" type="number" value="0" name="protein">
+              </label>
+              
+            </div>
+            
+            <label>Meal</label>
+    
+            <select name="meal_name">
+    
+              <option value="Breakfast">Breakfast</option>
+              <option value="Lunch">Lunch</option>
+              <option value="Dinnner">Dinnner</option>
+              <option value="Snack">Snack</option>
+    
+            </select>
+    
+            <div class="btn-meal-container">
+              <button type="submit">Add Food</button>
+            </div>
+    
+          </form>
+    
+        </section>
+    
+      </main>
+
+
+
+
+
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js" integrity="sha512-s+xg36jbIujB2S2VKfpGmlC3T5V2TF3lY48DX7u2r9XzGzgPsa6wTpOQA7J9iffvdeBN0q9tKzRxVxw1JviZPg==" crossorigin="anonymous"></script>
+    <script src="{{ url_for('static', filename='/js/stats.js') }}"></script>
+    <script src="{{ url_for('static', filename='/js/barChart.js') }}"></script>
 </body>
 </html>
