@@ -1,4 +1,4 @@
-#Offical Repo for HealhTrak app.
+# Offical Repo for HealhTrak app.
 
 HealthTrak is a responsive application where users can track their workouts, meals, and search for food items through the USDA Food Database. 
 
