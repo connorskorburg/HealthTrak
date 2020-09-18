@@ -410,9 +410,9 @@
     margin-bottom: 0;
   }
   #search-results {
-    grid-gap: 2.5%;
+    grid-gap: 1.25% 2.5%;
     padding: 2rem 5% 2rem calc(5% + 5rem);
-    margin-bottom: 0;
+    margin-bottom: 2rem;
     grid-template-columns: 1fr 1fr 1fr;
   }
   .search-food {

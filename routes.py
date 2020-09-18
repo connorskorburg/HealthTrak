@@ -33,3 +33,5 @@ app.add_url_rule('/settings', view_func=settings)
 app.add_url_rule('/updateSettings', view_func=updateSettings, methods=['POST'])
 
 app.add_url_rule('/reg', view_func=reg)
+
+app.add_url_rule('/createLog', view_func=createLog)
