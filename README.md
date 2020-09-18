@@ -8,3 +8,5 @@ HealthTrak is a responsive application where users can track their workouts, mea
 
 
 ![image](https://user-images.githubusercontent.com/59313846/93646269-813a9980-f9cb-11ea-906f-bd9cbb27ff08.png)
+
+![image](https://user-images.githubusercontent.com/59313846/93646367-b1823800-f9cb-11ea-80a2-67ceb437797b.png)
