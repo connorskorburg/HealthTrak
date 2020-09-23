@@ -9,6 +9,7 @@ from better_profanity import profanity
 utc = datetime.now(timezone.utc)
 local_time = utc.astimezone()
 
+EMAIL_REGEX = re.compile(r'^[a-zA-Z0-9.+_-]+@[a-zA-Z0-9._-]+\.[a-zA-Z]+$')
 
 def calcCalories(height, weight, sex, age, activity):
     if sex == 1:
@@ -76,7 +77,7 @@ class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     first_name = db.Column(db.String(45))
     last_name = db.Column(db.String(45))
-    username = db.Column(db.String(100))
+    email = db.Column(db.String(100))
     age = db.Column(db.Integer)
     sex = db.Column(db.Integer)
     activity = db.Column(db.Float)
@@ -104,9 +105,9 @@ class User(db.Model):
         if profanity.contains_profanity(user_data['last_name']) == True:
             is_valid = False
             flash("Please Enter an Appropriate Last Name", "reg_error");
-        if profanity.contains_profanity(user_data['username']) or user_data['username'] == '' or len(user_data['username']) < 6:
+        if not EMAIL_REGEX.match(user_data['email']):
             is_valid = False
-            flash("Please Enter a Valid Username", "reg_error")
+            flash("Please Enter a Valid Email", "reg_error")
         if request.form['feet'] == '' or request.form['inches'] == '':
             is_valid = False
             flash("Please Enter a Valid Height", "reg_error")
@@ -135,21 +136,21 @@ class User(db.Model):
         # hash password w bcrypt
         hashed_password = bcrypt.generate_password_hash(user_data['password'])
         # create user 
-        user = cls(first_name=user_data['first_name'], last_name=user_data['last_name'], username=user_data['username'], age=user_data['age'], sex=user_data['sex'], activity=user_data['activity'], height=user_height, weight=float(user_data['weight']), daily_calories=daily_cals, password=hashed_password)
+        user = cls(first_name=user_data['first_name'], last_name=user_data['last_name'], email=user_data['email'], age=user_data['age'], sex=user_data['sex'], activity=user_data['activity'], height=user_height, weight=float(user_data['weight']), daily_calories=daily_cals, password=hashed_password)
         # save user to db
         db.session.add(user)
         db.session.commit()
         return user
     @classmethod
     def validate_login(cls, user_data):
-        if profanity.contains_profanity(user_data['username']) or user_data['username'] == '' or len(user_data['username']) < 6:
+        if not EMAIL_REGEX.match(user_data['email']):
             user = False
-            flash("Please Enter a Valid Username", 'login_error')
+            flash("Please Enter a Valid Email", 'login_error')
         if len(user_data['password']) < 8:
             user = False 
             flash("Please Enter a Valid Password", 'login_error')
         else:
-            user = cls.query.filter_by(username=user_data['username']).first()
+            user = cls.query.filter_by(email=user_data['email']).first()
             if bcrypt.check_password_hash(user.password, user_data['password']):
                 return user
             else:
