@@ -357,40 +357,6 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/* import from dash.css */
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 @media screen and (min-width: 300px) and (max-width:1100px) {
   .bottom-nav {
       display: flex;
@@ -423,12 +389,6 @@
       height: 50px;
   }
 } 
-
-
-
-/* import from dash.css */
-
-
 
 
 
@@ -607,34 +567,6 @@
   }
 
 /* fitness page */
-
-
-
-
-
-
-
-
-
-
-
-/* settings page */
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 /* settings page */
